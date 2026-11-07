@@ -1,0 +1,4996 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHP Programlama Vize Sınavı Hazırlık Platformu | BPR709</title>
+  
+  <!-- Modern Fontlar -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+/* PHP VİZE ÇALIŞMA PLATFORMU - PREMIUM UI/UX TASARIM SİSTEMİ */
+:root {
+  --bg-primary: #0a0f1d;
+  --bg-secondary: #111827;
+  --bg-tertiary: #1f2937;
+  --bg-card: rgba(17, 24, 39, 0.75);
+  --bg-card-hover: rgba(31, 41, 55, 0.85);
+  
+  --text-primary: #f9fafb;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+  
+  --accent-primary: #3b82f6;
+  --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+  --accent-glow: rgba(59, 130, 246, 0.25);
+  
+  --color-success: #10b981;
+  --color-success-bg: rgba(16, 185, 129, 0.12);
+  --color-success-border: rgba(16, 185, 129, 0.4);
+  
+  --color-error: #ef4444;
+  --color-error-bg: rgba(239, 68, 68, 0.12);
+  --color-error-border: rgba(239, 68, 68, 0.4);
+  
+  --color-warning: #f59e0b;
+  --color-warning-bg: rgba(245, 158, 11, 0.12);
+  
+  --border-light: rgba(255, 255, 255, 0.08);
+  --border-focus: #3b82f6;
+  
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  
+  --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.35);
+  --shadow-glow: 0 0 25px rgba(59, 130, 246, 0.3);
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(59, 130, 246, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 85% 85%, rgba(139, 92, 246, 0.08) 0%, transparent 40%);
+  background-attachment: fixed;
+}
+
+/* APP CONTAINER */
+.app-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px 20px 80px 20px;
+}
+
+/* HEADER */
+.header {
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.brand-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-logo {
+  width: 48px;
+  height: 48px;
+  background: var(--accent-gradient);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 20px;
+  color: #fff;
+  box-shadow: var(--shadow-glow);
+}
+
+.brand-text h1 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #ffffff 30%, #93c5fd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-text p {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.header-stats {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.stat-pill {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-light);
+  padding: 8px 16px;
+  border-radius: var(--radius-xl);
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.stat-pill.success {
+  color: var(--color-success);
+  border-color: var(--color-success-border);
+}
+
+.stat-pill.error {
+  color: var(--color-error);
+  border-color: var(--color-error-border);
+}
+
+.stat-pill.score {
+  color: #60a5fa;
+  font-weight: 700;
+  border-color: rgba(96, 165, 250, 0.4);
+}
+
+/* NAVIGATION BARS */
+.nav-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.nav-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.nav-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  min-width: 80px;
+}
+
+.pill-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  background: rgba(17, 24, 39, 0.6);
+  padding: 4px;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-light);
+}
+
+.pill-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  padding: 8px 18px;
+  border-radius: var(--radius-xl);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pill-btn:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.pill-btn.active {
+  background: var(--accent-gradient);
+  color: #ffffff;
+  box-shadow: 0 2px 12px rgba(59, 130, 246, 0.35);
+}
+
+.mode-badge {
+  background: rgba(255, 255, 255, 0.15);
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+/* HERO BANNER FOR SELECTED WEEK */
+.week-info-banner {
+  background: linear-gradient(135deg, rgba(30, 58, 138, 0.3) 0%, rgba(17, 24, 39, 0.7) 100%);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  border-radius: var(--radius-lg);
+  padding: 18px 24px;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.week-info-content h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.week-info-content p {
+  font-size: 13px;
+  color: #93c5fd;
+}
+
+.quick-stats {
+  display: flex;
+  gap: 16px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.quick-stats strong {
+  color: var(--text-primary);
+}
+
+/* PROGRESS BAR */
+.progress-container {
+  margin-bottom: 24px;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.progress-track {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--accent-gradient);
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+
+/* QUESTION NAV PALETTE */
+.palette-container {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.palette-title {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.palette-grid {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  max-height: 110px;
+  overflow-y: auto;
+  padding: 2px;
+}
+
+.palette-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid var(--border-light);
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.palette-btn:hover {
+  border-color: var(--accent-primary);
+  color: #fff;
+}
+
+.palette-btn.current {
+  border-color: var(--accent-primary);
+  background: rgba(59, 130, 246, 0.25);
+  color: #60a5fa;
+  font-weight: 700;
+}
+
+.palette-btn.correct {
+  background: var(--color-success-bg);
+  border-color: var(--color-success);
+  color: var(--color-success);
+}
+
+.palette-btn.incorrect {
+  background: var(--color-error-bg);
+  border-color: var(--color-error);
+  color: var(--color-error);
+}
+
+/* MAIN CONTENT AREA */
+.main-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+/* CARDS */
+.quiz-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  padding: 32px 36px;
+  box-shadow: var(--shadow-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+  transition: var(--transition);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.question-badge {
+  background: rgba(59, 130, 246, 0.15);
+  color: #93c5fd;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  padding: 4px 14px;
+  border-radius: var(--radius-xl);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.question-topic {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.question-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.question-code-snippet {
+  background: #050811;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: #38bdf8;
+  overflow-x: auto;
+  line-height: 1.5;
+}
+
+/* OPTIONS (TEST MODE - 5 ŞIK) */
+.options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.option-item {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 14px 20px;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  position: relative;
+}
+
+.option-item:hover:not(.disabled) {
+  background: var(--bg-card-hover);
+  border-color: rgba(59, 130, 246, 0.4);
+  transform: translateY(-1px);
+}
+
+.option-item.disabled {
+  cursor: default;
+}
+
+.option-letter {
+  min-width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--text-secondary);
+  transition: var(--transition);
+}
+
+.option-text {
+  font-size: 15px;
+  color: var(--text-primary);
+  padding-top: 4px;
+  flex: 1;
+}
+
+/* OPTION STATES */
+.option-item.correct {
+  background: var(--color-success-bg) !important;
+  border-color: var(--color-success) !important;
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+}
+
+.option-item.correct .option-letter {
+  background: var(--color-success);
+  color: #ffffff;
+  border-color: var(--color-success);
+}
+
+.option-item.incorrect {
+  background: var(--color-error-bg) !important;
+  border-color: var(--color-error) !important;
+  animation: shake 0.4s ease;
+}
+
+.option-item.incorrect .option-letter {
+  background: var(--color-error);
+  color: #ffffff;
+  border-color: var(--color-error);
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+/* ANSWER REVELATION BOX (YANLIŞSA VE KONTROLDE AÇILAN KUTU) */
+.explanation-box {
+  background: rgba(17, 24, 39, 0.9);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  margin-top: 8px;
+  border-left: 4px solid var(--accent-primary);
+  animation: fadeIn 0.3s ease;
+}
+
+.explanation-box.wrong-alert {
+  border-left-color: var(--color-error);
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid var(--color-error-border);
+  border-left-width: 6px;
+}
+
+.explanation-box.correct-alert {
+  border-left-color: var(--color-success);
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid var(--color-success-border);
+  border-left-width: 6px;
+}
+
+.exp-header {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.exp-header.wrong {
+  color: #f87171;
+}
+
+.exp-header.correct {
+  color: #34d399;
+}
+
+.exp-correct-value {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 14px;
+  display: inline-block;
+  margin: 6px 0 10px 0;
+  border: 1px solid var(--color-success-border);
+}
+
+.exp-text {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* FILL IN BLANKS MODE */
+.fib-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.fib-sentence-card {
+  background: #080d1a;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--text-primary);
+}
+
+.fib-blank-highlight {
+  display: inline-block;
+  background: rgba(59, 130, 246, 0.15);
+  border-bottom: 2px dashed #60a5fa;
+  padding: 0 12px;
+  margin: 0 4px;
+  color: #93c5fd;
+  font-weight: 600;
+  border-radius: 4px;
+}
+
+.fib-input-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.fib-input {
+  flex: 1;
+  min-width: 260px;
+  background: var(--bg-secondary);
+  border: 2px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 14px 20px;
+  font-size: 16px;
+  color: #ffffff;
+  font-family: var(--font-sans);
+  transition: var(--transition);
+}
+
+.fib-input:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.25);
+  background: #1e293b;
+}
+
+.btn {
+  padding: 14px 28px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-primary {
+  background: var(--accent-gradient);
+  color: #ffffff;
+  box-shadow: 0 2px 14px rgba(59, 130, 246, 0.35);
+}
+
+.btn-primary:hover {
+  opacity: 0.95;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-light);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* CODING PRACTICE MODE */
+.coding-container {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.coding-editor-wrapper {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: #090d16;
+}
+
+.coding-editor-header {
+  background: #111827;
+  padding: 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-light);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.coding-editor {
+  width: 100%;
+  min-height: 220px;
+  background: transparent;
+  border: none;
+  color: #e2e8f0;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.6;
+  padding: 16px 20px;
+  resize: vertical;
+  outline: none;
+}
+
+.coding-result-box {
+  background: #040711;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* SUMMARY / CHEATSHEET TAB */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 18px;
+}
+
+.summary-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: var(--transition);
+}
+
+.summary-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(59, 130, 246, 0.3);
+  box-shadow: var(--shadow-subtle);
+}
+
+.summary-card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #60a5fa;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.summary-card p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* CARD CONTROLS (BOTTOM ACTIONS) */
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-light);
+}
+
+.actions-left, .actions-right {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* FOOTER */
+.footer {
+  margin-top: 48px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-light);
+  padding-top: 24px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .quiz-card {
+    padding: 20px 18px;
+  }
+  .header-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .header-stats {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .card-actions {
+    flex-direction: column-reverse;
+  }
+  .actions-left, .actions-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header-top">
+        <div class="brand-wrapper">
+          <div class="brand-logo">PHP</div>
+          <div class="brand-text">
+            <h1>PHP Vize Hazırlık Platformu</h1>
+            <p>Bozok Üniversitesi • BPR709 PHP Programlama • Hafta 2 - 6 Kapsamlı Çalışma</p>
+          </div>
+        </div>
+
+        <div class="header-stats">
+          <div class="stat-pill success" id="stat-success">✓ 0 Doğru</div>
+          <div class="stat-pill error" id="stat-error">✗ 0 Yanlış</div>
+          <div class="stat-pill score" id="stat-score">%0 Başarı</div>
+        </div>
+      </div>
+
+      <!-- NAVİGASYON (HAFTA & ÇALIŞMA MODU SEÇİCİ) -->
+      <nav class="nav-section">
+        <!-- Hafta Seçimi -->
+        <div class="nav-row">
+          <span class="nav-label">Hafta:</span>
+          <div class="pill-group" id="week-selector">
+            <button class="pill-btn active" data-week="2">Hafta 2 <span class="mode-badge">Giriş</span></button>
+            <button class="pill-btn" data-week="3">Hafta 3 <span class="mode-badge">Tipler & Sabitler</span></button>
+            <button class="pill-btn" data-week="4">Hafta 4 <span class="mode-badge">Kontrol Yapıları</span></button>
+            <button class="pill-btn" data-week="5">Hafta 5 <span class="mode-badge">Döngüler</span></button>
+            <button class="pill-btn" data-week="6">Hafta 6 <span class="mode-badge">Fonksiyonlar</span></button>
+            <button class="pill-btn" data-week="all" style="background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); color: #fff;">🏆 Tüm Konular (Vize Denemesi)</button>
+          </div>
+        </div>
+
+        <!-- Mod Seçimi -->
+        <div class="nav-row">
+          <span class="nav-label">Mod:</span>
+          <div class="pill-group" id="mode-selector">
+            <button class="pill-btn active" data-mode="test">
+              <span>🎯</span> Çoktan Seçmeli Test (5 Şık)
+            </button>
+            <button class="pill-btn" data-mode="fib">
+              <span>✍️</span> Boşluk Doldurma
+            </button>
+            <button class="pill-btn" data-mode="coding">
+              <span>💻</span> Klasik Kod Yazma & Simülasyon
+            </button>
+            <button class="pill-btn" data-mode="summary">
+              <span>📌</span> PDF Hap Bilgiler & Özet
+            </button>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- HAFTA BİLGİ KARTI / BANNER -->
+    <div id="week-info-banner" class="week-info-banner"></div>
+
+    <!-- İLERLEME ÇUBUĞU -->
+    <div id="progress-container" class="progress-container">
+      <div class="progress-header">
+        <span id="progress-text">Soru 1 / 30</span>
+        <span id="progress-percent">%0</span>
+      </div>
+      <div class="progress-track">
+        <div id="progress-bar" class="progress-bar"></div>
+      </div>
+    </div>
+
+    <!-- SORU NAVİGASYON HARİTASI (SORU PALETİ) -->
+    <div id="palette-container" class="palette-container">
+      <div class="palette-title">
+        <span>Soru Haritası & Hızlı Atlama</span>
+        <span style="font-size: 11px; text-transform: none; color: var(--text-secondary);">Yeşil: Doğru | Kırmızı: Yanlış</span>
+      </div>
+      <div id="palette-grid" class="palette-grid"></div>
+    </div>
+
+    <!-- ANA İÇERİK ALANI -->
+    <main class="main-content">
+      <div id="dynamic-content"></div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <p>Yozgat Bozok Üniversitesi PHP Programlama (BPR709) Vize Sınavı Çalışma Sistemi</p>
+      <p style="margin-top: 6px; font-size: 12px; color: var(--text-muted);">Tüm sorular, testler ve kod örnekleri ders sunum ve PDF slaytlarından birebir referans alınarak üretilmiştir.</p>
+    </footer>
+
+  </div>
+
+  <script>
+// HAFTA 2: PHP'ye Giriş & Temel Özellikler
+var HAFTA_2_DATA = {
+  title: "Hafta 2: PHP'ye Giriş & Temel Özellikler",
+  description: "PHP nedir, sunucu taraflı çalışma mantığı, temel sözdizimi, değişkenler, veri tipleri, avantaj ve dezavantajlar.",
+  summaryNotes: [
+    { title: "PHP'nin Anlamı & Türü", text: "PHP (Hypertext Preprocessor), sunucu taraflı (server-side) çalışan, açık kaynaklı bir betik dilidir. HTML içerisine gömülebilir." },
+    { title: "Çalışma Mantığı", text: "Kullanıcı tarayıcıdan istek gönderir -> Web sunucusu (Apache, Nginx) isteği alır -> PHP yorumlayıcısı kodları çalıştırır -> Sunucu kullanıcıya yalnızca HTML çıktısını gönderir. PHP kodları istemciye görünmez." },
+    { title: "Sözdizimi Temelleri", text: "PHP kodları <?php ve ?> etiketleri arasına yazılır. Komutlar noktalı virgül (;) ile biter. Değişkenler $ işareti ile başlar." },
+    { title: "Dinamik Tipli Dil", text: "Değişken türü önceden tanımlanmaz, atanan değere göre otomatik belirlenir. Temel tipler: int, float, string, boolean, array, object, null." },
+    { title: "Dizi Tanımlama", text: "İndeksli: $dizi = array(1, 2, 3); veya İlişkisel: $kisi = array('isim' => 'Ahmet', 'yas' => 25);" },
+    { title: "Avantajları", text: "Kolay öğrenilebilirlik, derlenmeden çalışmasıyla hızlı web performansı, geniş topluluk, WordPress desteği, MySQL entegrasyonu, açık kaynaklı ve ücretsiz oluşu." },
+    { title: "Dezavantajları", text: "Zayıf tip denetimi (weak typing), büyük uygulamalarda performans sorunları, nesne yönelimli soyutlamada basitlik, MySQL bağımlılığı, kötü yapılandırılabilen modülerlik, manuel güvenlik önlemi ihtiyacı (SQLi, XSS)." }
+  ],
+  tests: [
+    {
+      id: "h2_t1",
+      question: "PHP kısaltmasının açılımı aşağıdakilerden hangisidir?",
+      options: [
+        "Hypertext Preprocessor",
+        "Personal Home Page",
+        "Private Hypertext Processor",
+        "Programmed Hypertext Parser",
+        "Protocol Hypertext Provider"
+      ],
+      correctAnswer: "Hypertext Preprocessor",
+      explanation: "PDF Hafta 2 Slayt 2'ye göre PHP, 'Hypertext Preprocessor' anlamına gelmektedir (özyinelemeli kısaltma)."
+    },
+    {
+      id: "h2_t2",
+      question: "PHP kodlarının çalışma mantığı ve güvenliğiyle ilgili hangisi doğrudur?",
+      options: [
+        "PHP kodları sunucuda çalıştırılır; tarayıcıya sadece HTML çıktısı gönderilir, kullanıcı PHP kodunu göremez.",
+        "PHP kodları kullanıcının tarayıcısında JavaScript gibi istemci taraflı derlenir.",
+        "Tarayıcı 'Kaynağı Görüntüle' dediğinde PHP kod blokları aynen görünür.",
+        "PHP kodlarının çalışması için istemci bilgisayarında PHP yorumlayıcısı kurulu olmalıdır.",
+        "PHP dosyaları sunucuda doğrudan ikili makine koduna derlenip saklanır."
+      ],
+      correctAnswer: "PHP kodları sunucuda çalıştırılır; tarayıcıya sadece HTML çıktısı gönderilir, kullanıcı PHP kodunu göremez.",
+      explanation: "Slayt 3: PHP sunucu-taraflı bir dildir. Kullanıcılar sadece çıktı olan HTML'yi görür, PHP kodlarını göremez ve müdahale edemezler."
+    },
+    {
+      id: "h2_t3",
+      question: "PHP kod blokları hangi etiketler arasında yer alır?",
+      options: [
+        "<?php ve ?>",
+        "<script php> ve <\\/script>",
+        "<%php ve %>",
+        "<!php ve !>",
+        "<php> ve </php>"
+      ],
+      correctAnswer: "<?php ve ?>",
+      explanation: "Slayt 11: PHP kodları genellikle <?php ve ?> etiketleri arasında yazılır."
+    },
+    {
+      id: "h2_t4",
+      question: "PHP'de komutlar hangi karakter ile sonlandırılmak zorundadır?",
+      options: [
+        "Noktalı virgül (;)",
+        "İki nokta (:)",
+        "Nokta (.)",
+        "Virgül (,)",
+        "Ters eğik çizgi (\\)"
+      ],
+      correctAnswer: "Noktalı virgül (;)",
+      explanation: "Slayt 11: PHP'de komutlar noktalı virgülle (;) sonlandırılır."
+    },
+    {
+      id: "h2_t5",
+      question: "PHP'de değişken tanımlarken değişken adının başına hangi işaret konulur?",
+      options: [
+        "$",
+        "@",
+        "&",
+        "#",
+        "%"
+      ],
+      correctAnswer: "$",
+      explanation: "Slayt 11: PHP değişken adlarını $ işareti ile başlatır. Örneğin: $deger = 5;"
+    },
+    {
+      id: "h2_t6",
+      question: "PHP'nin 'dinamik tipli' (dynamic typing) bir dil olması ne anlama gelir?",
+      options: [
+        "Değişkenlerin veri tipini PHP'nin atanan değere göre otomatik belirlemesi",
+        "Değişkenlerin tipinin program çalışırken hiçbir zaman değiştirilememesi",
+        "Her değişken tanımlanırken türünün (int, string vb.) zorunlu yazılması",
+        "Değişkenlerin yalnızca sayısal veri saklayabilmesi",
+        "Değişkenlerin sadece fonksiyonlar içinde tanımlanabilmesi"
+      ],
+      correctAnswer: "Değişkenlerin veri tipini PHP'nin atanan değere göre otomatik belirlemesi",
+      explanation: "Slayt 12: PHP, değişkenlerin tipini otomatik olarak belirler (dinamik tip)."
+    },
+    {
+      id: "h2_t7",
+      question: "Aşağıdakilerden hangisi Hafta 2 slaytında belirtilen PHP temel veri türleri arasında YER ALMAZ?",
+      options: [
+        "decimal",
+        "boolean",
+        "array",
+        "object",
+        "null"
+      ],
+      correctAnswer: "decimal",
+      explanation: "Slayt 12: Temel veri türleri: int, float, string, boolean, array, object, null olarak listelenmiştir. 'decimal' temel veri türü değildir."
+    },
+    {
+      id: "h2_t8",
+      question: "PHP'de diziler hakkında slaytta belirtilen temel özellik hangisidir?",
+      options: [
+        "Diziler hem indeksli (indexed) hem de anahtar-değer (associative) biçiminde tanımlanabilir.",
+        "PHP dizilerinde anahtar olarak yalnızca pozitif tamsayılar kullanılabilir.",
+        "Bir dizinin tüm elemanları aynı veri tipinde olmak zorundadır.",
+        "Dizilerin boyutu tanımlandıktan sonra kesinlikle değiştirilemez.",
+        "Diziler yalnızca echo komutu ile doğrudan ekrana yazdırılabilir."
+      ],
+      correctAnswer: "Diziler hem indeksli (indexed) hem de anahtar-değer (associative) biçiminde tanımlanabilir.",
+      explanation: "Slayt 13: PHP, dizileri hem indeksli hem de anahtar-değer biçiminde tanımlamaya olanak tanır."
+    },
+    {
+      id: "h2_t9",
+      question: "$assocDizi = array('isim' => 'Ahmet', 'yas' => 25); tanımı için hangisi doğrudur?",
+      options: [
+        "Anahtar-değer (associative) biçiminde tanımlanmış bir dizidir.",
+        "Yalnızca sayısal indeks içeren indeksli bir dizidir.",
+        "Hatalı bir tanımdır çünkü diziler sadece köşeli parantezle tanımlanır.",
+        "Bu bir nesne (object) tanımıdır, dizi değildir.",
+        "Dizideki 'Ahmet' değerine $assocDizi[0] ile erişilir."
+      ],
+      correctAnswer: "Anahtar-değer (associative) biçiminde tanımlanmış bir dizidir.",
+      explanation: "Slayt 13: $assocDizi = array('isim' => 'Ahmet', 'yas' => 25); anahtar-değer (associative) dizi örneğidir."
+    },
+    {
+      id: "h2_t10",
+      question: "PHP'de fonksiyonlar hangi anahtar kelime ile tanımlanır?",
+      options: [
+        "function",
+        "def",
+        "func",
+        "fn",
+        "method"
+      ],
+      correctAnswer: "function",
+      explanation: "Slayt 15: PHP'de fonksiyonlar 'function' anahtar kelimesi ile tanımlanır."
+    },
+    {
+      id: "h2_t11",
+      question: "Aşağıdakilerden hangisi PHP'nin avantajlarından biri olarak slaytlarda BELİRTİLMİŞTİR?",
+      options: [
+        "Kodu derlenmeden çalıştırıldığı için dinamik web sitelerinde hızlıdır.",
+        "Java ve C++ dillerinden çok daha katı bir tip denetimine sahiptir.",
+        "Tüm güvenlik açıklarını sunucu tarafında otomatik olarak engeller.",
+        "Sadece Apache web sunucusunda çalışabilir, başka sunucu kabul etmez.",
+        "Yalnızca nesne tabanlı mimaride kod yazımına izin verir."
+      ],
+      correctAnswer: "Kodu derlenmeden çalıştırıldığı için dinamik web sitelerinde hızlıdır.",
+      explanation: "Slayt 16: PHP'nin avantajlarında 'PHP kodu derlenmeden çalıştırıldığı için dinamik web sitelerinde hızlıdır' ve kolay öğrenilebilirlik vurgulanmıştır."
+    },
+    {
+      id: "h2_t12",
+      question: "Dünyaca ünlü hangi popüler içerik yönetim sistemi (CMS) PHP ile yazılmıştır?",
+      options: [
+        "WordPress",
+        "Django",
+        "Ruby on Rails",
+        "ASP.NET MVC",
+        "Spring Boot"
+      ],
+      correctAnswer: "WordPress",
+      explanation: "Slayt 16: WordPress gibi popüler içerik yönetim sistemlerinin PHP ile yazılmış olması onun pratikteki önemini artırmaktadır."
+    },
+    {
+      id: "h2_t13",
+      question: "Aşağıdakilerden hangisi PHP'nin dezavantajları arasında slaytta AÇIKÇA yer almaktadır?",
+      options: [
+        "Zayıf tip denetimi (Weak Typing) nedeniyle bazen tip hatalarına yol açabilmesi",
+        "Ücretsiz ve açık kaynaklı olması",
+        "Geniş topluluk desteğine sahip olması",
+        "MySQL veritabanı ile kolay entegre olması",
+        "HTML sayfalarının içine gömülerek çalışabilmesi"
+      ],
+      correctAnswer: "Zayıf tip denetimi (Weak Typing) nedeniyle bazen tip hatalarına yol açabilmesi",
+      explanation: "Slayt 17: PHP'nin Dezavantajları başlığı altında ilk madde 'Zayıf Tip Denetimi (Weak Typing)'dir."
+    },
+    {
+      id: "h2_t14",
+      question: "PHP'de güvenlik konusunda slaytta yer alan doğru ifade hangisidir?",
+      options: [
+        "Güvenlik önlemlerinin manuel olarak alınması gerekir ve kötü yazılmış kodlar açık (SQLi, XSS) yaratabilir.",
+        "PHP varsayılan olarak SQL Injection ve XSS saldırılarına karşı %100 korumalıdır.",
+        "PHP'de hiçbir zaman güvenlik fonksiyonu bulunmaz.",
+        "PHP güvenlik açıklarını otomatik kapatan yapay zekaya sahiptir.",
+        "Güvenlik önlemleri yalnızca web sunucusu (Apache) tarafından sağlanır, PHP kodu etkisizdir."
+      ],
+      correctAnswer: "Güvenlik önlemlerinin manuel olarak alınması gerekir ve kötü yazılmış kodlar açık (SQLi, XSS) yaratabilir.",
+      explanation: "Slayt 17: Güvenlik önlemlerinin manuel olarak alınması gerekir ve PHP'nin kendisi her zaman en iyi güvenlik standartlarını sağlamaz (SQL Injection, XSS riski)."
+    },
+    {
+      id: "h2_t15",
+      question: "PHP hangi dillerin sözdizimine benzerliği sayesinde kolay öğrenilebilir bir yapıya sahiptir?",
+      options: [
+        "C, Java ve Perl",
+        "Python, Ruby ve Swift",
+        "Haskell, Prolog ve Lisp",
+        "Pascal, Fortran ve Cobol",
+        "Assembly, Rust ve Go"
+      ],
+      correctAnswer: "C, Java ve Perl",
+      explanation: "Slayt 10: 'Öğrenmesi kolaydır, C, Java ve Perl dillerine benzer bir sözdizimi vardır.'"
+    },
+    {
+      id: "h2_t16",
+      question: "PHP'nin platform bağımsızlığı (cross-platform) ne anlama gelir?",
+      options: [
+        "Windows, Linux ve MacOS gibi farklı işletim sistemlerinde çalışabilmesi",
+        "Yalnızca Linux sunucularda çalışabilmesi",
+        "Hiçbir web sunucusuna ihtiyaç duymadan tarayıcıda çalışabilmesi",
+        "Herhangi bir işletim sistemi olmaksızın donanım üzerinde çalışabilmesi",
+        "Yalnızca mobil cihazlarda çalışabilmesi"
+      ],
+      correctAnswer: "Windows, Linux ve MacOS gibi farklı işletim sistemlerinde çalışabilmesi",
+      explanation: "Slayt 4 & 10: PHP, platform bağımsız bir dil olup Windows, Linux, MacOS gibi farklı işletim sistemlerinde çalışabilir."
+    },
+    {
+      id: "h2_t17",
+      question: "PHP ile farklı veritabanlarına (MySQL, PostgreSQL, Oracle, SQLite) bağlanmak için kullanılan soyutlama katmanı nedir?",
+      options: [
+        "PDO (PHP Data Objects)",
+        "ODBC Driver Only",
+        "Entity Framework",
+        "Hibernate",
+        "ActiveRecord"
+      ],
+      correctAnswer: "PDO (PHP Data Objects)",
+      explanation: "Slayt 4: 'Ayrıca PDO (PHP Data Objects) gibi soyutlama katmanlarıyla farklı veritabanlarına bağlanmak mümkündür.'"
+    },
+    {
+      id: "h2_t18",
+      question: "PHP'de hata ayıklama için mesajları kaydetmeye yarayan ve slaytta adı geçen fonksiyon hangisidir?",
+      options: [
+        "error_log()",
+        "debug_print()",
+        "system_error()",
+        "log_write()",
+        "catch_error()"
+      ],
+      correctAnswer: "error_log()",
+      explanation: "Slayt 5: 'error_log() gibi fonksiyonlar ile hata mesajları kaydedilebilir, ayrıca Xdebug gibi araçlarla uygulama hataları detaylı izlenebilir.'"
+    },
+    {
+      id: "h2_t19",
+      question: "PHP'de hata ayıklamayı detaylı şekilde izlemek için slaytta önerilen popüler araç hangisidir?",
+      options: [
+        "Xdebug",
+        "GDB",
+        "Valgrind",
+        "Wireshark",
+        "Postman"
+      ],
+      correctAnswer: "Xdebug",
+      explanation: "Slayt 5: 'ayrıca Xdebug gibi araçlarla uygulama hataları detaylı şekilde izlenebilir.'"
+    },
+    {
+      id: "h2_t20",
+      question: "PHP'de HTTP istekleri göndermek ve ağ iletişimi sağlamak için slaytta adı geçen araç hangisidir?",
+      options: [
+        "cURL",
+        "FetchAPI",
+        "Axios",
+        "Ping",
+        "Telnet"
+      ],
+      correctAnswer: "cURL",
+      explanation: "Slayt 6: 'Ayrıca, cURL kullanarak HTTP istekleri gönderilebilir.'"
+    },
+    {
+      id: "h2_t21",
+      question: "Aşağıdakilerden hangisi PHP'nin iletişim kurabildiği ağ protokollerinden biri olarak slaytta sayılmıştır?",
+      options: [
+        "HTTP, FTP, IMAP, SMTP, POP3",
+        "Yalnızca Bluetooth ve NFC",
+        "Yalnızca USB ve Firewire",
+        "Yalnızca MIDI ve CAN bus",
+        "Yalnızca SSH ve Telnet"
+      ],
+      correctAnswer: "HTTP, FTP, IMAP, SMTP, POP3",
+      explanation: "Slayt 6: 'HTTP, FTP, IMAP, SMTP, POP3 gibi protokoller üzerinden ağ iletişimi sağlanabilir.'"
+    },
+    {
+      id: "h2_t22",
+      question: "PHP'de metin işleme için kullanılan ve Perl uyumlu düzenli ifadeleri temsil eden kısaltma nedir?",
+      options: [
+        "PCRE",
+        "JSON",
+        "POSIX",
+        "REGEX_PHP",
+        "SOAP"
+      ],
+      correctAnswer: "PCRE",
+      explanation: "Slayt 7: 'Perl düzenli ifadeleri (PCRE) ile metin işleme ve POSIX standartlarıyla belge işlemleri yapılabilir.'"
+    },
+    {
+      id: "h2_t23",
+      question: "PHP web sunucularıyla nasıl çalışabilir?",
+      options: [
+        "Hem modül olarak hem de CGI olarak çalışabilir.",
+        "Yalnızca bağımsız bir masaüstü uygulaması olarak çalışabilir.",
+        "Yalnızca tarayıcı eklentisi olarak çalışabilir.",
+        "Web sunucuları ile kesinlikle iletişim kuramaz.",
+        "Sadece işletim sistemi çekirdeğine gömülü çalışabilir."
+      ],
+      correctAnswer: "Hem modül olarak hem de CGI olarak çalışabilir.",
+      explanation: "Slayt 7: 'PHP, hem modül olarak hem de CGI olarak çalışabilir.'"
+    },
+    {
+      id: "h2_t24",
+      question: "Aşağıdaki kod parçasının ekran çıktısı ne olur?\n\n<?php\n$yas = 20;\nif ($yas > 18) {\n  echo \"Yetişkin\";\n} else {\n  echo \"Çocuk\";\n}\n?>",
+      options: [
+        "Yetişkin",
+        "Çocuk",
+        "20",
+        "Hata verir",
+        "Hiçbir şey yazdırmaz"
+      ],
+      correctAnswer: "Yetişkin",
+      explanation: "Slayt 14: $yas 20'dir ve 20 > 18 koşulu doğru olduğu için ekrana 'Yetişkin' yazar."
+    },
+    {
+      id: "h2_t25",
+      question: "Aşağıdaki fonksiyon çağrısının çıktısı nedir?\n\nfunction selamla($isim) {\n  echo \"Merhaba, \" . $isim;\n}\nselamla(\"Ali\");",
+      options: [
+        "Merhaba, Ali",
+        "Merhaba, $isim",
+        "Ali",
+        "selamla Ali",
+        "Merhaba,"
+      ],
+      correctAnswer: "Merhaba, Ali",
+      explanation: "Slayt 15: Nokta (.) birleştirme operatörüdür. Fonksiyon 'Merhaba, Ali' çıktısını üretir."
+    },
+    {
+      id: "h2_t26",
+      question: "PHP'nin çalışma mantığında adım sırası hangisinde doğru verilmiştir?",
+      options: [
+        "Tarayıcı İsteği -> Web Sunucusu -> PHP Yorumlayıcısı -> HTML Çıktısı -> Tarayıcıya Gönderim",
+        "Tarayıcı İsteği -> PHP Yorumlayıcısı -> Web Sunucusu -> Veritabanı -> Tarayıcı",
+        "Web Sunucusu -> Tarayıcı İsteği -> HTML -> PHP Yorumlayıcısı",
+        "Tarayıcı -> HTML Dosyası -> Web Sunucusu -> PHP Kodu",
+        "PHP Yorumlayıcısı -> Tarayıcı İsteği -> Web Sunucusu -> HTML"
+      ],
+      correctAnswer: "Tarayıcı İsteği -> Web Sunucusu -> PHP Yorumlayıcısı -> HTML Çıktısı -> Tarayıcıya Gönderim",
+      explanation: "Slayt 9 Şema: Client istek gönderir -> Server (Apache/Nginx) yorumlayıcıya iletir -> PHP kodları çalıştırır -> HTML çıktısı tarayıcıya döner."
+    },
+    {
+      id: "h2_t27",
+      question: "PHP nesne yönelimli programlama (OOP) desteği sunar mı?",
+      options: [
+        "Evet, sınıflar, nesneler, miras ve polimorfizm gibi OOP özelliklerini destekler.",
+        "Hayır, PHP kesinlikle nesne yönelimli programlamayı desteklemez.",
+        "Yalnızca sınıflara izin verir fakat miras (inheritance) özelliğini desteklemez.",
+        "Sadece fonksiyonel programlamayı destekler.",
+        "Yalnızca veritabanı işlemlerinde OOP kullanılabilir."
+      ],
+      correctAnswer: "Evet, sınıflar, nesneler, miras ve polimorfizm gibi OOP özelliklerini destekler.",
+      explanation: "Slayt 6: 'PHP, nesne yönelimli programlamayı (OOP) destekler. Sınıflar, nesneler, miras, polimorfizm gibi OOP özellikleri PHP'de kullanılabilir.'"
+    },
+    {
+      id: "h2_t28",
+      question: "PHP dosyasının uzantısı standart olarak aşağıdakilerden hangisidir?",
+      options: [
+        ".php",
+        ".html",
+        ".ph",
+        ".script",
+        ".server"
+      ],
+      correctAnswer: ".php",
+      explanation: "PHP betik dosyaları .php uzantılı dosyalarda saklanır."
+    },
+    {
+      id: "h2_t29",
+      question: "PHP'de iki metni (string) birleştirmek için hangi operatör kullanılır?",
+      options: [
+        "Nokta (.)",
+        "Artı (+)",
+        "Ve işareti (&)",
+        "Tire (-)",
+        "İki nokta (:)"
+      ],
+      correctAnswer: "Nokta (.)",
+      explanation: "Slayt 15 kod örneği: echo 'Merhaba, ' . $isim; PHP'de string birleştirme operatörü noktadır (.)."
+    },
+    {
+      id: "h2_t30",
+      question: "Aşağıdakilerden hangisi PHP ile yaygın kullanılan HTTP web sunucularından biridir?",
+      options: [
+        "Apache, Nginx, IIS, Lighttpd",
+        "Yalnızca Microsoft Word",
+        "Yalnızca Google Chrome",
+        "Yalnızca MySQL Workbench",
+        "Yalnızca Adobe Photoshop"
+      ],
+      correctAnswer: "Apache, Nginx, IIS, Lighttpd",
+      explanation: "Slayt 7: 'PHP, popüler HTTP sunucularıyla çalışabilir. Apache, IIS, Nginx, Lighttpd gibi sunucular ile uyumlu çalışabilir.'"
+    }
+  ],
+  fillInBlanks: [
+    {
+      id: "h2_f1",
+      sentence: "PHP kısaltmasının açılımı ____ Preprocessor şeklindedir.",
+      acceptedAnswers: ["Hypertext", "hypertext"],
+      hint: "Köprü metin anlamına gelen İngilizce kelime",
+      explanation: "PHP açılımı 'Hypertext Preprocessor'dür."
+    },
+    {
+      id: "h2_f2",
+      sentence: "PHP, istemci taraflı değil ____ taraflı (server-side) çalışan bir programlama dilidir.",
+      acceptedAnswers: ["sunucu", "sunucu taraflı", "server"],
+      hint: "Sunucu / server",
+      explanation: "PHP sunucu taraflı (server-side) bir dildir."
+    },
+    {
+      id: "h2_f3",
+      sentence: "PHP kodları genellikle <?php ile başlayıp ____ etiketi ile sonlandırılır.",
+      acceptedAnswers: ["?>", "? >"],
+      hint: "Soru işareti ve büyüktür işareti",
+      explanation: "PHP kod blokları <?php ve ?> etiketleri arasına yazılır."
+    },
+    {
+      id: "h2_f4",
+      sentence: "PHP'de her bir komut satırı ____ (;) karakteri ile bitirilmelidir.",
+      acceptedAnswers: ["noktalı virgül", "noktali virgul", ";"],
+      hint: "Noktalı virgül",
+      explanation: "PHP komutları noktalı virgül (;) ile sonlandırılır."
+    },
+    {
+      id: "h2_f5",
+      sentence: "PHP'de değişken tanımları her zaman ____ işareti ile başlar.",
+      acceptedAnswers: ["$", "dolar", "dolar işareti"],
+      hint: "$ işareti",
+      explanation: "PHP'de değişken isimleri $ işareti ile başlar."
+    },
+    {
+      id: "h2_f6",
+      sentence: "PHP'de veri tipleri önceden bildirilmez; değişkenin türü atanan değere göre belirlendiği için PHP ____ tipli bir dildir.",
+      acceptedAnswers: ["dinamik", "dinamik tipli", "dynamic"],
+      hint: "Statik olmayan",
+      explanation: "PHP dinamik tipli (dynamically typed) bir dildir."
+    },
+    {
+      id: "h2_f7",
+      sentence: "PHP'de fonksiyon tanımlamak için kullanılan anahtar kelime ____ kelimesidir.",
+      acceptedAnswers: ["function"],
+      hint: "İngilizce fonksiyon",
+      explanation: "PHP'de fonksiyonlar 'function' anahtar kelimesi ile tanımlanır."
+    },
+    {
+      id: "h2_f8",
+      sentence: "PHP ile özellikle en çok tercih edilen ve birlikte mükemmel entegrasyon sağlayan ilişkisel veritabanı ____ veritabanıdır.",
+      acceptedAnswers: ["MySQL", "mysql"],
+      hint: "My... veritabanı",
+      explanation: "Slayt 2 & 16: PHP özellikle MySQL veritabanı ile birlikte çok tercih edilir."
+    },
+    {
+      id: "h2_f9",
+      sentence: "PHP farklı veritabanlarına tek bir arayüzden bağlanmak için ____ (PHP Data Objects) soyutlama katmanını sunar.",
+      acceptedAnswers: ["PDO", "pdo"],
+      hint: "Üç harfli kısaltma: PHP Data Objects",
+      explanation: "PDO (PHP Data Objects) veritabanı soyutlama katmanıdır."
+    },
+    {
+      id: "h2_f10",
+      sentence: "PHP'de hata mesajlarını bir dosyaya veya günlüğe kaydetmek için ____() fonksiyonu kullanılır.",
+      acceptedAnswers: ["error_log", "error_log()"],
+      hint: "error_...",
+      explanation: "Slayt 5: error_log() fonksiyonu ile hata mesajları kaydedilebilir."
+    },
+    {
+      id: "h2_f11",
+      sentence: "PHP uygulamalarında detaylı hata ayıklama ve izleme yapmayı sağlayan popüler hata ayıklama eklentisi ____ aracıdır.",
+      acceptedAnswers: ["Xdebug", "xdebug"],
+      hint: "X ile başlayan debug aracı",
+      explanation: "Slayt 5: Xdebug aracı hata ayıklama için yaygın kullanılır."
+    },
+    {
+      id: "h2_f12",
+      sentence: "PHP'de farklı sunuculara HTTP istekleri göndermek için ____ kütüphanesi/aracı kullanılır.",
+      acceptedAnswers: ["cURL", "curl"],
+      hint: "c ile başlayan 4 harfli araç",
+      explanation: "Slayt 6: cURL kullanarak HTTP istekleri gönderilebilir."
+    },
+    {
+      id: "h2_f13",
+      sentence: "PHP'de Perl uyumlu düzenli ifadeler ile metin işleme desteği sağlayan kütüphanenin adı ____ kütüphanesidir.",
+      acceptedAnswers: ["PCRE", "pcre"],
+      hint: "Perl Compatible Regular Expressions kısaltması",
+      explanation: "Slayt 7: Perl düzenli ifadeleri (PCRE) metin işlemede kullanılır."
+    },
+    {
+      id: "h2_f14",
+      sentence: "PHP hem modül olarak hem de ____ (Common Gateway Interface) olarak çalışabilir.",
+      acceptedAnswers: ["CGI", "cgi"],
+      hint: "3 harfli kısaltma",
+      explanation: "Slayt 7: PHP hem modül hem CGI olarak çalışabilir."
+    },
+    {
+      id: "h2_f15",
+      sentence: "PHP kodları sunucuda yorumlandıktan sonra tarayıcıya sonuç sadece ____ çıktısı olarak gönderilir.",
+      acceptedAnswers: ["HTML", "html"],
+      hint: "Web işaretleme dili",
+      explanation: "Slayt 9: Sonuç HTML çıktısı olarak tarayıcıya gönderilir."
+    },
+    {
+      id: "h2_f16",
+      sentence: "PHP'de metinleri ekrana yazdırmak için en yaygın kullanılan dil yapısı ____ komutudur.",
+      acceptedAnswers: ["echo", "print"],
+      hint: "e... ile başlar",
+      explanation: "Slayt 8, 14, 15: echo komutu çıktı yazdırmak için kullanılır."
+    },
+    {
+      id: "h2_f17",
+      sentence: "PHP'de iki metin ifadesini yan yana birleştirmek için kullanılan karakter ____ (nokta) işaretidir.",
+      acceptedAnswers: [".", "nokta"],
+      hint: ".",
+      explanation: "PHP'de birleştirme operatörü noktadır (.)."
+    },
+    {
+      id: "h2_f18",
+      sentence: "PHP'nin zayıf tip kontrolüne sahip olması literatürde '____ Typing' olarak adlandırılır.",
+      acceptedAnswers: ["Weak", "weak", "Weak Typing"],
+      hint: "İngilizce 'zayıf'",
+      explanation: "Slayt 17: Zayıf Tip Denetimi (Weak Typing)."
+    },
+    {
+      id: "h2_f19",
+      sentence: "PHP ile yazılmış dünyanın en çok kullanılan açık kaynaklı içerik yönetim sistemi ____'tir.",
+      acceptedAnswers: ["WordPress", "wordpress"],
+      hint: "WP",
+      explanation: "Slayt 16: WordPress PHP ile yazılmıştır."
+    },
+    {
+      id: "h2_f20",
+      sentence: "PHP'de hiçbir değer taşımayan boş değişken tipine ____ adı verilir.",
+      acceptedAnswers: ["null", "NULL"],
+      hint: "null",
+      explanation: "Slayt 12: Temel tiplerden biri null'dır."
+    },
+    {
+      id: "h2_f21",
+      sentence: "Kötü yazılmış PHP kodlarında veritabanı sorgularına karşı oluşabilecek en büyük güvenlik açığı ____ Injection açığıdır.",
+      acceptedAnswers: ["SQL", "sql"],
+      hint: "SQL",
+      explanation: "Slayt 17: SQL Injection güvenlik açığı."
+    },
+    {
+      id: "h2_f22",
+      sentence: "Kullanıcıdan alınan filtrelenmemiş verilerin doğrudan HTML'e basılmasıyla oluşan web saldırısı türüne ____ saldırısı denir.",
+      acceptedAnswers: ["XSS", "xss"],
+      hint: "Cross-Site Scripting kısaltması",
+      explanation: "Slayt 17: XSS (Cross-Site Scripting)."
+    },
+    {
+      id: "h2_f23",
+      sentence: "PHP Windows, Linux ve MacOS gibi sistemlerde çalışabildiği için ____ bağımsız (cross-platform) bir dildir.",
+      acceptedAnswers: ["platform", "işletim sistemi"],
+      hint: "Platform",
+      explanation: "Slayt 4: Platform bağımsız bir dil olup..."
+    },
+    {
+      id: "h2_f24",
+      sentence: "PHP'de bir dizideki elemanlar anahtar-değer şeklinde eşleştiriliyorsa buna ____ dizi (associative array) denir.",
+      acceptedAnswers: ["ilişkisel", "iliskisel", "associative"],
+      hint: "İlişkisel / Associative",
+      explanation: "Slayt 13: Associative array (ilişkisel dizi)."
+    },
+    {
+      id: "h2_f25",
+      sentence: "PHP kodu diğer bazı diller gibi önceden makine koduna ____ çalıştırıldığı için dinamik sitelerde hızlıdır.",
+      acceptedAnswers: ["derlenmeden", "derlenmeksizin", "derleme yapılmadan"],
+      hint: "Derleme (compilation) aşaması olmaması",
+      explanation: "Slayt 16: PHP kodu derlenmeden çalıştırıldığı için dinamik sitelerde hızlıdır."
+    },
+    {
+      id: "h2_f26",
+      sentence: "PHP sözdizimi olarak C, Java ve ____ dillerine benzerlik gösterir.",
+      acceptedAnswers: ["Perl", "perl"],
+      hint: "P ile başlayan betik dili",
+      explanation: "Slayt 10: C, Java ve Perl dillerine benzer bir sözdizimi vardır."
+    },
+    {
+      id: "h2_f27",
+      sentence: "PHP'de bir koşulun doğruluğuna göre farklı kod bloklarını çalıştırmak için ____-else karar yapısı kullanılır.",
+      acceptedAnswers: ["if", "if-else"],
+      hint: "Eğer anlamına gelen İngilizce kelime",
+      explanation: "Slayt 14: if, else, elseif karar yapıları."
+    },
+    {
+      id: "h2_f28",
+      sentence: "PHP açık kaynaklı olduğu için tamamen ____ ve lisans bedelsiz bir şekilde kullanılabilir.",
+      acceptedAnswers: ["ücretsiz", "ucretsiz", "bedava", "free"],
+      hint: "Maddi ücret gerektirmeyen",
+      explanation: "Slayt 16: Açık kaynaklı bir dil olduğu için ücretsizdir."
+    },
+    {
+      id: "h2_f29",
+      sentence: "PHP dizileri tanımlanırken geleneksel olarak ____( ) fonksiyonu veya köşeli parantez [ ] kullanılır.",
+      acceptedAnswers: ["array", "array()"],
+      hint: "array",
+      explanation: "Slayt 13: $dizi = array(1, 2, 3);"
+    },
+    {
+      id: "h2_f30",
+      sentence: "Nesne yönelimli programlamada nesnelerin şablonunu oluşturan yapılara ____ (sınıf) denir.",
+      acceptedAnswers: ["class", "sınıf", "sinif"],
+      hint: "class",
+      explanation: "Slayt 6: Sınıflar (class), nesneler, miras OOP özellikleridir."
+    }
+  ],
+  codingQuestions: [
+    {
+      id: "h2_c1",
+      title: "Klasik PHP Giriş Scripti",
+      task: "HTML gövdesi içerisinde 'Merhaba Dünya' metnini echo komutu ile ekrana yazdıran PHP etiketlerini eksiksiz yazınız.",
+      initialCode: "<?php\n// Kodunuzu buraya yazınız\n",
+      expectedSolution: "<?php\necho \"Merhaba Dünya\";\n?>",
+      validationKeyword: ["echo", "Merhaba Dünya"],
+      explanation: "PHP kodları <?php ile başlar, echo ile metin yazdırılır, satır noktalı virgülle sonlandırılır ve ?> ile kapatılır."
+    },
+    {
+      id: "h2_c2",
+      title: "İki Değişken Tanımlama ve String Birleştirme",
+      task: "$ad ve $soyad değişkenlerini tanımlayıp aralarında boşluk olacak şekilde birleştirerek (nokta . operatörüyle) ekrana yazdırınız.",
+      initialCode: "<?php\n$ad = \"Ahmet\";\n$soyad = \"Yılmaz\";\n// echo ile birleştirip yazdırın\n",
+      expectedSolution: "<?php\n$ad = \"Ahmet\";\n$soyad = \"Yılmaz\";\necho $ad . \" \" . $soyad;\n?>",
+      validationKeyword: ["echo", "$ad", "$soyad", "."],
+      explanation: "PHP'de string birleştirme operatörü noktadır: echo $ad . ' ' . $soyad;"
+    },
+    {
+      id: "h2_c3",
+      title: "İlişkisel Dizi (Associative Array) Oluşturma",
+      task: "'isim' anahtarına 'Mehmet', 'yas' anahtarına 22 değerlerini atayarak bir $ogrenci ilişkisel dizisi tanımlayınız.",
+      initialCode: "<?php\n// $ogrenci dizisini tanımlayınız\n",
+      expectedSolution: "<?php\n$ogrenci = array(\"isim\" => \"Mehmet\", \"yas\" => 22);\n?>",
+      validationKeyword: ["$ogrenci", "=>", "isim", "yas"],
+      explanation: "İlişkisel dizilerde anahtar => değer sözdizimi kullanılır."
+    },
+    {
+      id: "h2_c4",
+      title: "Parametreli Basit Fonksiyon Tanımlama",
+      task: "Gelen $ad parametresini alıp ekrana 'Hoş geldin, ' ve adı birleştirerek yazdıran 'karsila' isimli bir fonksiyon yazınız.",
+      initialCode: "<?php\n// karsila fonksiyonunu yazınız\n",
+      expectedSolution: "<?php\nfunction karsila($ad) {\n  echo \"Hoş geldin, \" . $ad;\n}\n?>",
+      validationKeyword: ["function", "karsila", "$ad", "echo"],
+      explanation: "function anahtar kelimesi ile fonksiyon tanımlanır ve gelen parametre echo ile yazdırılır."
+    },
+    {
+      id: "h2_c5",
+      title: "Basit Yaş Kontrolü (if - else)",
+      task: "$yas değişkeni 18 veya daha büyükse 'Reşit', değilse 'Reşit değil' yazdıran if-else yapısını yazınız.",
+      initialCode: "<?php\n$yas = 20;\n// if-else bloğunu tamamlayınız\n",
+      expectedSolution: "<?php\n$yas = 20;\nif ($yas >= 18) {\n  echo \"Reşit\";\n} else {\n  echo \"Reşit değil\";\n}\n?>",
+      validationKeyword: ["if", "else", "$yas", ">="],
+      explanation: "if ($yas >= 18) koşulu ile yaş kontrol edilir."
+    }
+  ]
+};
+
+
+// HAFTA 3: Veri Tipleri, Sabitler ve Temel Operatörler
+var HAFTA_3_DATA = {
+  title: "Hafta 3: Veri Tipleri, Sabitler ve Temel Operatörler",
+  description: "Veri tipleri, tek/çift tırnak farkı, sayı tabanları, diziler, nesneler, resource, callable, define vs const, sihirli sabitler ve tüm operatörler.",
+  summaryNotes: [
+    { title: "Değişken Kuralları", text: "$ ile başlar, harf veya alt çizgi (_) ile başlayabilir, rakamla başlayamaz. Harf duyarlıdır (case-sensitive: $ad ile $Ad farklıdır). Dinamik tiplidir." },
+    { title: "Veri Türleri", text: "Skaler: string, int, float, bool. Bileşik: array, object, callable, iterable. Özel: null, resource. Süper Globaller: $_GET, $_POST, $_SESSION, $_COOKIE, $_FILES, $_SERVER." },
+    { title: "Tırnak Farkı", text: "Çift tırnak (\" \") içerisindeki değişkenleri çözümler ve değerini basar; tek tırnak (' ') değişkenleri çözümlemez, aynen metin olarak basar." },
+    { title: "Sayı Tabanları", text: "Decimal (42), Hexadecimal (0x2A), Octal (052), Binary (0b101010). Hepsinin 10'luk tabandaki değeri 42'dir." },
+    { title: "Bilimsel Gösterim (Float)", text: "$exp = 1.2e3; ifadesi 1.2 x 10^3 = 1200 anlamına gelir." },
+    { title: "Diziler ve echo Tuzağı", text: "Array ifadelerde echo komutu doğrudan kullanılırsa ekrana sadece 'Array' uyarısı basar. Dizinin içeriğini görmek için print_r() veya var_dump() kullanılmalıdır." },
+    { title: "define() vs const", text: "define(): Çalışma zamanında tanımlanır, koşul (if) içinde kullanılabilir, sınıf içinde kullanılamaz. const: Derleme anında tanımlanır, sınıf içinde kullanılabilir, koşul içinde kullanılamaz. Sabitlerin başına asla $ işareti konulmaz!" },
+    { title: "Sihirli Sabitler (Magic Constants)", text: "__LINE__ (satır numarası), __FILE__ (dosya yolu), __DIR__ (bulunduğu klasör), __FUNCTION__, __CLASS__, __METHOD__, __NAMESPACE__." },
+    { title: "Operatör İncelikleri", text: "** (üs alma: 10**3 = 1000), <=> (uzay gemisi: 2 <=> 3 = -1), ?? (null coalescing: null ise varsayılan), @ (hata gizleme)." }
+  ],
+  tests: [
+    {
+      id: "h3_t1",
+      question: "PHP'de değişken isimlendirme kuralları ile ilgili aşağıdakilerden hangisi YANLIŞTIR?",
+      options: [
+        "Değişken isimleri rakam ile başlayabilir.",
+        "Değişkenler her zaman $ işareti ile başlar.",
+        "Değişken isimleri harf veya alt çizgi (_) ile başlayabilir.",
+        "PHP değişken isimlerinde büyük-küçük harfe duyarlıdır ($ad ile $Ad farklıdır).",
+        "Değişkenin türü atanan değere göre dinamik olarak belirlenir."
+      ],
+      correctAnswer: "Değişken isimleri rakam ile başlayabilir.",
+      explanation: "Hafta 3 Slayt 2: Değişken isimleri harf veya _ ile başlayabilir, kesinlikle rakamla başlayamaz."
+    },
+    {
+      id: "h3_t2",
+      question: "Aşağıdaki kod çalıştırıldığında $text2 ekrana ne basar?\n\n$text1 = \"Dünya\";\n$text2 = 'Merhaba $text1';\necho $text2;",
+      options: [
+        "Merhaba $text1",
+        "Merhaba Dünya",
+        "Merhaba \"Dünya\"",
+        "Dünya",
+        "Hata verir"
+      ],
+      correctAnswer: "Merhaba $text1",
+      explanation: "Slayt 3: Tek tırnak (' ') içinde yazılan metinlerde değişkenler çözümlenmez, aynen metin olarak kalır."
+    },
+    {
+      id: "h3_t3",
+      question: "PHP'de çift tırnak (\" \") ile tek tırnak (' ') arasındaki temel fark nedir?",
+      options: [
+        "Çift tırnak içinde değişkenler çözümlenir, tek tırnak içinde çözümlenmez.",
+        "Tek tırnak sadece tek bir karakter saklayabilir.",
+        "Çift tırnak yalnızca sayılar için kullanılır.",
+        "Tek tırnaklı metinler hafızada yer kaplamaz.",
+        "İkisi arasında hiçbir çalışma ve yorumlama farkı yoktur."
+      ],
+      correctAnswer: "Çift tırnak içinde değişkenler çözümlenir, tek tırnak içinde çözümlenmez.",
+      explanation: "Slayt 3: Çift tırnak (\" \") içinde değişkenleri çözümleyebilir, tek tırnak (' ') çözümlemez."
+    },
+    {
+      id: "h3_t4",
+      question: "Aşağıdaki sayı gösterimlerinden hangisi hexadecimal (16'lık) tabanda 42 sayısını temsil eder?",
+      options: [
+        "0x2A",
+        "052",
+        "0b101010",
+        "42h",
+        "x42"
+      ],
+      correctAnswer: "0x2A",
+      explanation: "Slayt 4: 0x2A hexadecimal (16'lık), 052 octal (8'lik), 0b101010 binary (2'lik) gösterimdir. Hepsi 42'ye eşittir."
+    },
+    {
+      id: "h3_t5",
+      question: "PHP'de 052 sayısının başında 0 olması hangi sayı sistemini ifade eder ve decimal karşılığı nedir?",
+      options: [
+        "Octal (8'lik) sistemdir ve decimal karşılığı 42'dir.",
+        "Binary (2'lik) sistemdir ve karşılığı 52'dir.",
+        "Hexadecimal (16'lık) sistemdir ve karşılığı 82'dir.",
+        "Decimal sistemdir ve karşılığı 52'dir.",
+        "Geçersiz bir sözdizimidir, PHP hata verir."
+      ],
+      correctAnswer: "Octal (8'lik) sistemdir ve decimal karşılığı 42'dir.",
+      explanation: "Slayt 4: $c = 052; // octal (42). 0 ile başlayan tamsayılar 8'lik (octal) taban kabul edilir."
+    },
+    {
+      id: "h3_t6",
+      question: "$exp = 1.2e3; ifadesinin değeri ve bilimsel gösterim karşılığı nedir?",
+      options: [
+        "1200",
+        "123",
+        "1.23",
+        "12000",
+        "12"
+      ],
+      correctAnswer: "1200",
+      explanation: "Slayt 5: 1.2e3 = 1.2 x 10^3 = 1200 (Float / bilimsel gösterim)."
+    },
+    {
+      id: "h3_t7",
+      question: "PHP'de boolean $isAdmin = false; değişkeni echo $isAdmin; ile ekrana yazdırıldığında ekranda ne görünür?",
+      options: [
+        "Ekrana hiçbir şey yazmaz (boş çıktı)",
+        "0",
+        "false",
+        "null",
+        "-1"
+      ],
+      correctAnswer: "Ekrana hiçbir şey yazmaz (boş çıktı)",
+      explanation: "Slayt 6: PHP'de echo ile true yazdırıldığında '1' basılır, false yazdırıldığında ekrana hiçbir şey basılmaz (boş dize)."
+    },
+    {
+      id: "h3_t8",
+      question: "Bir dizi doğrudan echo ile yazdırılmak istendiğinde (örneğin: echo $numbers;) ekranda ne görünür?",
+      options: [
+        "Sadece ekrana 'Array' ifadesini yazar veya uyarı verir.",
+        "Dizinin tüm elemanları virgülle ayrılarak listelenir.",
+        "Dizinin ilk elemanı yazdırılır.",
+        "Dizinin eleman sayısı yazdırılır.",
+        "Dizinin bellekteki adresi yazdırılır."
+      ],
+      correctAnswer: "Sadece ekrana 'Array' ifadesini yazar veya uyarı verir.",
+      explanation: "Slayt 9: Array ifadede echo komutu kullanılırsa sadece ekrana Array ifadesini vurgular. Bunun için print_r() kullanılmalıdır."
+    },
+    {
+      id: "h3_t9",
+      question: "Dizilerin içeriğini ve yapısını ekrana ayrıntılı basmak için Hafta 3 slaytında önerilen fonksiyon hangisidir?",
+      options: [
+        "print_r()",
+        "echo_all()",
+        "display()",
+        "write_array()",
+        "show()"
+      ],
+      correctAnswer: "print_r()",
+      explanation: "Slayt 9: 'Bunun için kullanmamız gereken php fonksiyonu print_r() olmalıdır.'"
+    },
+    {
+      id: "h3_t10",
+      question: "$matrix = [ [1,2,3], [4,5,6] ]; tanımlı dizide echo $matrix[0][0]; ifadesinin çıktısı nedir?",
+      options: [
+        "1",
+        "2",
+        "4",
+        "[1,2,3]",
+        "0"
+      ],
+      correctAnswer: "1",
+      explanation: "Slayt 9: $matrix[0][0] ilk satırın (0) ilk sütun (0) değerini basar, o da 1'dir."
+    },
+    {
+      id: "h3_t11",
+      question: "PHP'de nesne üretmek için kullanılan standart anahtar kelime hangisidir?\nÖrn: $student = ____ Student();",
+      options: [
+        "new",
+        "create",
+        "make",
+        "instance",
+        "class"
+      ],
+      correctAnswer: "new",
+      explanation: "Slayt 10: $student = new Student(); nesne örneği 'new' ile üretilir."
+    },
+    {
+      id: "h3_t12",
+      question: "PHP'de NULL veri türü ile ilgili aşağıdakilerden hangisi doğrudur?",
+      options: [
+        "Bir değişkenin hiçbir değer taşımadığını gösterir; 'boş string' veya 0 ile aynı şey değildir.",
+        "0 sayısı ile tamamen aynıdır.",
+        "Boş string (\"\") ile bellekte aynı değeri taşır.",
+        "echo $var null olduğunda ekrana 'NULL' metnini yazar.",
+        "Tüm değişkenler varsayılan olarak 0 değerini alır, null alamaz."
+      ],
+      correctAnswer: "Bir değişkenin hiçbir değer taşımadığını gösterir; 'boş string' veya 0 ile aynı şey değildir.",
+      explanation: "Slayt 11: NULL, bir değişkenin hiçbir değer taşımadığını gösterir. 'boş string' veya 0 ile aynı şey değildir."
+    },
+    {
+      id: "h3_t13",
+      question: "PHP'de fopen(\"test.txt\", \"r\") gibi bir dosya işaretçisi veya veritabanı bağlantısı tutan özel veri tipi hangisidir?",
+      options: [
+        "resource",
+        "file_handle",
+        "pointer",
+        "stream",
+        "handler"
+      ],
+      correctAnswer: "resource",
+      explanation: "Slayt 12: Resource özel kaynak tipidir. Dosya, veritabanı bağlantısı, cURL oturumu gibi dış kaynaklara işaret eder."
+    },
+    {
+      id: "h3_t14",
+      question: "Fonksiyonların adını bir değişkende saklayıp $func(\"Ali\") şeklinde çağırmaya izin veren tür hangisidir?",
+      options: [
+        "callable",
+        "function_ptr",
+        "delegate",
+        "invoker",
+        "action"
+      ],
+      correctAnswer: "callable",
+      explanation: "Slayt 13: Callable tipi fonksiyonları değişken olarak saklamaya izin verir. $func = 'hello'; echo $func('Ali');"
+    },
+    {
+      id: "h3_t15",
+      question: "PHP'de sabit (constant) tanımlama ile ilgili hangisi YANLIŞTIR?",
+      options: [
+        "Sabitler kullanılırken isimlerinin başına $ işareti yazılır.",
+        "Sabitler bir kez tanımlanır, program boyunca değeri değiştirilemez.",
+        "define(\"SABIT_ADI\", deger) şeklinde tanımlanabilir.",
+        "const SABIT_ADI = deger şeklinde tanımlanabilir.",
+        "Genelde vergi oranı, minimum yaş gibi konfigürasyon bilgilerinde kullanılır."
+      ],
+      correctAnswer: "Sabitler kullanılırken isimlerinin başına $ işareti yazılır.",
+      explanation: "Slayt 14 ve Hafta 5 Slayt 13: Sabit kullanımında sabit adının başına asla $ yazılmaz!"
+    },
+    {
+      id: "h3_t16",
+      question: "define() ve const sabit tanımlama yöntemlerinin farkı hakkında hangisi DOĞRUDUR?",
+      options: [
+        "define() çalışma zamanında, const derleme anında (kod yüklenirken) çalışır; define koşul içinde kullanılabilir, const kullanılamaz.",
+        "const koşul (if) blokları içinde tanımlanabilir, define tanımlanamaz.",
+        "define sınıf (class) içinde kullanılabilir, const sınıf içinde kullanılamaz.",
+        "define sadece sayıları, const ise sadece metinleri saklayabilir.",
+        "İkisi arasında hiçbir fark yoktur, tamamen eşdeğerdir."
+      ],
+      correctAnswer: "define() çalışma zamanında, const derleme anında (kod yüklenirken) çalışır; define koşul içinde kullanılabilir, const kullanılamaz.",
+      explanation: "Slayt 15 Tablo: define() çalışma zamanında ve koşul içinde kullanılabilir, sınıf içinde kullanılamaz. const derleme zamanında ve sınıf içinde kullanılabilir, koşul içinde kullanılamaz."
+    },
+    {
+      id: "h3_t17",
+      question: "PHP'de kodun bulunduğu satır numarasını veren sihirli sabit (magic constant) hangisidir?",
+      options: [
+        "__LINE__",
+        "__ROW__",
+        "__NUMBER__",
+        "__FILE_LINE__",
+        "__CURRENT__"
+      ],
+      correctAnswer: "__LINE__",
+      explanation: "Slayt 17: __LINE__ bulunduğu satır numarasını verir."
+    },
+    {
+      id: "h3_t18",
+      question: "PHP'de dosyanın tam yolunu ve adını veren sihirli sabit hangisidir?",
+      options: [
+        "__FILE__",
+        "__PATH__",
+        "__DIR__",
+        "__FILENAME__",
+        "__URL__"
+      ],
+      correctAnswer: "__FILE__",
+      explanation: "Slayt 17: __FILE__ dosyanın yolunu, __DIR__ dosyanın bulunduğu dizini verir."
+    },
+    {
+      id: "h3_t19",
+      question: "PHP'de üs alma (kuvvet alma) işlemi için kullanılan aritmetik operatör hangisidir?\nÖrn: 10'un 3. kuvveti",
+      options: [
+        "**",
+        "^",
+        "^^",
+        "pow",
+        "//"
+      ],
+      correctAnswer: "**",
+      explanation: "Slayt 19: echo $a ** $b; // 10 ** 3 = 1000 (üs alma)."
+    },
+    {
+      id: "h3_t20",
+      question: "$a = 10; $b = 3; için echo $a % $b; komutunun ekran çıktısı nedir?",
+      options: [
+        "1",
+        "3",
+        "3.33",
+        "0",
+        "10"
+      ],
+      correctAnswer: "1",
+      explanation: "Slayt 19: % modül (kalan) operatörüdür. 10'un 3'e bölümünden kalan 1'dir."
+    },
+    {
+      id: "h3_t21",
+      question: "Aşağıdaki kodun çıktısı nedir?\n\n$name = \"PHP\";\n$name .= \" Ders\";\necho $name;",
+      options: [
+        "PHP Ders",
+        "PHPDers",
+        "Ders",
+        "Hata verir",
+        "PHP.Ders"
+      ],
+      correctAnswer: "PHP Ders",
+      explanation: "Slayt 20: .= operatörü metne ekleme yapar. 'PHP' . ' Ders' = 'PHP Ders'."
+    },
+    {
+      id: "h3_t22",
+      question: "var_dump(5 === \"5\"); ifadesinin ekran çıktısı nedir?",
+      options: [
+        "bool(false)",
+        "bool(true)",
+        "5",
+        "true",
+        "Hata verir"
+      ],
+      correctAnswer: "bool(false)",
+      explanation: "Slayt 21: === operatörü hem değere hem türe bakar. Biri int, diğeri string olduğu için sonuç bool(false) olur."
+    },
+    {
+      id: "h3_t23",
+      question: "PHP 7 ile gelen ve echo 2 <=> 3; ifadesi çalıştırıldığında ekrana basılan 'uzay gemisi' (spaceship) operatörünün çıktısı nedir?",
+      options: [
+        "-1",
+        "1",
+        "0",
+        "false",
+        "true"
+      ],
+      correctAnswer: "-1",
+      explanation: "Slayt 21: <=> operatöründe sol taraf küçükse -1, eşitse 0, büyükse 1 döner. 2 < 3 olduğu için -1 döner."
+    },
+    {
+      id: "h3_t24",
+      question: "Mantıksal 'özel veya' anlamına gelen ve koşullardan sadece biri doğruyken true dönen operatör hangisidir?",
+      options: [
+        "xor",
+        "||",
+        "&&",
+        "!",
+        "not"
+      ],
+      correctAnswer: "xor",
+      explanation: "Slayt 22: xor (özel veya) operatörüdür."
+    },
+    {
+      id: "h3_t25",
+      question: "++$a ile $a++ arasındaki fark nedir?",
+      options: [
+        "++$a önce değeri artırır sonra kullanır; $a++ önce değeri kullanır sonra artırır.",
+        "$a++ değeri 2 artırır, ++$a 1 artırır.",
+        "İkisi de tamamen aynı sırada çalışır, hiçbir fark yoktur.",
+        "++$a yalnızca döngülerde kullanılır, $a++ her yerde kullanılır.",
+        "++$a negatif sayılarda çalışmaz."
+      ],
+      correctAnswer: "++$a önce değeri artırır sonra kullanır; $a++ önce değeri kullanır sonra artırır.",
+      explanation: "Slayt 23: ++$a (önce artır sonra kullan), $a++ (önce kullan sonra artır)."
+    },
+    {
+      id: "h3_t26",
+      question: "Null Coalescing operatörü «??» ne işe yarar?\nÖrn: $username = $deger ?? \"Misafir\";",
+      options: [
+        "Solundaki değişken null (veya tanımsız) ise sağındaki varsayılan değeri seçer.",
+        "Değişkenin değerini her zaman null yapar.",
+        "İki değişkenin eşit olup olmadığını kontrol eder.",
+        "Değişkeni silip belleği boşaltır.",
+        "Yalnızca sayısal değerleri karşılaştırır."
+      ],
+      correctAnswer: "Solundaki değişken null (veya tanımsız) ise sağındaki varsayılan değeri seçer.",
+      explanation: "Slayt 24: Eğer değer içi null ise sağındaki ifade seçilir / yazılır."
+    },
+    {
+      id: "h3_t27",
+      question: "Aşağıdaki kodun çıktısı nedir?\n\n$age = 19;\necho $age >= 18 ? \"Reşit\" : \"Çocuk\";",
+      options: [
+        "Reşit",
+        "Çocuk",
+        "19",
+        "true",
+        "1"
+      ],
+      correctAnswer: "Reşit",
+      explanation: "Slayt 25: Ternary (üçlü) operatörüdür. 19 >= 18 doğru olduğu için soru işaretinden hemen sonraki 'Reşit' döner."
+    },
+    {
+      id: "h3_t28",
+      question: "PHP'de bir fonksiyonun veya komutun üretebileceği hata mesajını bastırmak (gizlemek) için başına hangi operatör konulur?",
+      options: [
+        "@",
+        "#",
+        "!",
+        "~",
+        "%"
+      ],
+      correctAnswer: "@",
+      explanation: "Slayt 25: Error Control @ operatörü hatayı gizler, kod durmaz false döner (@$file = file('olmayan.txt')). "
+    },
+    {
+      id: "h3_t29",
+      question: "PHP 8 ile gelen ve switch yapısına modern, sıkı tipli bir alternatif sunup doğrudan değer üreten yapı hangisidir?",
+      options: [
+        "match",
+        "when",
+        "choose",
+        "case_of",
+        "select"
+      ],
+      correctAnswer: "match",
+      explanation: "Slayt 27: Match: switch'e modern alternatif, dönüş değeri üretir."
+    },
+    {
+      id: "h3_t30",
+      question: "Aşağıdaki döngüde continue ve break komutları hangi sayıları yazdırır?\n\nfor ($i=1; $i<=10; $i++) {\n  if ($i == 5) continue;\n  if ($i == 8) break;\n  echo $i . \" \";\n}",
+      options: [
+        "1 2 3 4 6 7 ",
+        "1 2 3 4 5 6 7 8 ",
+        "1 2 3 4 6 7 8 ",
+        "5 8 ",
+        "1 2 3 4 "
+      ],
+      correctAnswer: "1 2 3 4 6 7 ",
+      explanation: "Slayt 29: 5 olduğunda continue ile atlanır. 8 olduğunda break ile döngüden çıkılır. Dolayısıyla 1, 2, 3, 4, 6, 7 yazdırılır."
+    }
+  ],
+  fillInBlanks: [
+    {
+      id: "h3_f1",
+      sentence: "PHP'de $ad ve $Ad değişkenlerinin farklı kabul edilmesi PHP'nin case-____ (büyük/küçük harf duyarlı) olduğunu gösterir.",
+      acceptedAnswers: ["sensitive", "sensetive"],
+      hint: "İngilizce duyarlı kelimesi (case-sensitive)",
+      explanation: "PHP değişken isimlerinde büyük-küçük harf duyarlıdır (case-sensitive)."
+    },
+    {
+      id: "h3_f2",
+      sentence: "PHP'de ____ tırnak (\" \") içindeki değişkenlerin değeri çözümlenirken tek tırnak içindekiler çözümlenmez.",
+      acceptedAnswers: ["çift", "cift"],
+      hint: "Çift tırnak",
+      explanation: "Çift tırnak değişkenleri çözümler."
+    },
+    {
+      id: "h3_f3",
+      sentence: "0x ön eki ile başlayan tamsayılar PHP'de ____ (16'lık) sayı tabanını temsil eder.",
+      acceptedAnswers: ["hexadecimal", "onaltılık", "16'lık", "onaltilik"],
+      hint: "Hexadecimal",
+      explanation: "Slayt 4: $b = 0x2A hexadecimal gösterimdir."
+    },
+    {
+      id: "h3_f4",
+      sentence: "0b ön eki ile başlayan sayılar PHP'de ____ (2'lik) tabandaki ikili sayıları temsil eder.",
+      acceptedAnswers: ["binary", "ikilik", "2'lik"],
+      hint: "Binary",
+      explanation: "Slayt 4: $d = 0b101010 binary gösterimdir."
+    },
+    {
+      id: "h3_f5",
+      sentence: "1.2e3 ifadesinde 'e' harfi bilimsel gösterim (____ notation) anlamındadır ve değeri 1200'dür.",
+      acceptedAnswers: ["scientific", "bilimsel"],
+      hint: "scientific",
+      explanation: "Slayt 5: Bilimsel gösterim (scientific notation)."
+    },
+    {
+      id: "h3_f6",
+      sentence: "PHP'de bir dizinin elemanlarını ve yapısını ekrana formatlı dökmek için ____() fonksiyonu kullanılır.",
+      acceptedAnswers: ["print_r", "print_r()"],
+      hint: "print_r",
+      explanation: "Slayt 9: echo yerine print_r() kullanılır."
+    },
+    {
+      id: "h3_f7",
+      sentence: "Çok boyutlu bir dizide $matrix[0][0] ifadesinde birinci indeks satırı, ikinci indeks ise ____ değerini belirtir.",
+      acceptedAnswers: ["sütun", "sutun", "kolon"],
+      hint: "Sütun",
+      explanation: "Slayt 9: İlk satırın ilk sütun değeri."
+    },
+    {
+      id: "h3_f8",
+      sentence: "PHP'de bir sınıftan yeni bir nesne üretilirken ____ anahtar kelimesi yazılır.",
+      acceptedAnswers: ["new"],
+      hint: "new",
+      explanation: "Slayt 10: $student = new Student();"
+    },
+    {
+      id: "h3_f9",
+      sentence: "Bir değişkenin hiçbir değer taşımadığını ve tanımsız olduğunu belirten özel veri türü ____'dır.",
+      acceptedAnswers: ["null", "NULL"],
+      hint: "null",
+      explanation: "Slayt 11: NULL hiçbir değer taşımadığını gösterir."
+    },
+    {
+      id: "h3_f10",
+      sentence: "Dosya bağlantıları veya veritabanı bağlantılarını tutan özel PHP veri tipine ____ denir.",
+      acceptedAnswers: ["resource"],
+      hint: "resource",
+      explanation: "Slayt 12: $file = fopen(...); bir resource türüdür."
+    },
+    {
+      id: "h3_f11",
+      sentence: "Fonksiyonların isimlerinin bir değişkende saklanarak çalıştırılmasına imkan veren türe ____ adı verilir.",
+      acceptedAnswers: ["callable"],
+      hint: "callable",
+      explanation: "Slayt 13: Callable tipi fonksiyonları değişkende saklamayı sağlar."
+    },
+    {
+      id: "h3_f12",
+      sentence: "PHP'de sabitler iki yolla tanımlanır: define() fonksiyonu veya ____ anahtar kelimesi ile.",
+      acceptedAnswers: ["const"],
+      hint: "const",
+      explanation: "Slayt 14: define(\"AD\", val) veya const AD = val;"
+    },
+    {
+      id: "h3_f13",
+      sentence: "const ile tanımlanan sabitler derleme zamanında, define() ile tanımlananlar ise ____ zamanında çalışır.",
+      acceptedAnswers: ["çalışma", "calisma", "runtime"],
+      hint: "Çalışma (runtime)",
+      explanation: "Slayt 15: define() çalışma zamanında, const derleme anında değerlendirilir."
+    },
+    {
+      id: "h3_f14",
+      sentence: "Sabitlerin adının başında değişkenlerde olduğu gibi ____ ($) işareti KULLANILMAZ.",
+      acceptedAnswers: ["dolar", "$"],
+      hint: "$",
+      explanation: "Sabitlerin başında $ yazılmaz."
+    },
+    {
+      id: "h3_f15",
+      sentence: "PHP'de kodun çalıştığı an dosyanın bulunduğu klasörün dizin yolunu veren sihirli sabit ____'dir.",
+      acceptedAnswers: ["__DIR__"],
+      hint: "İki alt çizgi DIR iki alt çizgi",
+      explanation: "Slayt 17: __DIR__ dosyanın bulunduğu dizindir."
+    },
+    {
+      id: "h3_f16",
+      sentence: "PHP'de kodun çalıştığı dosyanın tam adını ve yolunu veren sihirli sabit ____'dir.",
+      acceptedAnswers: ["__FILE__"],
+      hint: "İki alt çizgi FILE iki alt çizgi",
+      explanation: "Slayt 17: __FILE__ dosyanın yoludur."
+    },
+    {
+      id: "h3_f17",
+      sentence: "PHP'de kodun bulunduğu satır numarasını veren sihirli sabit ____'dir.",
+      acceptedAnswers: ["__LINE__"],
+      hint: "İki alt çizgi LINE iki alt çizgi",
+      explanation: "Slayt 17: __LINE__ bulunduğu satır numarası."
+    },
+    {
+      id: "h3_f18",
+      sentence: "PHP'de üs alma (kuvvet alma) işlemi için aritmetik operatör olarak ____ kullanılır.",
+      acceptedAnswers: ["**"],
+      hint: "İki adet yıldız işareti",
+      explanation: "Slayt 19: ** operatörü üs almadır."
+    },
+    {
+      id: "h3_f19",
+      sentence: "PHP'de bölme işleminden kalanı veren modül operatörünün simgesi ____ işaretidir.",
+      acceptedAnswers: ["%", "yüzde"],
+      hint: "%",
+      explanation: "Slayt 19: % operatörü kalanı (modülü) verir."
+    },
+    {
+      id: "h3_f20",
+      sentence: "PHP'de hem değerin hem de veri türünün eşitliğini kontrol eden sıkı eşitlik operatörü ____'tür.",
+      acceptedAnswers: ["==="],
+      hint: "Üç adet eşittir",
+      explanation: "Slayt 21: === değer ve tip eşitliğini denetler."
+    },
+    {
+      id: "h3_f21",
+      sentence: "PHP'de değer veya tipin farklı olduğunu kontrol eden operatör ____'dir.",
+      acceptedAnswers: ["!=="],
+      hint: "Ünlem ve iki eşittir",
+      explanation: "Slayt 21: !== değer veya tip farklı."
+    },
+    {
+      id: "h3_f22",
+      sentence: "echo 2 <=> 3; işleminde kullanılan <=> operatörüne halk arasında ____ operatörü denir.",
+      acceptedAnswers: ["uzay gemisi", "spaceship"],
+      hint: "Uzay gemisi (spaceship)",
+      explanation: "Slayt 21: <=> uzay gemisi (spaceship) operatörüdür."
+    },
+    {
+      id: "h3_f23",
+      sentence: "Mantıksal operatörlerden && ifadesi 'VE' anlamına gelirken || ifadesi '____' anlamına gelir.",
+      acceptedAnswers: ["VEYA", "veya", "or"],
+      hint: "Veya",
+      explanation: "Slayt 22: || mantıksal VEYA anlamına gelir."
+    },
+    {
+      id: "h3_f24",
+      sentence: "Önce değeri kullanıp ardından 1 artıran artırma operatörü yazımı $a____ şeklindedir.",
+      acceptedAnswers: ["++"],
+      hint: "++",
+      explanation: "Slayt 23: $a++ (önce kullan sonra artır)."
+    },
+    {
+      id: "h3_f25",
+      sentence: "Eğer bir değişkenin içi null ise alternatif değeri seçmeyi sağlayan operatör «____» operatörüdür.",
+      acceptedAnswers: ["??", "null coalescing"],
+      hint: "İki adet soru işareti",
+      explanation: "Slayt 24: Null Coalescing «??»."
+    },
+    {
+      id: "h3_f26",
+      sentence: "Tek satırda koşula bağlı seçim yapmayı sağlayan $kosul ? $dogru : $yanlis yapısına ____ operatörü denir.",
+      acceptedAnswers: ["ternary", "üçlü", "uclu", "üçlü koşul"],
+      hint: "Ternary / Üçlü operatör",
+      explanation: "Slayt 25: Ternary «?:»."
+    },
+    {
+      id: "h3_f27",
+      sentence: "PHP'de bir satırda oluşabilecek hata mesajını gizlemek için satırın başına ____ karakteri konulur.",
+      acceptedAnswers: ["@", "et"],
+      hint: "@ işareti",
+      explanation: "Slayt 25: Error Control @ operatörü."
+    },
+    {
+      id: "h3_f28",
+      sentence: "PHP 8 ile gelen ve switch yapısının yerini alan dönüş değerli modern alternatif ____ yapısıdır.",
+      acceptedAnswers: ["match"],
+      hint: "match",
+      explanation: "Slayt 27: Match switch'e modern alternatiftir."
+    },
+    {
+      id: "h3_f29",
+      sentence: "Döngülerde o anki turu atlayıp bir sonraki tura geçmek için ____ komutu kullanılır.",
+      acceptedAnswers: ["continue"],
+      hint: "continue",
+      explanation: "Slayt 29: continue o anki turu atlar."
+    },
+    {
+      id: "h3_f30",
+      sentence: "Döngüyü tamamen sonlandırıp döngüden çıkmak için ____ komutu kullanılır.",
+      acceptedAnswers: ["break"],
+      hint: "break",
+      explanation: "Slayt 29: break döngüden tamamen çıkar."
+    }
+  ],
+  codingQuestions: [
+    {
+      id: "h3_c1",
+      title: "define() ve const ile Sabit Tanımlama",
+      task: "define() ile 'SITE_URL' sabitini 'https://bozok.edu.tr', const ile 'MAX_LOGIN' sabitini 5 olarak tanımlayıp ekrana yazdırınız.",
+      initialCode: "<?php\n// Sabitleri tanımlayınız\n",
+      expectedSolution: "<?php\ndefine(\"SITE_URL\", \"https://bozok.edu.tr\");\nconst MAX_LOGIN = 5;\necho SITE_URL . \" \" . MAX_LOGIN;\n?>",
+      validationKeyword: ["define", "const", "SITE_URL", "MAX_LOGIN"],
+      explanation: "define(\"NAME\", val) ve const NAME = val sözdizimiyle sabit tanımlanır."
+    },
+    {
+      id: "h3_c2",
+      title: "Tek ve Çift Tırnak Farkını Gösterme",
+      task: "$ad = 'Ahmet'; değişkenini kullanarak $t1 çift tırnaklı 'Selam $ad', $t2 tek tırnaklı 'Selam $ad' şeklinde tanımlayıp yazdırınız.",
+      initialCode: "<?php\n$ad = \"Ahmet\";\n// $t1 ve $t2 tanımlayınız\n",
+      expectedSolution: "<?php\n$ad = \"Ahmet\";\n$t1 = \"Selam $ad\";\n$t2 = 'Selam $ad';\necho $t1 . \" - \" . $t2;\n?>",
+      validationKeyword: ["$ad", "\"Selam $ad\"", "'Selam $ad'"],
+      explanation: "Çift tırnakta $ad Ahmet olarak çözümlenir, tek tırnakta aynen kalır."
+    },
+    {
+      id: "h3_c3",
+      title: "Null Coalescing (??) Operatörü",
+      task: "$kullaniciAdi null olduğunda ekrana 'Misafir' yazdıran kodu null coalescing (??) ile yazınız.",
+      initialCode: "<?php\n$kullaniciAdi = null;\n// ?? operatörüyle $ad belirleyip echo yapın\n",
+      expectedSolution: "<?php\n$kullaniciAdi = null;\n$ad = $kullaniciAdi ?? \"Misafir\";\necho $ad;\n?>",
+      validationKeyword: ["??", "Misafir", "echo"],
+      explanation: "$kullaniciAdi ?? 'Misafir' ifadesi null olduğunda 'Misafir' değerini alır."
+    },
+    {
+      id: "h3_c4",
+      title: "PHP 8 Match İfadesi",
+      task: "$kod 200 ise 'Başarılı', 404 ise 'Sayfa Yok', diğer durumlarda 'Bilinmeyen' üreten match bloğunu yazınız.",
+      initialCode: "<?php\n$kod = 200;\n$mesaj = match ($kod) {\n  // match gövdesi\n};\necho $mesaj;\n?>",
+      expectedSolution: "<?php\n$kod = 200;\n$mesaj = match ($kod) {\n  200 => \"Başarılı\",\n  404 => \"Sayfa Yok\",\n  default => \"Bilinmeyen\"\n};\necho $mesaj;\n?>",
+      validationKeyword: ["match", "200 =>", "404 =>", "default =>"],
+      explanation: "PHP 8 match ifadesi değer döndürür ve default ile bilinmeyen durumları yakalar."
+    },
+    {
+      id: "h3_c5",
+      title: "Sihirli Sabitleri Yazdırma",
+      task: "Kodun çalıştığı dosyanın tam yolunu (__FILE__) ve satır numarasını (__LINE__) ekrana yazdırınız.",
+      initialCode: "<?php\n// Sihirli sabitleri echo ile yazdırınız\n",
+      expectedSolution: "<?php\necho \"Dosya: \" . __FILE__ . \" Satır: \" . __LINE__;\n?>",
+      validationKeyword: ["__FILE__", "__LINE__", "echo"],
+      explanation: "__FILE__ dosya yolunu, __LINE__ ise satır numarasını basar."
+    }
+  ]
+};
+
+
+// HAFTA 4: Kontrol Yapıları (Control Structures)
+var HAFTA_4_DATA = {
+  title: "Hafta 4: Kontrol Yapıları & Koşul Mantığı",
+  description: "if-else, elseif, switch, match (PHP 8), boolean yorumu, kısa devre değerlendirme, and vs && öncelik farkı ve sık yapılan mantık hataları.",
+  summaryNotes: [
+    { title: "Boolean False Değerler", text: "PHP'de şu 7 değer koşulda FALSE yorumlanır: false, 0, 0.0, \"\" (boş metin), \"0\" (sıfır metni), null, [] (boş dizi). Diğer her şey (-1, \"false\", \"PHP\") TRUE kabul edilir!" },
+    { title: "Atama (=) vs Karşılaştırma (==)", text: "if ($not = 50) yazılırsa değişkene 50 atanır, atanan 50 değeri TRUE yorumlanır ve blok daima çalışır! Karşılaştırma için == veya === kullanılmalıdır." },
+    { title: "elseif Sıralama Kuralı", text: "Koşullar yukarıdan aşağıya değerlendirilir. İlk true koşulda zincir biter. Bu yüzden yüksek eşikler (örn: >= 90) daima düşük eşiklerden (örn: >= 50) önce yazılmalıdır." },
+    { title: "and ile && Öncelik Farkı", text: "&& atama (=) operatöründen önce, 'and' ise atamadan sonra değerlendirilir. Bu nedenle $b = true and false; yazıldığında $b'nin değeri true olur!" },
+    { title: "Kısa Devre (Short-Circuit)", text: "&& işleminde sol taraf false ise sağ taraf hiç çalıştırılmaz ($payda !== 0 && $pay/$payda > 2 bölme hatasını önler). || işleminde sol true ise sağ çalıştırılmaz." },
+    { title: "switch vs match (PHP 8)", text: "switch gevşek (==) karşılaştırma yapar, komut yürütür, break gerektirir. match ise sıkı (===) karşılaştırma yapar, değer döndürür, break kullanılmaz ve default yoksa hata üretir." },
+    { title: "?? vs ?: Farkı", text: "$puan = 0; için $puan ?? 100 sonucu 0 olur (çünkü null değildir). Fakat $puan ?: 100 sonucu 100 olur (çünkü 0 false yorumlanır)." },
+    { title: "Hayati Mantık Hataları", text: "1) if ($not >= 50); { ... } sondaki noktalı virgül boş komut oluşturur, blok her zaman çalışır! 2) Aralık kontrolünde || kullanmak ($x >= 0 || $x <= 100) her sayı için true döner, doğrusu && olmalıdır." }
+  ],
+  tests: [
+    {
+      id: "h4_t1",
+      question: "Aşağıdaki değerlerden hangisi PHP'de bir if koşulu içinde 'true' (doğru) olarak yorumlanır?",
+      options: [
+        "\"false\"",
+        "\"0\"",
+        "0.0",
+        "[] (boş dizi)",
+        "null"
+      ],
+      correctAnswer: "\"false\"",
+      explanation: "Hafta 4 Slayt 7 Tablo: PHP'de false, 0, 0.0, \"\", \"0\", null ve [] false yorumlanır. Ancak \"false\" içi dolu bir metin olduğu için TRUE yorumlanır!"
+    },
+    {
+      id: "h4_t2",
+      question: "Aşağıdaki kod çalıştırıldığında çıktısı ne olur?\n\n$not = 30;\nif ($not = 50) {\n  echo \"Koşul çalıştı\\n\";\n}\necho \"Notun yeni değeri: $not\\n\";",
+      options: [
+        "Koşul çalıştı ve Notun yeni değeri: 50",
+        "Sadece Notun yeni değeri: 30",
+        "Sözdizimi hatası verir",
+        "Hiçbir çıktı üretmez",
+        "Koşul çalıştı ve Notun yeni değeri: 30"
+      ],
+      correctAnswer: "Koşul çalıştı ve Notun yeni değeri: 50",
+      explanation: "Slayt 6: Karşılaştırma (==) yerine tek eşittir (=) atama yapılmıştır. $not 50 olur, 50 sayısı true sayılır ve koşul çalışır!"
+    },
+    {
+      id: "h4_t3",
+      question: "var_dump(50 == \"50\") ve var_dump(50 === \"50\") ifadelerinin çıktıları sırasıyla nedir?",
+      options: [
+        "bool(true) ve bool(false)",
+        "bool(true) ve bool(true)",
+        "bool(false) ve bool(true)",
+        "bool(false) ve bool(false)",
+        "1 ve 0"
+      ],
+      correctAnswer: "bool(true) ve bool(false)",
+      explanation: "Slayt 5: == tür dönüşümü yapar (gevşek eşitlik: true), === değerle birlikte türü de kontrol eder (int !== string: false)."
+    },
+    {
+      id: "h4_t4",
+      question: "Aşağıdaki hatalı kodda $not = 95 için ekran çıktısı ne olur?\n\n$not = 95;\nif ($not >= 50) {\n  echo \"Yeterli\\n\";\n} elseif ($not >= 90) {\n  echo \"Çok iyi\\n\";\n}",
+      options: [
+        "Yeterli",
+        "Çok iyi",
+        "Yeterli Çok iyi",
+        "Hata verir",
+        "Hiçbir şey"
+      ],
+      correctAnswer: "Yeterli",
+      explanation: "Slayt 18: 95 ilk koşulu (>= 50) sağlar. PHP ilk true koşuldan sonra zinciri bitirir, ikinci koşula hiç bakmaz!"
+    },
+    {
+      id: "h4_t5",
+      question: "and operatörü ile && operatörü arasındaki öncelik farkı nedeniyle aşağıdaki kodun çıktısı nedir?\n\n$b = true and false;\nvar_dump($b);",
+      options: [
+        "bool(true)",
+        "bool(false)",
+        "null",
+        "false",
+        "Hata verir"
+      ],
+      correctAnswer: "bool(true)",
+      explanation: "Slayt 26: and operatörü atamadan (=) sonra değerlendirilir. Yani ($b = true) önce atanır, and false sonradan kalır! Bu yüzden $b true olur."
+    },
+    {
+      id: "h4_t6",
+      question: "Kısa devre (short-circuit) değerlendirme özelliğine göre aşağıdaki kod neden sıfıra bölme hatası vermez?\n\n$pay = 10; $payda = 0;\nif ($payda !== 0 && $pay / $payda > 2) {\n  echo \"Oran 2'den büyük\";\n} else {\n  echo \"Koşul sağlanmadı\";\n}",
+      options: [
+        "&& operatöründe sol taraf false olduğunda sağ taraf hiç çalıştırılmaz.",
+        "PHP otomatik olarak 0'a bölmede 0 sonucunu üretir.",
+        "Sıfıra bölme işlemi sadece fonksiyonlarda hata üretir.",
+        "Koşuldaki bölme işlemi tamsayı değil kayan noktalıdır.",
+        "Kod hata verir ve PHP derleyicisi çöker."
+      ],
+      correctAnswer: "&& operatöründe sol taraf false olduğunda sağ taraf hiç çalıştırılmaz.",
+      explanation: "Slayt 27: && sol taraf false ($payda !== 0 false) ise sağ tarafı hiç değerlendirmez. Böylece riskli bölme işlemi yapılmaz."
+    },
+    {
+      id: "h4_t7",
+      question: "switch yapısında break komutu unutulduğunda gerçekleşen ve sonraki case bloklarının da çalışmasına ne ad verilir?",
+      options: [
+        "fall-through",
+        "loop-back",
+        "short-circuit",
+        "overflow",
+        "deadlock"
+      ],
+      correctAnswer: "fall-through",
+      explanation: "Slayt 35: 'İlk case eşleşince yürütme başlar. Sonraki case komutları da çalışır. Bu davranışa fall-through denir.'"
+    },
+    {
+      id: "h4_t8",
+      question: "Aşağıdaki switch kodunun çıktısı nedir?\n\n$secim = 1;\nswitch ($secim) {\n  case 1: echo \"Birinci \";\n  case 2: echo \"İkinci \"; break;\n  default: echo \"Diğer \";\n}",
+      options: [
+        "Birinci İkinci ",
+        "Birinci ",
+        "İkinci ",
+        "Birinci İkinci Diğer ",
+        "Diğer "
+      ],
+      correctAnswer: "Birinci İkinci ",
+      explanation: "Slayt 35: case 1'de break olmadığı için case 2'ye akar (fall-through) ve 'Birinci İkinci ' yazar."
+    },
+    {
+      id: "h4_t9",
+      question: "switch yapısı değişken ile case değerlerini karşılaştırırken hangi eşitlik mantığını kullanır?",
+      options: [
+        "Gevşek eşitlik (==)",
+        "Sıkı eşitlik (===)",
+        "Tip kontrolü zorunludur",
+        "Sadece metin karşılaştırması yapar",
+        "Spaceship (<=>) karşılaştırması yapar"
+      ],
+      correctAnswer: "Gevşek eşitlik (==)",
+      explanation: "Slayt 37: 'switch gevşek karşılaştırma (==) kullanır. Bu örnekte tür farkına rağmen eşleşme oluşur.'"
+    },
+    {
+      id: "h4_t10",
+      question: "PHP 8 ile gelen match ifadesi karşılaştırmada ne kullanır?",
+      options: [
+        "Sıkı eşitlik (===)",
+        "Gevşek eşitlik (==)",
+        "Sadece büyük-küçük karşılaştırması",
+        "RegEx deseni",
+        "Özel tip dönüştürücü"
+      ],
+      correctAnswer: "Sıkı eşitlik (===)",
+      explanation: "Slayt 40 & 41: 'match, === ile karşılaştırır. '2' tamsayı 2 ile eşleşmez.'"
+    },
+    {
+      id: "h4_t11",
+      question: "PHP 8 match ifadesi ile switch arasındaki farklardan hangisi YANLIŞTIR?",
+      options: [
+        "match içinde her seçeneğin sonuna mutlaka 'break;' yazılmalıdır.",
+        "match bir değer üretir ve bir değişkene doğrudan atanabilir.",
+        "match sıkı (===) karşılaştırma yapar, switch gevşek (==) yapar.",
+        "match yapısında sonraki seçeneğe geçiş (fall-through) olmaz.",
+        "match ifadesinde eşleşen seçenek yoksa ve default tanımlanmamışsa hata üretilir."
+      ],
+      correctAnswer: "match içinde her seçeneğin sonuna mutlaka 'break;' yazılmalıdır.",
+      explanation: "Slayt 39, 41: match içinde kesinlikle 'break' KULLANILMAZ."
+    },
+    {
+      id: "h4_t12",
+      question: "Aşağıdaki kod çalıştırıldığında çıktısı ne olur?\n\n$secim = \"2\";\n$sayfa = match ($secim) {\n  1 => \"Ana sayfa\",\n  2 => \"Dersler\",\n  default => \"Geçersiz seçim\",\n};\necho $sayfa;",
+      options: [
+        "Geçersiz seçim",
+        "Dersler",
+        "Ana sayfa",
+        "2",
+        "Hata verir"
+      ],
+      correctAnswer: "Geçersiz seçim",
+      explanation: "Slayt 40: $secim string '2'dir. match sıkı (===) karşılaştırdığı için tamsayı 2 ile eşleşmez ve default'a düşer ('Geçersiz seçim')."
+    },
+    {
+      id: "h4_t13",
+      question: "Aşağıdaki kod parçasının çıktıları sırasıyla nedir?\n\n$puan = 0;\n$a = $puan ?? 100;\n$b = $puan ?: 100;\necho \"$a ve $b\";",
+      options: [
+        "0 ve 100",
+        "100 ve 100",
+        "0 ve 0",
+        "100 ve 0",
+        "null ve 100"
+      ],
+      correctAnswer: "0 ve 100",
+      explanation: "Slayt 43: ?? operatörü sadece sol taraf null veya yoksa çalışır ($puan 0 olduğundan $a=0). ?: ise sol taraf false yorumlandığında varsayılanı seçer ($puan 0 false olduğundan $b=100)."
+    },
+    {
+      id: "h4_t14",
+      question: "HTML sayfaları içerisine PHP koşul blokları yazılırken süslü parantez yerine tercih edilen alternatif sözdiziminde blok nasıl kapatılır?",
+      options: [
+        "endif;",
+        "end;",
+        "close if;",
+        "stop if;",
+        "exit;"
+      ],
+      correctAnswer: "endif;",
+      explanation: "Slayt 44: <?php if ($stok > 0): ?> ... <?php else: ?> ... <?php endif; ?>"
+    },
+    {
+      id: "h4_t15",
+      question: "Aşağıdaki kodda oluşan mantık hatasının sebebi nedir?\n\n$not = 20;\nif ($not >= 50);\n{\n  echo \"Bu blok her zaman çalışır\\n\";\n}",
+      options: [
+        "if parantezinden hemen sonraki noktalı virgül (;) boş komut oluşturur ve altındaki süslü parantez koşuldan bağımsız hale gelir.",
+        "$not değişkenine tırnak işareti konulmadığı için sözdizimi hatası oluşur.",
+        "PHP'de bloklar süslü parantezle başlatılamaz.",
+        "echo komutu çift tırnak kabul etmez.",
+        "20 sayısı 50'den küçük olduğu için blok çalışmaz."
+      ],
+      correctAnswer: "if parantezinden hemen sonraki noktalı virgül (;) boş komut oluşturur ve altındaki süslü parantez koşuldan bağımsız hale gelir.",
+      explanation: "Slayt 45: if satırındaki ; boş komut oluşturur. Sonraki blok koşuldan bağımsız kalır ve her zaman çalışır!"
+    },
+    {
+      id: "h4_t16",
+      question: "0 ile 100 arasında bir not aralığını kontrol etmek isteyen biri var_dump($not >= 0 || $not <= 100); yazarsa $not = 150 için çıktı ne olur ve hata nedir?",
+      options: [
+        "bool(true) çıkar; çünkü || (VEYA) kullanıldığı için 150 >= 0 koşulu sağlanır. Doğrusu && (VE) olmalıdır.",
+        "bool(false) çıkar ve kod doğrudur.",
+        "PHP sözdizimi hatası verir.",
+        "150 sayısı string olmadığı için çalışmaz.",
+        "null döner."
+      ],
+      correctAnswer: "bool(true) çıkar; çünkü || (VEYA) kullanıldığı için 150 >= 0 koşulu sağlanır. Doğrusu && (VE) olmalıdır.",
+      explanation: "Slayt 46: Aralık iki sınırı da sağlamalıdır (>= 0 && <= 100). || kullanılırsa her sayı doğru kabul edilir."
+    },
+    {
+      id: "h4_t17",
+      question: "Bir sayının çift olup olmadığını sınayan en doğru PHP koşul ifadesi hangisidir?",
+      options: [
+        "$sayi % 2 === 0",
+        "$sayi / 2 === 0",
+        "$sayi % 2 === 1",
+        "$sayi // 2 == 0",
+        "$sayi & 2 == 2"
+      ],
+      correctAnswer: "$sayi % 2 === 0",
+      explanation: "Slayt 14: % operatörü bölmeden kalanı verir. 2 ile bölümden kalan 0 ise sayı çifttir."
+    },
+    {
+      id: "h4_t18",
+      question: "Aşağıdaki kodun çıktısı nedir?\n\n$aktif = false;\necho (!$aktif ? \"D\" : \"E\");",
+      options: [
+        "D",
+        "E",
+        "false",
+        "true",
+        "DE"
+      ],
+      correctAnswer: "D",
+      explanation: "Slayt 48 & 49: $aktif false ise !$aktif true olur. Ternary operatöründe true dalı olan 'D' seçilir."
+    },
+    {
+      id: "h4_t19",
+      question: "Aşağıdaki bağımsız if bloklarının çıktısı nedir?\n\n$not = 95;\nif ($not >= 50) { echo \"Geçti \"; }\nif ($not >= 90) { echo \"Üstün Başarı \"; }",
+      options: [
+        "Geçti Üstün Başarı ",
+        "Geçti ",
+        "Üstün Başarı ",
+        "Hiçbiri",
+        "Hata verir"
+      ],
+      correctAnswer: "Geçti Üstün Başarı ",
+      explanation: "Slayt 19: elseif kullanılmayıp iki ayrı bağımsız if yazıldığı için iki koşul da bağımsız çalışır ve her ikisi de yazdırılır."
+    },
+    {
+      id: "h4_t20",
+      question: "Birden çok case bloğuna aynı işlemi yaptırmak için switch yapısında ne yapılır?\nÖrn: Cumartesi ve Pazar için 'Hafta sonu'",
+      options: [
+        "İlk case'in altına komut ve break koymadan hemen altına ikinci case yazılır.",
+        "case 'Cumartesi' || 'Pazar': şeklinde yazılır.",
+        "case 'Cumartesi' && 'Pazar': şeklinde yazılır.",
+        "switch içine virgülle ayrılmış case yazılır.",
+        "Böyle bir özellik PHP switch yapısında mümkün değildir."
+      ],
+      correctAnswer: "İlk case'in altına komut ve break koymadan hemen altına ikinci case yazılır.",
+      explanation: "Slayt 36: case 'Cumartesi': case 'Pazar': echo 'Hafta sonu'; break;"
+    },
+    {
+      id: "h4_t21",
+      question: "Hafta 4 ders sonu uygulamasında not ortalaması formülü nasıl belirlenmiştir?",
+      options: [
+        "Ortalama = $vize * 0.40 + $final * 0.60",
+        "Ortalama = ($vize + $final) / 2",
+        "Ortalama = $vize * 0.30 + $final * 0.70",
+        "Ortalama = $vize * 0.50 + $final * 0.50",
+        "Ortalama = $vize * 0.20 + $final * 0.80"
+      ],
+      correctAnswer: "Ortalama = $vize * 0.40 + $final * 0.60",
+      explanation: "Slayt 52: Ortalama = vize x 0.40 + final x 0.60"
+    },
+    {
+      id: "h4_t22",
+      question: "Hafta 4 ders sonu uygulamasında devamsızlık kaçın üzerinde olduğunda öğrenci doğrudan 'Devamsızlıktan kaldı' sayılır?",
+      options: [
+        "20",
+        "10",
+        "15",
+        "25",
+        "30"
+      ],
+      correctAnswer: "20",
+      explanation: "Slayt 52: 'Devamsızlık > 20 ise sonuç: Devamsızlıktan kaldı.'"
+    },
+    {
+      id: "h4_t23",
+      question: "Hafta 4 ders sonu uygulamasında bir öğrencinin rozet kazanması için gereken koşul hangisidir?",
+      options: [
+        "Dersi geçmesi, ortalamasının >= 85 olması ve projeyi teslim etmiş ($projeTeslim === true) olması",
+        "Sadece finalden 90 alması",
+        "Devamsızlığının 0 olması",
+        "Vize ve finalinin 100 olması",
+        "Sadece projesini teslim etmesi"
+      ],
+      correctAnswer: "Dersi geçmesi, ortalamasının >= 85 olması ve projeyi teslim etmiş ($projeTeslim === true) olması",
+      explanation: "Slayt 52 & 55: 'Geçen, ortalaması >= 85 olan ve projeyi teslim eden öğrenci rozet alır.'"
+    },
+    {
+      id: "h4_t24",
+      question: "Hafta 4 ders sonu uygulamasında final notu kaçın altında olan bir öğrenci ortalaması ne olursa olsun 'Final koşulundan kaldı' sayılır?",
+      options: [
+        "50",
+        "60",
+        "40",
+        "45",
+        "55"
+      ],
+      correctAnswer: "50",
+      explanation: "Slayt 52: 'Aksi halde final < 50 ise sonuç: Final koşulundan kaldı.'"
+    },
+    {
+      id: "h4_t25",
+      question: "Hangi durumda switch yerine if-elseif yapısı tercih edilmelidir?",
+      options: [
+        "Sayı aralıkları (örneğin Not >= 90, Not >= 80 gibi) kontrol edilirken",
+        "Belirli sabit menü seçenekleri (1, 2, 3) kontrol edilirken",
+        "Yalnızca tek bir string eşleştirmesi yapılırken",
+        "Haftanın günleri kontrol edilirken",
+        "Bütün durumlarda switch daha uygundur"
+      ],
+      correctAnswer: "Sayı aralıkları (örneğin Not >= 90, Not >= 80 gibi) kontrol edilirken",
+      explanation: "Slayt 38 Tablo: Sayı aralıkları için uygun başlangıç if-elseif yapısıdır."
+    },
+    {
+      id: "h4_t26",
+      question: "Bir değişkenin hem tanımlı olduğunu hem de null olmadığını test etmek veya değer atanmamışsa varsayılan değer vermek için en kısa operatör hangisidir?",
+      options: [
+        "??",
+        "?:",
+        "==",
+        "&&",
+        "!!"
+      ],
+      correctAnswer: "??",
+      explanation: "Slayt 43: ?? (Null coalescing operatörü)."
+    },
+    {
+      id: "h4_t27",
+      question: "Aşağıdaki kodun çıktısı nedir?\n\n$not = 80;\nif ($not >= 90) echo \"A\";\nelseif ($not >= 70) echo \"B\";\nelseif ($not >= 50) echo \"C\";\nelse echo \"F\";",
+      options: [
+        "B",
+        "A",
+        "C",
+        "F",
+        "BC"
+      ],
+      correctAnswer: "B",
+      explanation: "80, >= 90 değildir; ancak >= 70 koşulunu sağlar ve 'B' yazıp zincirden çıkar."
+    },
+    {
+      id: "h4_t28",
+      question: "var_dump(\"0\" == false); ve var_dump(\"0\" === false); sonuçları sırasıyla nedir?",
+      options: [
+        "bool(true) ve bool(false)",
+        "bool(true) ve bool(true)",
+        "bool(false) ve bool(false)",
+        "bool(false) ve bool(true)",
+        "Hata verir"
+      ],
+      correctAnswer: "bool(true) ve bool(false)",
+      explanation: "Gevşek eşitlikte \"0\" false'a eşittir (true). Sıkı eşitlikte string !== bool olduğu için false'tur."
+    },
+    {
+      id: "h4_t29",
+      question: "Koşullu ifadelerde parantez kullanımı ($uye && ($kupon || $vip)) neden önemlidir?",
+      options: [
+        "İşlem önceliğini belirleyerek VE ile VEYA mantığının doğru gruplanmasını sağlar.",
+        "Parantez kullanılmazsa kod PHP tarafından derlenmez.",
+        "Parantez değişkenlerin tipini otomatik integer yapar.",
+        "Parantez sadece hız optimizasyonu sağlar.",
+        "PHP'de parantez kullanmak yasaktır."
+      ],
+      correctAnswer: "İşlem önceliğini belirleyerek VE ile VEYA mantığının doğru gruplanmasını sağlar.",
+      explanation: "Slayt 25: Parantez, kupon ve VIP seçeneklerini birlikte gruplar ve önceliği garanti eder."
+    },
+    {
+      id: "h4_t30",
+      question: "Hafta 4 ders sonu uygulamasında vize=101 ve final=90 girildiğinde sistemin tepkisi ne olmalıdır?",
+      options: [
+        "Geçersiz veri uyarısı verilmeli ve başarı harf notu üretilmemelidir.",
+        "Ortalama hesaplanıp AA verilmelidir.",
+        "Vize otomatik olarak 100'e yuvarlanmalıdır.",
+        "Öğrenci devamsızlıktan bırakılmalıdır.",
+        "Final notu iki katına çıkarılmalıdır."
+      ],
+      correctAnswer: "Geçersiz veri uyarısı verilmeli ve başarı harf notu üretilmemelidir.",
+      explanation: "Slayt 56 Tablo: 101 / 90 -> 'Geçersiz veri', harf notu 'Üretilmez'. Notlar 0-100 aralığında doğrulanmalıdır."
+    }
+  ],
+  fillInBlanks: [
+    {
+      id: "h4_f1",
+      sentence: "PHP'de koşul ifadelerinde hem değeri hem de türü karşılaştıran sıkı eşitlik operatörü ____'tür.",
+      acceptedAnswers: ["==="],
+      hint: "Üç adet eşittir",
+      explanation: "=== tür ve değer eşitliğini denetler."
+    },
+    {
+      id: "h4_f2",
+      sentence: "PHP'de if ($not = 50) yazıldığında karşılaştırma yerine ____ yapılmış olur ve koşul daima true döner.",
+      acceptedAnswers: ["atama", "değer atama"],
+      hint: "atama",
+      explanation: "Tek eşittir (=) atama operatörüdür."
+    },
+    {
+      id: "h4_f3",
+      sentence: "PHP'de false, null, [] ve 0 dışında metinsel '____' ifadesi de koşullarda false olarak yorumlanır.",
+      acceptedAnswers: ["0", "\"0\"", "'0'"],
+      hint: "Sıfır içeren string",
+      explanation: "Slayt 7: \"0\" metni PHP'de false kabul edilir."
+    },
+    {
+      id: "h4_f4",
+      sentence: "Birbirine bağlı çoklu koşullarda sıralama yapılırken daima en ____ eşiklerden başlanmalıdır.",
+      acceptedAnswers: ["yüksek", "üst", "özel"],
+      hint: "Yüksek / üst",
+      explanation: "Slayt 17: Üst eşiklerden başlanır."
+    },
+    {
+      id: "h4_f5",
+      sentence: "if ($x && $y) ifadesinde && mantıksal ____ (VE) operatörüdür.",
+      acceptedAnswers: ["VE", "ve", "and"],
+      hint: "VE",
+      explanation: "&& VE anlamına gelir."
+    },
+    {
+      id: "h4_f6",
+      sentence: "if ($x || $y) ifadesinde || mantıksal ____ (VEYA) operatörüdür.",
+      acceptedAnswers: ["VEYA", "veya", "or"],
+      hint: "VEYA",
+      explanation: "|| VEYA anlamına gelir."
+    },
+    {
+      id: "h4_f7",
+      sentence: "Bir mantıksal sonucun tersini almak için başına ____ (ünlem) işareti konulur.",
+      acceptedAnswers: ["!", "ünlem", "unlem"],
+      hint: "!",
+      explanation: "!true false olur, !false true olur."
+    },
+    {
+      id: "h4_f8",
+      sentence: "&& operatörünün atama operatöründen önce, '____' operatörünün ise atamadan sonra değerlendirilmesi öncelik farkı yaratır.",
+      acceptedAnswers: ["and", "AND"],
+      hint: "İngilizce üç harfli kelime",
+      explanation: "Slayt 26: and operatörü atamadan sonra değerlendirilir."
+    },
+    {
+      id: "h4_f9",
+      sentence: "&& operatöründe sol taraf false ise sağ tarafın hiç çalıştırılmamasına ____ devre (short-circuit) değerlendirme denir.",
+      acceptedAnswers: ["kısa", "kisa", "short"],
+      hint: "Kısa (short)",
+      explanation: "Slayt 27: Kısa devre değerlendirme."
+    },
+    {
+      id: "h4_f10",
+      sentence: "switch yapısında eşleşen bir case'den sonra döngü veya switch'ten çıkmayı sağlayan komut ____ komutudur.",
+      acceptedAnswers: ["break"],
+      hint: "break",
+      explanation: "Slayt 32: break, switch bloğundan çıkışı sağlar."
+    },
+    {
+      id: "h4_f11",
+      sentence: "switch yapısında hiçbir case eşleşmediğinde çalışacak olan varsayılan blok ____ bloğudur.",
+      acceptedAnswers: ["default"],
+      hint: "default",
+      explanation: "Slayt 32: default eşleşmeyen değerlerin yolunu belirler."
+    },
+    {
+      id: "h4_f12",
+      sentence: "switch yapısında break unutulduğunda bir sonraki case komutlarının da peş peşe çalışmasına ____-through denir.",
+      acceptedAnswers: ["fall", "fall-through"],
+      hint: "fall",
+      explanation: "Slayt 35: Bu davranışa fall-through denir."
+    },
+    {
+      id: "h4_f13",
+      sentence: "switch yapısı gevşek (==) karşılaştırma yaparken PHP 8 ile gelen ____ yapısı sıkı (===) karşılaştırma yapar.",
+      acceptedAnswers: ["match"],
+      hint: "match",
+      explanation: "Slayt 41: match sıkı (===) karşılaştırma yapar."
+    },
+    {
+      id: "h4_f14",
+      sentence: "match ifadesinde switch'in aksine blok sonlarında ____ komutu KULLANILMAZ.",
+      acceptedAnswers: ["break"],
+      hint: "break",
+      explanation: "Slayt 39: match ifadesinde break kullanılmaz."
+    },
+    {
+      id: "h4_f15",
+      sentence: "match ifadesinde eşleşen bir dal bulunamazsa ve ____ tanımlanmamışsa PHP fatal hata üretir.",
+      acceptedAnswers: ["default"],
+      hint: "default",
+      explanation: "Slayt 40: default olmadığında eşleşmeyen değer hata üretir."
+    },
+    {
+      id: "h4_f16",
+      sentence: "$durum = ($not >= 50) ? 'Geçti' : 'Kaldı'; ifadesinde kullanılan yapıya ____ koşul (ternary) operatörü denir.",
+      acceptedAnswers: ["üçlü", "uclu", "ternary"],
+      hint: "Üçlü / Ternary",
+      explanation: "Slayt 42: Üçlü koşul operatörü (ternary)."
+    },
+    {
+      id: "h4_f17",
+      sentence: "0 değerini korumak istediğimizde ?: yerine ____ operatörünü tercih etmeliyiz.",
+      acceptedAnswers: ["??", "null coalescing"],
+      hint: "??",
+      explanation: "Slayt 43: 0 değerini korumak için ?? tercih edilir."
+    },
+    {
+      id: "h4_f18",
+      sentence: "HTML içinde <?php if ($x): ?> ile başlayan alternatif yazım <?php ____; ?> ile sonlandırılır.",
+      acceptedAnswers: ["endif", "endif;"],
+      hint: "endif",
+      explanation: "Slayt 44: endif; karar bloğunu kapatır."
+    },
+    {
+      id: "h4_f19",
+      sentence: "if ($not >= 50); { echo 'A'; } kodundaki hata, parantezden hemen sonraki ____ virgül işaretidir.",
+      acceptedAnswers: ["noktalı", "noktali", ";"],
+      hint: "noktalı virgül",
+      explanation: "Slayt 45: if satırındaki noktalı virgül boş komut oluşturur."
+    },
+    {
+      id: "h4_f20",
+      sentence: "Bir notun 0 ile 100 arasında olduğunu doğru test etmek için $not >= 0 ____ $not <= 100 yazılmalıdır.",
+      acceptedAnswers: ["&&", "ve", "and"],
+      hint: "&&",
+      explanation: "Slayt 46: Aralık kontrolü && ile yapılır."
+    },
+    {
+      id: "h4_f21",
+      sentence: "Hafta 4 ders uygulamasında $devamsizlik > ____ olduğunda öğrenci devamsızlıktan kalmaktadır.",
+      acceptedAnswers: ["20"],
+      hint: "20",
+      explanation: "Slayt 52: Devamsızlık > 20 devamsızlıktan kaldı."
+    },
+    {
+      id: "h4_f22",
+      sentence: "Hafta 4 ders uygulamasında final notu en az ____ olmalıdır, aksi halde doğrudan kalınır.",
+      acceptedAnswers: ["50"],
+      hint: "50",
+      explanation: "Slayt 52: final < 50 finalden kaldı."
+    },
+    {
+      id: "h4_f23",
+      sentence: "Hafta 4 uygulamasında dersi geçip ortalaması en az 85 olan ve projeyi teslim eden öğrenciye başarı ____ verilir.",
+      acceptedAnswers: ["rozet", "rozeti", "badge"],
+      hint: "rozet",
+      explanation: "Slayt 52: Başarı rozeti kazanır."
+    },
+    {
+      id: "h4_f24",
+      sentence: "Ortalaması 90 ve üzeri olan başarılı bir öğrencinin harf notu ____ olur.",
+      acceptedAnswers: ["AA"],
+      hint: "AA",
+      explanation: "Slayt 53: Ortalama >= 90 -> AA."
+    },
+    {
+      id: "h4_f25",
+      sentence: "Ortalaması 80 ile 89.9 arasında olan başarılı bir öğrencinin harf notu ____ olur.",
+      acceptedAnswers: ["BA"],
+      hint: "BA",
+      explanation: "Slayt 53: 80 <= ortalama < 90 -> BA."
+    },
+    {
+      id: "h4_f26",
+      sentence: "Dersi geçemeyen başarısız bir öğrencinin harf notu doğrudan ____ olarak belirlenir.",
+      acceptedAnswers: ["FF"],
+      hint: "FF",
+      explanation: "Slayt 53: Başarısız öğrenci -> FF."
+    },
+    {
+      id: "h4_f27",
+      sentence: "PHP'de bir koşulun sonucunu ve veri türünü ekranda bool(true) şeklinde görmek için ____() fonksiyonu kullanılır.",
+      acceptedAnswers: ["var_dump", "var_dump()"],
+      hint: "var_dump",
+      explanation: "Slayt 3: var_dump() türü ve değeri birlikte basar."
+    },
+    {
+      id: "h4_f28",
+      sentence: "Bir değişkendeki program kodu 'BPR' olduğunda ekrana '____ Programcılığı' yazdırılmıştır.",
+      acceptedAnswers: ["Bilgisayar", "bilgisayar"],
+      hint: "Bilgisayar",
+      explanation: "Slayt 34: case 'BPR': echo 'Bilgisayar Programcılığı';"
+    },
+    {
+      id: "h4_f29",
+      sentence: "İki boolean değişkeni birleştirerek $gecebilir = $notYeterli && $devamUygun yazmaya koşullara ____ ad verme denir.",
+      acceptedAnswers: ["anlamlı", "anlamli"],
+      hint: "Anlamlı",
+      explanation: "Slayt 30: Koşullara anlamlı ad verme."
+    },
+    {
+      id: "h4_f30",
+      sentence: "PHP'de 12 sayısının çift olduğunu $sayi % 2 === ____ ifadesiyle doğrularız.",
+      acceptedAnswers: ["0", "sıfır", "sifir"],
+      hint: "0",
+      explanation: "Slayt 14: Kalan 0 ise çift sayıdır."
+    }
+  ],
+  codingQuestions: [
+    {
+      id: "h4_c1",
+      title: "Tek / Çift Sayı Kontrolü",
+      task: "$sayi değişkeninin 2'ye bölümünden kalanı kontrol ederek çiftse 'Çift sayı', tekse 'Tek sayı' yazdırınız.",
+      initialCode: "<?php\n$sayi = 12;\n// if-else ile kontrol ediniz\n",
+      expectedSolution: "<?php\n$sayi = 12;\nif ($sayi % 2 === 0) {\n  echo \"Çift sayı\";\n} else {\n  echo \"Tek sayı\";\n}\n?>",
+      validationKeyword: ["$sayi % 2", "echo", "Çift sayı", "Tek sayı"],
+      explanation: "Kalan sıfır ise çift, değilse tek sayıdır."
+    },
+    {
+      id: "h4_c2",
+      title: "Pozitif, Negatif veya Sıfır Kontrolü",
+      task: "$sayi değişkeni 0'dan büyükse 'Pozitif', 0'dan küçükse 'Negatif', değilse 'Sıfır' yazdıran if-elseif-else yapısını kurunuz.",
+      initialCode: "<?php\n$sayi = -4;\n// if-elseif-else kodunu yazınız\n",
+      expectedSolution: "<?php\n$sayi = -4;\nif ($sayi > 0) {\n  echo \"Pozitif\";\n} elseif ($sayi < 0) {\n  echo \"Negatif\";\n} else {\n  echo \"Sıfır\";\n}\n?>",
+      validationKeyword: ["if", "elseif", "else", "Pozitif", "Negatif", "Sıfır"],
+      explanation: "Slayt 16: Pozitif, negatif veya sıfır kontrolü if-elseif-else ile yapılır."
+    },
+    {
+      id: "h4_c3",
+      title: "Switch ile Menü Seçimi",
+      task: "$secim 1 ise 'Ana sayfa', 2 ise 'Dersler', diğer durumlarda 'Geçersiz seçim' yazdıran switch yapısını yazınız.",
+      initialCode: "<?php\n$secim = 2;\n// switch bloğunu yazınız\n",
+      expectedSolution: "<?php\n$secim = 2;\nswitch ($secim) {\n  case 1:\n    echo \"Ana sayfa\";\n    break;\n  case 2:\n    echo \"Dersler\";\n    break;\n  default:\n    echo \"Geçersiz seçim\";\n}\n?>",
+      validationKeyword: ["switch", "case 1:", "case 2:", "break;", "default:"],
+      explanation: "Slayt 33: switch ile menü seçimi."
+    },
+    {
+      id: "h4_c4",
+      title: "PHP 8 Match İfadesi",
+      task: "$status 200 ise 'Başarılı', 404 ise 'Sayfa yok', 500 ise 'Sunucu hatası', diğer durumlarda 'Bilinmeyen durum' üreten match ifadesini yazınız.",
+      initialCode: "<?php\n$status = 404;\n$message = match ($status) {\n  // seçenekler\n};\necho $message;\n?>",
+      expectedSolution: "<?php\n$status = 404;\n$message = match ($status) {\n  200 => \"Başarılı\",\n  404 => \"Sayfa yok\",\n  500 => \"Sunucu hatası\",\n  default => \"Bilinmeyen durum\"\n};\necho $message;\n?>",
+      validationKeyword: ["match", "200 =>", "404 =>", "500 =>", "default =>"],
+      explanation: "Slayt 39: PHP 8 match ifadesi."
+    },
+    {
+      id: "h4_c5",
+      title: "Hafta 4 Ders Sonu: Öğrenci Not & Başarı Hesaplama",
+      task: "$vize ve $final notlarından ortalamayı (vize*0.40 + final*0.60) hesaplayınız. $devamsizlik > 20 ise 'Devamsızlıktan kaldı', final < 50 ise 'Finalden kaldı', ortalama < 50 ise 'Ortalamadan kaldı', aksi halde 'Geçti' yazdırınız.",
+      initialCode: "<?php\n$vize = 80;\n$final = 90;\n$devamsizlik = 10;\n// Ortalamayı hesaplayıp karar veriniz\n",
+      expectedSolution: "<?php\n$vize = 80;\n$final = 90;\n$devamsizlik = 10;\n$ortalama = $vize * 0.40 + $final * 0.60;\nif ($devamsizlik > 20) {\n  echo \"Devamsızlıktan kaldı\";\n} elseif ($final < 50) {\n  echo \"Finalden kaldı\";\n} elseif ($ortalama < 50) {\n  echo \"Ortalamadan kaldı\";\n} else {\n  echo \"Geçti\";\n}\n?>",
+      validationKeyword: ["0.40", "0.60", "$devamsizlik > 20", "$final < 50", "$ortalama < 50", "Geçti"],
+      explanation: "Slayt 52 kurallarına göre sırasıyla devamsızlık, final barajı ve ortalama eşikleri kontrol edilir."
+    }
+  ]
+};
+
+
+// HAFTA 5: Döngüler (Loops)
+var HAFTA_5_DATA = {
+  title: "Hafta 5: Döngüler (for, while, do-while, foreach)",
+  description: "Döngü türleri, 4 temel bileşen, sayaçlar, akış şeması, break & continue farkı, dizilerle foreach, iç içe döngüler, yaygın sözdizimi ve mantık hataları.",
+  summaryNotes: [
+    { title: "Döngünün 4 Temel Bileşeni", text: "1) Başlangıç ($i=1), 2) Koşul ($i<=5), 3) Gövde (echo $i), 4) Güncelleme ($i++). for ($i=1; $i<=5; $i++) döngüsünde 5 tur için koşul 6 kez kontrol edilir ve döngü bittiğinde $i değeri 6 olur!" },
+    { title: "Hangi Döngü Nerede Kullanılır?", text: "Düzenli sayı aralığı için 'for', bitiş bir koşula bağlıysa 'while', işlemin en az bir kez çalışması şartsa 'do-while', dizi elemanlarını dolaşmak için 'foreach'." },
+    { title: "while vs do-while", text: "while döngüsünün gövdesi koşul başta yanlışsa 0 (sıfır) kez çalışabilir. do-while'da ise koşul sonda kontrol edildiği için gövde en az 1 kez mutlaka çalışır. do-while'ın while satırı noktalı virgülle (;) biter." },
+    { title: "Toplam (Biriktirme) Kuralı", text: "$toplam = 0 değişkeni döngüden ÖNCE başlatılmalıdır. Döngü içinde başlatılırsa her tur sıfırlanır ve hafıza kaybı oluşur." },
+    { title: "foreach ve Orijinal Dizi", text: "foreach ($notlar as $not) { $not += 5; } yapıldığında kaynak dizi DEĞİŞMEZ. Dizi elemanını güncellemek için anahtarla atama yapılmalıdır: $notlar[$anahtar] = $not + 5." },
+    { title: "break vs continue", text: "break döngüden veya switch'ten tamamen çıkar. continue ise yalnızca o anki turun kalan komutlarını atlayarak bir sonraki tura geçer. Döngü içindeki bir switch'te break kullanılırsa sadece switch'i kırar, dıştaki foreach devam eder." },
+    { title: "while İçinde continue Tuzağı", text: "while içinde sayaç artırma komutu continue'den sonraya yazılırsa continue sayacın artmasını engeller ve sonsuz döngü oluşur! Güncelleme atlama kararından önce olmalıdır." },
+    { title: "Sözdizimi Hataları", text: "for ($i=1; $i<=3; $i++); { ... } yazılırsa for gövdesi boş kalır, alttaki süslü blok sadece 1 kez çalışır ve $i 4 olarak yazdırılır." }
+  ],
+  tests: [
+    {
+      id: "h5_t1",
+      question: "Döngünün gövdesinin bir kez baştan sona çalışmasına ne ad verilir?",
+      options: [
+        "Tur / İterasyon",
+        "Fonksiyon",
+        "Derleme",
+        "Prosedür",
+        "İstisna"
+      ],
+      correctAnswer: "Tur / İterasyon",
+      explanation: "Hafta 5 Slayt 3: 'Tur / İterasyon: döngü gövdesinin bir kez çalışması.'"
+    },
+    {
+      id: "h5_t2",
+      question: "Döngülerin 4 temel bileşeni hangisinde eksiksiz ve doğru verilmiştir?",
+      options: [
+        "Başlangıç, Koşul, Gövde, Güncelleme",
+        "Giriş, Çıkış, Veri, Bellek",
+        "Değişken, Sabit, Fonksiyon, Sınıf",
+        "Başlık, Parametre, Sonuç, Noktalı virgül",
+        "if, else, switch, case"
+      ],
+      correctAnswer: "Başlangıç, Koşul, Gövde, Güncelleme",
+      explanation: "Slayt 4: Döngünün Dört Temel Bileşeni: 1. Başlangıç, 2. Koşul, 3. Gövde, 4. Güncelleme."
+    },
+    {
+      id: "h5_t3",
+      question: "for ($i = 1; $i <= 5; $i++) { echo $i; } döngüsü tamamlandıktan sonra $i değişkeninin son değeri ne olur?",
+      options: [
+        "6",
+        "5",
+        "4",
+        "0",
+        "Tanımsız (null)"
+      ],
+      correctAnswer: "6",
+      explanation: "Slayt 9: 5. turun ardından $i++ sayacı 6 yapar, 6 <= 5 false olur ve döngü biter. Dolayısıyla $i son değeri 6'dır."
+    },
+    {
+      id: "h5_t4",
+      question: "for ($i = 1; $i <= 5; $i++) { ... } döngüsünde 5 tur için döngü koşulu toplam kaç kez kontrol edilir?",
+      options: [
+        "6 kez",
+        "5 kez",
+        "4 kez",
+        "10 kez",
+        "1 kez"
+      ],
+      correctAnswer: "6 kez",
+      explanation: "Slayt 9: Beş tur için koşul altı (6) kez kontrol edilir. Son kontrol döngünün sona ereceğini belirler."
+    },
+    {
+      id: "h5_t5",
+      question: "for ($i = 1; $i < 5; $i++) ile for ($i = 1; $i <= 5; $i++) arasındaki tur sayısı farkı nedir?",
+      options: [
+        "< 5 olan 4 tur, <= 5 olan 5 tur çalışır.",
+        "< 5 olan 5 tur, <= 5 olan 6 tur çalışır.",
+        "İkisi de tamamen aynı sayıda (5 tur) çalışır.",
+        "< 5 olan hiç çalışmaz.",
+        "<= 5 olan sonsuz döngüye girer."
+      ],
+      correctAnswer: "< 5 olan 4 tur, <= 5 olan 5 tur çalışır.",
+      explanation: "Slayt 10: < 5 beş değerini dışarıda bırakır (4 tur), <= 5 ise beşi de kapsar (5 tur)."
+    },
+    {
+      id: "h5_t6",
+      question: "Geriye doğru sayan bir sayaç için hangisi uygundur?\nÖrn: 5'ten 1'e kadar geri sayım",
+      options: [
+        "for ($i = 5; $i >= 1; $i--)",
+        "for ($i = 1; $i <= 5; $i--)",
+        "for ($i = 5; $i <= 1; $i++)",
+        "for ($i = 1; $i >= 5; $i++)",
+        "for ($i = 5; $i == 1; $i--)"
+      ],
+      correctAnswer: "for ($i = 5; $i >= 1; $i--)",
+      explanation: "Slayt 11: Azalan sayaç örneği: for ($i = 5; $i >= 1; $i--)."
+    },
+    {
+      id: "h5_t7",
+      question: "1'den 10'a kadar olan tek sayıları (1, 3, 5, 7, 9) yazdırmak için en uygun for güncellemesi nedir?",
+      options: [
+        "for ($i = 1; $i <= 10; $i += 2)",
+        "for ($i = 1; $i <= 10; $i++)",
+        "for ($i = 2; $i <= 10; $i += 2)",
+        "for ($i = 1; $i < 10; $i += 3)",
+        "for ($i = 1; $i == 10; $i += 2)"
+      ],
+      correctAnswer: "for ($i = 1; $i <= 10; $i += 2)",
+      explanation: "Slayt 12: Başlangıç 1, adım $i += 2 olunca 1, 3, 5, 7, 9 üretilir."
+    },
+    {
+      id: "h5_t8",
+      question: "Döngü sınırını bir sabitle belirlerken hangisi doğrudur?",
+      options: [
+        "const UST_SINIR = 4; for ($i = 1; $i <= UST_SINIR; $i++)",
+        "const $UST_SINIR = 4; for ($i = 1; $i <= $UST_SINIR; $i++)",
+        "for ($i = 1; $i <= const(4); $i++)",
+        "define($SINIR, 4); for ($i = 1; $i <= $SINIR; $i++)",
+        "Sabitler döngü sınırında kullanılamaz."
+      ],
+      correctAnswer: "const UST_SINIR = 4; for ($i = 1; $i <= UST_SINIR; $i++)",
+      explanation: "Slayt 13: Sabit adının başına asla $ yazılmaz! UST_SINIR olarak doğrudan yazılır."
+    },
+    {
+      id: "h5_t9",
+      question: "Aşağıdaki kodda oluşan mantık hatası nedir?\n\nfor ($i = 1; $i <= 5; $i++) {\n  $toplam = 0;\n  $toplam += $i;\n}\necho \"Toplam: $toplam\";",
+      options: [
+        "$toplam değişkeni döngü içinde sıfırlandığı için önceki turlar kaybolur ve sonuç 5 çıkar.",
+        "for döngüsü süslü parantez kabul etmez.",
+        "$toplam += $i yerine $toplam =+ $i yazılmalıydı.",
+        "echo komutu tırnak içinde $toplam değişkenini yazdırmaz.",
+        "Döngü 1 kez çalışır ve biter."
+      ],
+      correctAnswer: "$toplam değişkeni döngü içinde sıfırlandığı için önceki turlar kaybolur ve sonuç 5 çıkar.",
+      explanation: "Slayt 16: Birikmesi gereken toplam, döngüden ÖNCE başlatılmalıdır. Döngü içinde her tur sıfırlanır, son turda sadece 5 kalır."
+    },
+    {
+      id: "h5_t10",
+      question: "while döngüsünün gövdesi başlangıç koşulu false ise en az kaç kez çalışır?",
+      options: [
+        "0 (hiç çalışmaz)",
+        "1 kez",
+        "2 kez",
+        "Sonsuz kez",
+        "Hata verir"
+      ],
+      correctAnswer: "0 (hiç çalışmaz)",
+      explanation: "Slayt 23 & 28: while döngüsünün gövdesi koşul başta yanlışsa sıfır (0) kez çalışabilir."
+    },
+    {
+      id: "h5_t11",
+      question: "do-while döngüsünün gövdesi başlangıç koşulu false olsa dahi en az kaç kez çalışır?",
+      options: [
+        "1 kez",
+        "0 kez",
+        "2 kez",
+        "Sonsuz kez",
+        "Hiç çalışmaz"
+      ],
+      correctAnswer: "1 kez",
+      explanation: "Slayt 26, 27, 28: do-while'da ilk gövde çalışması koşul kontrolünden önce gerçekleşir. Dolayısıyla en az 1 kez mutlaka çalışır."
+    },
+    {
+      id: "h5_t12",
+      question: "do-while döngüsünün sözdiziminde hangi karakter ZORUNLUDUR?",
+      options: [
+        "while satırının sonundaki noktalı virgül (;)",
+        "do kelimesinden sonraki iki nokta (:)",
+        "while parantezinden önceki virgül (,)",
+        "do kelimesinden önceki soru işareti (?)",
+        "Süslü parantez içine ünlem işareti"
+      ],
+      correctAnswer: "while satırının sonundaki noktalı virgül (;)",
+      explanation: "Slayt 26 & 49: do { ... } while ($kosul); sondaki noktalı virgül zorunludur."
+    },
+    {
+      id: "h5_t13",
+      question: "Aşağıdaki kodun çıktısı nedir?\n\n$i = 10;\ndo {\n  echo \"Değer: $i\\n\";\n  $i++;\n} while ($i < 5);",
+      options: [
+        "Değer: 10",
+        "Hiçbir şey yazdırmaz",
+        "Değer: 10 ve Değer: 11",
+        "Değer: 5",
+        "Sonsuz döngüye girer"
+      ],
+      correctAnswer: "Değer: 10",
+      explanation: "Slayt 27: Önce gövde çalışır ve 'Değer: 10' yazar, $i 11 olur. 11 < 5 false olduğu için döngü sona erer."
+    },
+    {
+      id: "h5_t14",
+      question: "Bir dizi elemanlarını (indeksli veya ilişkisel) sırayla dolaşmak için PHP'de tasarlanmış en uygun döngü hangisidir?",
+      options: [
+        "foreach",
+        "for",
+        "while",
+        "do-while",
+        "switch"
+      ],
+      correctAnswer: "foreach",
+      explanation: "Slayt 30: Listedeki mevcut elemanları işlemek için en uygun döngü 'foreach'tir."
+    },
+    {
+      id: "h5_t15",
+      question: "Boş bir dizi ($notlar = [];) ile foreach çalıştırıldığında döngü gövdesi kaç kez çalışır?",
+      options: [
+        "0 (hiç çalışmaz)",
+        "1 kez",
+        "Hata verir",
+        "null değeriyle 1 kez çalışır",
+        "Döngü sonsuz döngüye girer"
+      ],
+      correctAnswer: "0 (hiç çalışmaz)",
+      explanation: "Slayt 36: Boş dizide işlenecek eleman yoktur. Döngü gövdesi hiç çalışmaz (0 tur)."
+    },
+    {
+      id: "h5_t16",
+      question: "Aşağıdaki foreach kodunun çıktısı nedir?\n\n$notlar = [40, 60];\nforeach ($notlar as $not) {\n  $not += 5;\n}\necho $notlar[0];",
+      options: [
+        "40",
+        "45",
+        "60",
+        "65",
+        "5"
+      ],
+      correctAnswer: "40",
+      explanation: "Slayt 38: $not o turdaki değerin kopyasını taşır. $not değişince kaynak dizinin elemanı DEĞİŞMEZ. $notlar[0] hala 40'tır."
+    },
+    {
+      id: "h5_t17",
+      question: "Foreach döngüsü sırasında kaynak dizideki elemanların değerini gerçekten değiştirmek için ne yapılmalıdır?",
+      options: [
+        "Dizi elemanına anahtarı ile atama yapılmalıdır: $notlar[$anahtar] = $not + 5;",
+        "Diziye echo yapılmalıdır.",
+        "Döngü while'a çevrilmelidir.",
+        "Dizinin tüm elemanları silinmelidir.",
+        "PHP'de diziler döngü içinde asla güncellenemez."
+      ],
+      correctAnswer: "Dizi elemanına anahtarı ile atama yapılmalıdır: $notlar[$anahtar] = $not + 5;",
+      explanation: "Slayt 39: Dizinin içindeki değeri değiştirmek için doğrudan ilgili anahtara atama yapılabilir ($notlar[$anahtar] = $not + 5)."
+    },
+    {
+      id: "h5_t18",
+      question: "İç içe iki for döngüsünde dış döngü 2 tur, iç döngü 3 tur dönüyorsa en içteki gövde komutu toplam kaç kez çalışır?",
+      options: [
+        "6 kez (2 x 3)",
+        "5 kez (2 + 3)",
+        "3 kez",
+        "2 kez",
+        "9 kez"
+      ],
+      correctAnswer: "6 kez (2 x 3)",
+      explanation: "Slayt 41 & 42: Dış x iç = 2 x 3 = 6 kez çalışır."
+    },
+    {
+      id: "h5_t19",
+      question: "İç içe döngüler kurulurken yapılan en kritik hata hangisidir?",
+      options: [
+        "İç ve dış döngüde AYNI sayaç adını (örneğin ikisinde de $i) kullanmak",
+        "İç döngüde sayaç artırmak",
+        "Farklı isimde sayaç kullanmak",
+        "Döngü içine echo yazmak",
+        "İç döngüde çarpma yapmak"
+      ],
+      correctAnswer: "İç ve dış döngüde AYNI sayaç adını (örneğin ikisinde de $i) kullanmak",
+      explanation: "Slayt 40 Uyarı: 'İç ve dış döngü için farklı sayaç adları kullanılmalıdır.'"
+    },
+    {
+      id: "h5_t20",
+      question: "break ve continue komutlarının temel farkı nedir?",
+      options: [
+        "break döngüden tamamen çıkar; continue ise yalnızca o anki turu atlar ve döngü sonraki turla sürer.",
+        "continue döngüyü tamamen bitirir, break ise 1 tur bekletir.",
+        "İkisi de tamamen aynı işi yapar.",
+        "break sadece switch'te kullanılır, döngülerde kullanılamaz.",
+        "continue sadece for döngüsünde çalışır."
+      ],
+      correctAnswer: "break döngüden tamamen çıkar; continue ise yalnızca o anki turu atlar ve döngü sonraki turla sürer.",
+      explanation: "Slayt 46 Tablo: break: aradığımız sonuç bulunduysa döngü biter. continue: bir kayıt işlenmeyecekse tur atlanır, döngü sürer."
+    },
+    {
+      id: "h5_t21",
+      question: "Aşağıdaki kodun çıktısı nedir?\n\nfor ($i = 1; $i <= 6; $i++) {\n  if ($i % 3 === 0) continue;\n  echo \"$i \";\n}",
+      options: [
+        "1 2 4 5 ",
+        "1 2 3 4 5 6 ",
+        "3 6 ",
+        "1 2 ",
+        "4 5 6 "
+      ],
+      correctAnswer: "1 2 4 5 ",
+      explanation: "Slayt 45: 3 ve 6 sayıları 3'e tam bölündüğü için continue ile atlanır. Geriye 1 2 4 5 yazdırılır."
+    },
+    {
+      id: "h5_t22",
+      question: "while döngüsü içinde continue kullanılırken neden sayaç güncellemesi continue'den ÖNCE yazılmalıdır?",
+      options: [
+        "Çünkü güncelleme continue'den sonra yazılırsa atlanır, sayaç aynı kalır ve sonsuz döngü oluşur.",
+        "Çünkü PHP güncellemenin sonda yazılmasını yasaklamıştır.",
+        "Çünkü continue sadece sayısal değişkenlerle çalışır.",
+        "Çünkü sayaç ikişer ikişer artar.",
+        "Hiçbir fark yaratmaz, sayaç otomatik güncellenir."
+      ],
+      correctAnswer: "Çünkü güncelleme continue'den sonra yazılırsa atlanır, sayaç aynı kalır ve sonsuz döngü oluşur.",
+      explanation: "Slayt 47: Eğer $i++ echo satırının sonrasına yazılsaydı güncelleme atlanırdı, sayaç aynı değerde kalır ve döngü bitmeyebilirdi."
+    },
+    {
+      id: "h5_t23",
+      question: "Bir foreach döngüsü içerisine switch yazıldığında, switch case'i içindeki 'break;' komutu neyi etkiler?",
+      options: [
+        "Yalnızca en yakın switch yapısını bitirir, dıştaki foreach döngüsünü bitirmez.",
+        "Hem switch'i hem de dıştaki foreach döngüsünü tamamen sonlandırır.",
+        "Sözdizimi hatası verir.",
+        "Bütün PHP betiğini durdurur.",
+        "Sadece dizinin ilk elemanını siler."
+      ],
+      correctAnswer: "Yalnızca en yakın switch yapısını bitirir, dıştaki foreach döngüsünü bitirmez.",
+      explanation: "Slayt 48: 'Buradaki break: En yakın switch yapısını bitirir. foreach döngüsünü bitirmez. Tur sonundaki komutlar çalışır.'"
+    },
+    {
+      id: "h5_t24",
+      question: "Aşağıdaki hatalı kod çalıştırıldığında çıktısı ne olur?\n\nfor ($i = 1; $i <= 3; $i++);\n{\n  echo \"$i\\n\";\n}",
+      options: [
+        "4 (yalnızca bir kez)",
+        "1 2 3",
+        "1",
+        "Sözdizimi hatası (Parse error)",
+        "Hiçbir şey yazdırmaz"
+      ],
+      correctAnswer: "4 (yalnızca bir kez)",
+      explanation: "Slayt 49: Başlıktan hemen sonraki noktalı virgül (;) yüzünden for'un gövdesi boştur. Sayaç 4 olana kadar boş döner, sonra süslü parantez 1 kez çalışır ve 4 yazar."
+    },
+    {
+      id: "h5_t25",
+      question: "Aşağıdaki kodun çıktısı nedir?\n\n$toplam = 0;\nfor ($i = 1; $i <= 4; $i++) {\n  if ($i === 2) continue;\n  $toplam += $i;\n}\necho \"Toplam: $toplam, Sayaç: $i\";",
+      options: [
+        "Toplam: 8, Sayaç: 5",
+        "Toplam: 10, Sayaç: 4",
+        "Toplam: 8, Sayaç: 4",
+        "Toplam: 7, Sayaç: 5",
+        "Toplam: 9, Sayaç: 4"
+      ],
+      correctAnswer: "Toplam: 8, Sayaç: 5",
+      explanation: "Slayt 51 & 52: 2 atlanır; 1 + 3 + 4 = 8 toplanır. Son güncelleme sayacı 5 yapar."
+    },
+    {
+      id: "h5_t26",
+      question: "Alışveriş sepeti hesaplanırken negatif fiyatları atlamak için hangi döngü komutu kullanılır?\nÖrn: foreach ($fiyatlar as $fiyat) { if ($fiyat < 0) ____; ... }",
+      options: [
+        "continue",
+        "break",
+        "exit",
+        "die",
+        "return"
+      ],
+      correctAnswer: "continue",
+      explanation: "Slayt 56 & 57: Negatif fiyatları geçersiz kabul edip atlamak için 'continue' kullanılır (break kullanılırsa sonraki geçerli ürünler de hesaplanamaz)."
+    },
+    {
+      id: "h5_t27",
+      question: "Hafta 5 Alışveriş hesabı pekiştirmesinde indirim uygulanması için sepet toplamının en az kaç TL olması gerekir?",
+      options: [
+        "200 TL",
+        "100 TL",
+        "250 TL",
+        "150 TL",
+        "500 TL"
+      ],
+      correctAnswer: "200 TL",
+      explanation: "Slayt 56 & 57: 'Toplam en az 200 TL ise yüzde on indirim uygulayınız. 200 -> indirim VAR, 199 -> indirim YOK.'"
+    },
+    {
+      id: "h5_t28",
+      question: "Hafta 5 Ders Sonu Başarı Raporu uygulamasında devamsızlık kaçın üzerindeyse öğrenci devamsızlıktan kalmaktadır?",
+      options: [
+        "4",
+        "5",
+        "10",
+        "20",
+        "15"
+      ],
+      correctAnswer: "4",
+      explanation: "Slayt 60 & 62: 'Devamsızlık en fazla 4 olmalıdır. Ece: Devamsızlık 5 > 4 Kaldı (devamsızlık).'"
+    },
+    {
+      id: "h5_t29",
+      question: "Hafta 5 Ders Sonu uygulamasında sınıf ortalaması hesaplanırken geçersiz kayıtlar (örneğin Vize: 110) ne yapılır?",
+      options: [
+        "continue ile atlanır ve sınıf ortalaması hesabına dahil edilmez.",
+        "Ortalamaya 0 notu olarak katılır.",
+        "Ortalamaya 100 olarak eklenir.",
+        "Program hata verip durur.",
+        "Öğrencinin devamsızlığına 1 eklenir."
+      ],
+      correctAnswer: "continue ile atlanır ve sınıf ortalaması hesabına dahil edilmez.",
+      explanation: "Slayt 61 & 62: Can Vize 110 -> Geçersiz kayıt. Yalnızca geçerli 3 öğrenci hesaba katılır, Can dahil edilmez."
+    },
+    {
+      id: "h5_t30",
+      question: "Döngünün sonsuz döngüye girmesi durumunda terminalde işlemi zorla sonlandırmak için hangi kısayol kullanılır?",
+      options: [
+        "Ctrl + C",
+        "Ctrl + S",
+        "Ctrl + Z",
+        "Alt + F4",
+        "Ctrl + X"
+      ],
+      correctAnswer: "Ctrl + C",
+      explanation: "Slayt 24: 'Durdurmak için terminalde Ctrl + C (EK).'"
+    }
+  ],
+  fillInBlanks: [
+    {
+      id: "h5_f1",
+      sentence: "Döngü gövdesinin her bir kez çalıştırılması işlemine ____ (veya iterasyon) adı verilir.",
+      acceptedAnswers: ["tur", "iterasyon"],
+      hint: "tur",
+      explanation: "Slayt 3: Tur / İterasyon: döngü gövdesinin bir kez çalışması."
+    },
+    {
+      id: "h5_f2",
+      sentence: "Tekrar sayısını veya işlenen sırayı takip eden değişkene ____ adı verilir.",
+      acceptedAnswers: ["sayaç", "sayac", "counter"],
+      hint: "sayaç",
+      explanation: "Slayt 6: Sayaç, tekrar sayısını takip eden değişkendir."
+    },
+    {
+      id: "h5_f3",
+      sentence: "Düzenli bir sayı aralığında tekrar yapmak için en uygun döngü ____ döngüsüdür.",
+      acceptedAnswers: ["for"],
+      hint: "for",
+      explanation: "Slayt 7: for, düzenli bir sayı aralığında tekrar için uygundur."
+    },
+    {
+      id: "h5_f4",
+      sentence: "for başlığındaki üç ifade birbirinden iki adet ____ (;) ile ayrılır: for (a; b; c).",
+      acceptedAnswers: ["noktalı virgül", "noktali virgul", ";"],
+      hint: "noktalı virgül",
+      explanation: "Slayt 7: Üç ifade iki noktalı virgülle (;) ayrılır."
+    },
+    {
+      id: "h5_f5",
+      sentence: "for ($i=1; $i<=5; $i++) döngüsü bittiğinde $i değişkeninin değeri ____ olur.",
+      acceptedAnswers: ["6"],
+      hint: "6",
+      explanation: "Slayt 9: Döngü tamamlandığında $i değeri 6 olur."
+    },
+    {
+      id: "h5_f6",
+      sentence: "Değeri her turda 1 eksilten azaltma operatörü $i____ şeklindedir.",
+      acceptedAnswers: ["--"],
+      hint: "--",
+      explanation: "Slayt 6: $i-- değeri bir azaltır."
+    },
+    {
+      id: "h5_f7",
+      sentence: "Mevcut değere 3 eklemek için kullanılan bileşik atama operatörü $i ____ 3'tür.",
+      acceptedAnswers: ["+=", "+ ="],
+      hint: "+=",
+      explanation: "Slayt 6: $i += 3 mevcut değere üç ekler."
+    },
+    {
+      id: "h5_f8",
+      sentence: "Döngü içinde değer toplayan $toplam değişkeni döngüden ____ başlatılmalıdır.",
+      acceptedAnswers: ["önce", "once"],
+      hint: "önce",
+      explanation: "Slayt 16: Birikmesi gereken toplam döngüden ÖNCE başlatılmalıdır."
+    },
+    {
+      id: "h5_f9",
+      sentence: "Bir koşul doğru kaldığı sürece gövdeyi çalıştıran ve başlangıçta false ise hiç çalışmayan döngü ____ döngüsüdür.",
+      acceptedAnswers: ["while"],
+      hint: "while",
+      explanation: "Slayt 20 & 23: while döngüsü."
+    },
+    {
+      id: "h5_f10",
+      sentence: "Önce gövdeyi çalıştırıp koşulu tur sonunda kontrol eden döngü ____ döngüsüdür.",
+      acceptedAnswers: ["do-while", "do while", "dowhile"],
+      hint: "do-while",
+      explanation: "Slayt 26: do-while önce gövdeyi çalıştırır, sonra koşulu kontrol eder."
+    },
+    {
+      id: "h5_f11",
+      sentence: "do-while döngüsünün sonunda yer alan while satırı mutlaka ____ (;) ile bitirilmelidir.",
+      acceptedAnswers: ["noktalı virgül", "noktali virgul", ";"],
+      hint: "noktalı virgül",
+      explanation: "Slayt 26: Son while satırı noktalı virgülle biter."
+    },
+    {
+      id: "h5_f12",
+      sentence: "do-while döngüsünün gövdesi koşul ilk kontrolde yanlış olsa bile en az ____ kez çalışır.",
+      acceptedAnswers: ["1", "bir"],
+      hint: "1",
+      explanation: "Slayt 27 & 28: En az gövde çalışması: 1."
+    },
+    {
+      id: "h5_f13",
+      sentence: "Bir dizideki tüm elemanları indeks sayacı kullanmadan dolaşmak için ____ döngüsü kullanılır.",
+      acceptedAnswers: ["foreach"],
+      hint: "foreach",
+      explanation: "Slayt 30 & 33: foreach bir dizinin elemanlarını işlemek için kullanılır."
+    },
+    {
+      id: "h5_f14",
+      sentence: "PHP'de standart indeksli dizilerde ilk elemanın anahtarı (indeksi) ____'dan başlar.",
+      acceptedAnswers: ["0", "sıfır", "sifir"],
+      hint: "0",
+      explanation: "Slayt 31: İlk elemanın anahtarı 0'dır."
+    },
+    {
+      id: "h5_f15",
+      sentence: "foreach ($notlar as $ad => $not) ifadesinde '=>' işaretine ____ işareti denir.",
+      acceptedAnswers: ["ilişkilendirme", "iliskilendirme"],
+      hint: "İlişkilendirme",
+      explanation: "Slayt 32: => Anahtarla değeri ilişkilendiren işaret."
+    },
+    {
+      id: "h5_f16",
+      sentence: "Boş bir dizi üzerinde foreach çalıştırıldığında döngü gövdesi ____ kez çalışır.",
+      acceptedAnswers: ["0", "sıfır", "sifir", "hiç"],
+      hint: "0",
+      explanation: "Slayt 36: Boş dizide döngü gövdesi hiç çalışmaz (0 kez)."
+    },
+    {
+      id: "h5_f17",
+      sentence: "Ortalama hesaplamadan önce eleman adedinin if ($adet > 0) ile kontrol edilmesi sıfıra ____ hatasını önler.",
+      acceptedAnswers: ["bölme", "bolme"],
+      hint: "bölme",
+      explanation: "Slayt 37: if kontrolü boş listede sıfıra bölme yapılmasını önler."
+    },
+    {
+      id: "h5_f18",
+      sentence: "foreach ($notlar as $not) içinde $not değişkenini değiştirmek kaynak diziyi ____.",
+      acceptedAnswers: ["değiştirmez", "degistirmez", "etkilemez"],
+      hint: "değiştirmez",
+      explanation: "Slayt 38: $not değişince kaynak dizinin elemanı değişmez."
+    },
+    {
+      id: "h5_f19",
+      sentence: "Bir döngünün gövdesinde başka bir döngü bulunması yapısına ____ içe döngü denir.",
+      acceptedAnswers: ["iç", "ic"],
+      hint: "iç",
+      explanation: "Slayt 40: İç içe döngü kavramı."
+    },
+    {
+      id: "h5_f20",
+      sentence: "İç içe döngülerde toplam gövde çalışma sayısı dış döngü tur sayısı ile iç döngü tur sayısının ____ ile bulunur.",
+      acceptedAnswers: ["çarpımı", "carpimi", "çarpılması"],
+      hint: "çarpımı",
+      explanation: "Slayt 40 & 42: Gövde dış x iç kez çalışır."
+    },
+    {
+      id: "h5_f21",
+      sentence: "Döngüyü koşul sağlanmadan erkenden sonlandırmak ve döngüden çıkmak için ____ komutu kullanılır.",
+      acceptedAnswers: ["break"],
+      hint: "break",
+      explanation: "Slayt 44: break ile erken bitiş."
+    },
+    {
+      id: "h5_f22",
+      sentence: "Mevcut turun kalan komutlarını çalıştırmayıp hemen bir sonraki tura geçiren komut ____ komutudur.",
+      acceptedAnswers: ["continue"],
+      hint: "continue",
+      explanation: "Slayt 45: continue ile bir turu atlama."
+    },
+    {
+      id: "h5_f23",
+      sentence: "Döngü içinde yer alan bir switch yapısındaki break komutu sadece ____ yapısını bitirir, döngüyü bitirmez.",
+      acceptedAnswers: ["switch"],
+      hint: "switch",
+      explanation: "Slayt 48: Buradaki break en yakın switch yapısını bitirir."
+    },
+    {
+      id: "h5_f24",
+      sentence: "for ($i=1; $i<=3; $i++); { echo $i; } kodundaki noktalı virgül nedeniyle ekrana sadece ____ sayısı yazılır.",
+      acceptedAnswers: ["4"],
+      hint: "4",
+      explanation: "Slayt 49: Yalnızca bir kez 4 yazdırılır."
+    },
+    {
+      id: "h5_f25",
+      sentence: "Terminalde sonsuz döngüye giren bir PHP scriptini durdurmak için klavyeden Ctrl + ____ tuşlarına basılır.",
+      acceptedAnswers: ["C", "c"],
+      hint: "C",
+      explanation: "Slayt 24: Durdurmak için terminalde Ctrl + C."
+    },
+    {
+      id: "h5_f26",
+      sentence: "Hafta 5 Alışveriş örneğinde $fiyatlar = [120, -5, 80, 50] dizisindeki -5 değeri ____ komutu ile atlanmıştır.",
+      acceptedAnswers: ["continue"],
+      hint: "continue",
+      explanation: "Slayt 56: Negatif fiyatları atlamak için continue kullanılır."
+    },
+    {
+      id: "h5_f27",
+      sentence: "Hafta 5 Toplu Başarı Raporunda bir öğrencinin geçmesi için devamsızlığı en fazla ____ olmalıdır.",
+      acceptedAnswers: ["4"],
+      hint: "4",
+      explanation: "Slayt 60: Devamsızlık en fazla 4 olmalıdır."
+    },
+    {
+      id: "h5_f28",
+      sentence: "Hafta 5 Toplu Başarı Raporunda bir öğrencinin geçmesi için final notu en az ____ olmalıdır.",
+      acceptedAnswers: ["50"],
+      hint: "50",
+      explanation: "Slayt 60: Final en az 50 olmalıdır."
+    },
+    {
+      id: "h5_f29",
+      sentence: "Hafta 5 Toplu Başarı Raporunda geçme için ağırlıklı ortalama en az ____ olmalıdır.",
+      acceptedAnswers: ["60"],
+      hint: "60",
+      explanation: "Slayt 60: Ortalama en az 60 olmalıdır."
+    },
+    {
+      id: "h5_f30",
+      sentence: "PHP'de bir dizinin eleman sayısını öğrenmek için kullanılan yerleşik fonksiyon ____() fonksiyonudur.",
+      acceptedAnswers: ["count", "count()"],
+      hint: "count",
+      explanation: "count($dizi) dizideki eleman sayısını verir."
+    }
+  ],
+  codingQuestions: [
+    {
+      id: "h5_c1",
+      title: "1'den 5'e Kadar Sayıları Toplama (for)",
+      task: "for döngüsü kullanarak 1'den 5'e kadar (5 dahil) olan sayıların toplamını hesaplayıp ekrana 'Toplam: 15' şeklinde yazdırınız.",
+      initialCode: "<?php\n$toplam = 0;\n// for döngüsünü yazınız\n\necho \"Toplam: $toplam\";\n?>",
+      expectedSolution: "<?php\n$toplam = 0;\nfor ($i = 1; $i <= 5; $i++) {\n  $toplam += $i;\n}\necho \"Toplam: $toplam\";\n?>",
+      validationKeyword: ["for", "$i = 1", "$i <= 5", "$toplam +=", "Toplam:"],
+      explanation: "Slayt 14: Döngüden önce $toplam=0 tanımlanır, her turda $toplam += $i yapılır."
+    },
+    {
+      id: "h5_c2",
+      title: "Bir Sayının Katlarını Yazdırma (Ara Etkinlik)",
+      task: "$sayi = 7 için 1'den 5'e kadar pozitif katlarını for döngüsüyle '$sayi x $i = $kat' formatında yazdırınız.",
+      initialCode: "<?php\n$sayi = 7;\n$sinir = 5;\n// for döngüsü ile katları yazdırınız\n?>",
+      expectedSolution: "<?php\n$sayi = 7;\n$sinir = 5;\nfor ($i = 1; $i <= $sinir; $i++) {\n  $kat = $sayi * $i;\n  echo \"$sayi x $i = $kat\\n\";\n}\n?>",
+      validationKeyword: ["for", "$sayi * $i", "echo"],
+      explanation: "Slayt 19: Katlar etkinliğinin tam çözümü."
+    },
+    {
+      id: "h5_c3",
+      title: "While ile Birikim ve Hedefe Ulaşma",
+      task: "$birikim = 100 başlangıç değeriyle, hedef 500'e ulaşana kadar her turda 150 ekleyen ve tur sayısını sayan while döngüsünü yazınız.",
+      initialCode: "<?php\n$birikim = 100;\n$eklenen = 150;\n$hedef = 500;\n$tur = 0;\n// while döngüsünü kurunuz\n\necho \"Tur: $tur, Son birikim: $birikim\";\n?>",
+      expectedSolution: "<?php\n$birikim = 100;\n$eklenen = 150;\n$hedef = 500;\n$tur = 0;\nwhile ($birikim < $hedef) {\n  $birikim += $eklenen;\n  $tur++;\n}\necho \"Tur: $tur, Son birikim: $birikim\";\n?>",
+      validationKeyword: ["while", "$birikim < $hedef", "$birikim +=", "$tur++"],
+      explanation: "Slayt 22: while ile birikim hedefe 3 turda 550 olarak ulaşır."
+    },
+    {
+      id: "h5_c4",
+      title: "Foreach ile Dizideki Notların Ortalamasını Bulma",
+      task: "$notlar = [60, 75, 90] dizisini foreach ile dolaşarak toplamı ve ortalamayı bulunuz. Sıfıra bölmeyi önlemek için if kontrolü ekleyiniz.",
+      initialCode: "<?php\n$notlar = [60, 75, 90];\n$toplam = 0;\n$adet = 0;\n// foreach ve ortalama hesabı\n?>",
+      expectedSolution: "<?php\n$notlar = [60, 75, 90];\n$toplam = 0;\n$adet = 0;\nforeach ($notlar as $not) {\n  $toplam += $not;\n  $adet++;\n}\nif ($adet > 0) {\n  $ortalama = $toplam / $adet;\n  echo \"Ortalama: $ortalama\";\n}\n?>",
+      validationKeyword: ["foreach", "as $not", "$toplam +=", "$adet > 0", "$toplam / $adet"],
+      explanation: "Slayt 37: foreach ile toplam ve ortalama hesabı."
+    },
+    {
+      id: "h5_c5",
+      title: "İç İçe Döngü ile Satır ve Sütun Yazdırma",
+      task: "Dış döngü 2 satır ($satir=1; $satir<=2), iç döngü 3 sütun ($sutun=1; $sutun<=3) olacak şekilde '$satir, $sutun' koordinatlarını ekrana yazdırınız.",
+      initialCode: "<?php\n// İç içe döngüleri yazınız\n?>",
+      expectedSolution: "<?php\nfor ($satir = 1; $satir <= 2; $satir++) {\n  for ($sutun = 1; $sutun <= 3; $sutun++) {\n    echo \"$satir, $sutun\\n\";\n  }\n}\n?>",
+      validationKeyword: ["for ($satir", "for ($sutun", "echo \"$satir, $sutun"],
+      explanation: "Slayt 41: İç içe döngüde dış döngünün her turunda iç döngü 1'den 3'e kadar tekrarlanır."
+    }
+  ]
+};
+
+
+// HAFTA 6: Hazır Fonksiyonlar (Built-in Functions)
+var HAFTA_6_DATA = {
+  title: "Hafta 6: Hazır Fonksiyonlar",
+  description: "Metin fonksiyonları (trim, mb_strlen, mb_substr, strpos, str_replace, explode, implode), Tarih-Zaman (date, strtotime, checkdate), Matematik (round, floor, ceil, number_format) ve Değişken İnceleme (var_dump, is_numeric, isset, empty).",
+  summaryNotes: [
+    { title: "Fonksiyon Sonucunu Saklama", text: "Bir fonksiyonun sonuç üretmesi orijinal değişkeni değiştirmez: trim($ad) tek başına $ad'ı değiştirmez; kalıcı olması için $ad = trim($ad) atanmalıdır." },
+    { title: "strlen() vs mb_strlen()", text: "strlen() bayt sayısını verir. UTF-8'de Türkçe karakterler (ç, ğ, ı, ö, ş, ü, İ) 2 bayt yer kaplar. Bu yüzden 'Çağrı' için strlen 8 bayt verirken, karakter sayısını ölçen mb_strlen($ad, 'UTF-8') 5 sonucunu verir." },
+    { title: "strpos() 0 ve false Tuzağı", text: "strpos() aranan kelime en baştaysa 0 döndürür, bulamazsa false döndürür. if ($konum) kullanılırsa 0 değeri false algılanır ve kelime kaçırılır! Kontrol mutlaka if ($konum !== false) şeklinde yapılmalıdır." },
+    { title: "Tarih ve Saat Biçimlendirme", text: "date('d.m.Y H:i:s') formatında 'm' iki basamaklı ayı, 'i' ise dakikayı ifade eder! date('H:m') yazmak dakika yerine ayı basar ve çok yaygın bir hatadır." },
+    { title: "checkdate() Parametre Sırası", text: "checkdate(ay, gun, yil) sırasıyla alır! 29 Şubat 2026 için checkdate(2, 29, 2026) false, artık yıl olan 2028 için true döner." },
+    { title: "floor() vs ceil()", text: "floor() negatif sonsuza doğru aşağı yuvarlar (floor(4.8)=4, floor(-4.8)=-5). ceil() ise pozitif sonsuza doğru yukarı yuvarlar (ceil(4.2)=5, ceil(-4.8)=-4). Paket ve grup sayısı hesabı için ceil() kullanılır (örn: 37 öğrenciyi 8'erli paketlere bölerken ceil(37/8) = 5 paket)." },
+    { title: "number_format() Uyarısı", text: "number_format($tutar, 2, ',', '.') metin (string) üretir. Bu çıktı sadece ekrana basmak içindir; asla yeniden matematiksel hesaplamalara sokulmamalıdır!" },
+    { title: "isset() vs empty()", text: "isset() değişken tanımlıysa ve null değilse true döner (0 ve '' için true'dur). empty() ise 0, '0', false, null, [] ve '' için true döner! Sıfır puan geçerli bir not olduğu için not kontrolünde sadece empty() kullanmak sıfırı yok sayar ve hatalıdır; is_numeric() kullanılmalıdır." }
+  ],
+  tests: [
+    {
+      id: "h6_t1",
+      question: "Aşağıdaki kod çalıştırıldığında echo satırı ne yazdırır?\n\n$ad = \" Ali \";\ntrim($ad);\necho \"[$ad]\";",
+      options: [
+        "[ Ali ]",
+        "[Ali]",
+        "[Ali ]",
+        "[ Ali]",
+        "Hata verir"
+      ],
+      correctAnswer: "[ Ali ]",
+      explanation: "Hafta 6 Slayt 8: trim($ad) temizlenmiş metni döndürür fakat dönen değer $ad değişkenine yeniden atanmamıştır ($ad = trim($ad) yapılmalıdır). Bu yüzden $ad değişmez ve [ Ali ] kalır."
+    },
+    {
+      id: "h6_t2",
+      question: "UTF-8 kodlamasında 'Çağrı' metni için strlen(\"Çağrı\") ve mb_strlen(\"Çağrı\", \"UTF-8\") fonksiyonlarının sonuçları sırasıyla nedir?",
+      options: [
+        "8 ve 5",
+        "5 ve 5",
+        "5 ve 8",
+        "8 ve 8",
+        "6 ve 5"
+      ],
+      correctAnswer: "8 ve 5",
+      explanation: "Slayt 14 & 15: strlen() bayt sayısını verir (Ç, ğ, ı ikişer bayttır: 2+1+2+1+2 = 8 bayt). mb_strlen() ise karakter sayısını (5) verir."
+    },
+    {
+      id: "h6_t3",
+      question: "Bir metnin yalnızca solundaki boşlukları temizlemek için hangi fonksiyon kullanılır?",
+      options: [
+        "ltrim()",
+        "rtrim()",
+        "trim()",
+        "str_trim()",
+        "left_trim()"
+      ],
+      correctAnswer: "ltrim()",
+      explanation: "Slayt 13: ltrim() sol tarafı, rtrim() sağ tarafı, trim() her iki tarafı temizler."
+    },
+    {
+      id: "h6_t4",
+      question: "$metin = \"Programlama\"; için substr($metin, 0, 7) ve substr($metin, -4) çıktıları sırasıyla nedir?",
+      options: [
+        "Program ve lama",
+        "Programlama ve lama",
+        "Progra ve gram",
+        "Program ve amla",
+        "Program ve gram"
+      ],
+      correctAnswer: "Program ve lama",
+      explanation: "Slayt 16: substr($metin, 0, 7) ilk 7 karakter olan 'Program', substr($metin, -4) sondan 4 karakter olan 'lama'yı döndürür."
+    },
+    {
+      id: "h6_t5",
+      question: "Türkçe karakter içeren 'ışık izmir' metnini doğru şekilde 'IŞIK İZMİR' yapmak için slaytta önerilen yöntem nedir?",
+      options: [
+        "str_replace ile önce 'i' ve 'ı' harflerini 'İ' ve 'I' ile değiştirip ardından mb_strtoupper uygulamak",
+        "Doğrudan strtoupper() kullanmak",
+        "Doğrudan mb_strtoupper() kullanmak",
+        "ucwords() fonksiyonunu kullanmak",
+        "Metni ters çevirip tekrar büyütmek"
+      ],
+      correctAnswer: "str_replace ile önce 'i' ve 'ı' harflerini 'İ' ve 'I' ile değiştirip ardından mb_strtoupper uygulamak",
+      explanation: "Slayt 19: mb_strtoupper() Unicode kurallarını kullanır ve Türkçeye özgü i/ı eşleşmesini otomatik yapmaz. Bu yüzden str_replace(['i','ı'], ['İ','I'], $metin) ardından mb_strtoupper kullanılır."
+    },
+    {
+      id: "h6_t6",
+      question: "$metin = \"PHP programlama\"; için $konum = strpos($metin, \"PHP\"); olduğunda arama kontrolü neden if ($konum !== false) şeklinde yapılmalıdır?",
+      options: [
+        "Çünkü 'PHP' en başta olduğu için $konum 0 döner; if ($konum) yazılırsa 0 false sayılacağı için hatalı karar üretilir.",
+        "Çünkü strpos() her zaman string döndürür.",
+        "Çünkü PHP'de if içinde tek değişken yazılamaz.",
+        "Çünkü !== false yazılmazsa sistem bellek hatası verir.",
+        "Çünkü strpos negatif sayılar üretir."
+      ],
+      correctAnswer: "Çünkü 'PHP' en başta olduğu için $konum 0 döner; if ($konum) yazılırsa 0 false sayılacağı için hatalı karar üretilir.",
+      explanation: "Slayt 21: Aranan ifade en başta bulunduğunda konumu 0'dır. 0 koşul içinde false kabul edilir. Bu nedenle arama sonucu !== false ile kontrol edilmelidir."
+    },
+    {
+      id: "h6_t7",
+      question: "PHP 8 ile gelen ve bir metnin başka bir metinle bitip bitmediğini boolean olarak sınayan fonksiyon hangisidir?\nÖrn: var_dump(____($dosya, \".pdf\"));",
+      options: [
+        "str_ends_with()",
+        "str_starts_with()",
+        "str_contains()",
+        "has_suffix()",
+        "end_match()"
+      ],
+      correctAnswer: "str_ends_with()",
+      explanation: "Slayt 22: str_ends_with($dosya, '.pdf') metin bununla mı bitiyor sorusunu yanıtlar."
+    },
+    {
+      id: "h6_t8",
+      question: "Bir metni belirli bir ayırıcıya göre parçalayıp diziye dönüştüren fonksiyon hangisidir?\nÖrn: $dersler = ____(\";\", \"PHP;HTML;CSS\");",
+      options: [
+        "explode()",
+        "implode()",
+        "split()",
+        "join()",
+        "str_split_words()"
+      ],
+      correctAnswer: "explode()",
+      explanation: "Slayt 24: explode() bir metni belirli ayırıcıya göre diziye dönüştürür."
+    },
+    {
+      id: "h6_t9",
+      question: "Bir dizideki elemanları aralarına virgül koyarak tek bir metne birleştiren fonksiyon hangisidir?\nÖrn: $metin = ____(\", \", [\"PHP\", \"HTML\", \"CSS\"]);",
+      options: [
+        "implode()",
+        "explode()",
+        "concat()",
+        "combine()",
+        "merge()"
+      ],
+      correctAnswer: "implode()",
+      explanation: "Slayt 25: implode() dizideki değerleri ayırıcı kullanarak birleştirir."
+    },
+    {
+      id: "h6_t10",
+      question: "Kullanıcıdan gelen '<script>' gibi HTML etiketlerini &lt; ve &gt; karakterlerine dönüştürerek XSS saldırılarını önleyen ve metin gösterimine hazırlayan fonksiyon hangisidir?",
+      options: [
+        "htmlspecialchars()",
+        "strip_tags()",
+        "addslashes()",
+        "html_entity_decode()",
+        "md5()"
+      ],
+      correctAnswer: "htmlspecialchars()",
+      explanation: "Slayt 27: htmlspecialchars() < ve > gibi karakterleri güvenli HTML varlıklarına dönüştürür."
+    },
+    {
+      id: "h6_t11",
+      question: "PHP'de geçerli saat dilimini İstanbul olarak ayarlamak için hangi fonksiyon kullanılır?",
+      options: [
+        "date_default_timezone_set(\"Europe/Istanbul\")",
+        "set_timezone(\"Turkey\")",
+        "date_timezone_set(\"Istanbul\")",
+        "time_zone_default(\"Europe/Istanbul\")",
+        "init_timezone(\"Europe/Istanbul\")"
+      ],
+      correctAnswer: "date_default_timezone_set(\"Europe/Istanbul\")",
+      explanation: "Slayt 32: date_default_timezone_set('Europe/Istanbul'); saat dilimini belirler."
+    },
+    {
+      id: "h6_t12",
+      question: "time() fonksiyonunun döndürdüğü Unix zaman damgası (timestamp) neyi ifade eder?",
+      options: [
+        "1 Ocak 1970 00:00:00 UTC başlangıcından itibaren geçen saniyeleri",
+        "Bugünün başlangıcından itibaren geçen dakikaları",
+        "Yılın kaçıncı günü olduğunu",
+        "Sunucunun açık kaldığı milisaniyeleri",
+        "Geçerli saatin mikrosaniye cinsinden değerini"
+      ],
+      correctAnswer: "1 Ocak 1970 00:00:00 UTC başlangıcından itibaren geçen saniyeleri",
+      explanation: "Slayt 33: 1 Ocak 1970 00:00:00 UTC başlangıcından itibaren geçen saniyeleri temel alır."
+    },
+    {
+      id: "h6_t13",
+      question: "date() fonksiyonu ile saat ve dakikayı '14:05' biçiminde göstermek için hangi biçim karakterleri kullanılmalıdır?",
+      options: [
+        "date(\"H:i\")",
+        "date(\"H:m\")",
+        "date(\"h:M\")",
+        "date(\"H:s\")",
+        "date(\"s:i\")"
+      ],
+      correctAnswer: "date(\"H:i\")",
+      explanation: "Slayt 34: Sık karışan nokta: 'm' ay demektir, 'i' dakika demektir! Saat ve dakika için date('H:i') yazılır."
+    },
+    {
+      id: "h6_t14",
+      question: "Tarih metnini (örneğin '2026-10-21 09:30:00') Unix zaman damgasına dönüştüren fonksiyon hangisidir?",
+      options: [
+        "strtotime()",
+        "strtodate()",
+        "mktime()",
+        "time_parse()",
+        "datetotime()"
+      ],
+      correctAnswer: "strtotime()",
+      explanation: "Slayt 36: strtotime(), tanıyabildiği tarih metnini zaman damgasına dönüştürür. Çözümleyemezse false döner."
+    },
+    {
+      id: "h6_t15",
+      question: "strtotime() ile bir başlangıç zamanına 7 gün eklemek için ikinci parametre nasıl kullanılır?",
+      options: [
+        "strtotime(\"+7 days\", $baslangic)",
+        "strtotime($baslangic, \"+7 days\")",
+        "strtotime(\"+7 days\") + $baslangic",
+        "strtotime(\"add 7 days\", $baslangic)",
+        "strtotime(\"+7d\", $baslangic)"
+      ],
+      correctAnswer: "strtotime(\"+7 days\", $baslangic)",
+      explanation: "Slayt 37: $yeniZaman = strtotime('+7 days', $baslangic); İkinci parametre hesabın hangi zaman üzerinden yapılacağını belirtir."
+    },
+    {
+      id: "h6_t16",
+      question: "İki zaman damgası arasındaki fark $saniye = $bitis - $baslangic olarak hesaplandığında, saat cinsinden farkı bulmak için $saniye kaça bölünmelidir?",
+      options: [
+        "3600",
+        "60",
+        "86400",
+        "1000",
+        "24"
+      ],
+      correctAnswer: "3600",
+      explanation: "Slayt 38: 1 saat = 60 x 60 = 3600 saniyedir ($saat = $saniye / 3600; 24 saat için 86400)."
+    },
+    {
+      id: "h6_t17",
+      question: "checkdate() fonksiyonunun parametre sırası aşağıdakilerden hangisidir?",
+      options: [
+        "checkdate(ay, gun, yil)",
+        "checkdate(gun, ay, yil)",
+        "checkdate(yil, ay, gun)",
+        "checkdate(yil, gun, ay)",
+        "checkdate(tarih_metni)"
+      ],
+      correctAnswer: "checkdate(ay, gun, yil)",
+      explanation: "Slayt 39: Parametre sırası checkdate(ay, gun, yil) şeklindedir (Örn: checkdate(2, 29, 2026))."
+    },
+    {
+      id: "h6_t18",
+      question: "var_dump(checkdate(2, 29, 2026)); çıktısı nedir?",
+      options: [
+        "bool(false)",
+        "bool(true)",
+        "0",
+        "28",
+        "Hata verir"
+      ],
+      correctAnswer: "bool(false)",
+      explanation: "Slayt 39: 2026 artık yıl değildir, Şubat 28 çeker; dolayısıyla 29 Şubat 2026 yoktur ve sonuç bool(false) olur."
+    },
+    {
+      id: "h6_t19",
+      question: "echo round(12.345, 2); ve echo round(12.344, 2); çıktısı sırasıyla nedir?",
+      options: [
+        "12.35 ve 12.34",
+        "12.3 ve 12.3",
+        "13 ve 12",
+        "12.34 ve 12.34",
+        "12.35 ve 12.35"
+      ],
+      correctAnswer: "12.35 ve 12.34",
+      explanation: "Slayt 46: 12.345 son basamak 5 olduğu için yukarı 12.35'e; 12.344 son basamak 4 olduğu için aşağı 12.34'e yuvarlanır."
+    },
+    {
+      id: "h6_t20",
+      question: "echo floor(4.8); ve echo ceil(4.2); çıktısı sırasıyla nedir?",
+      options: [
+        "4 ve 5",
+        "5 ve 4",
+        "4.8 ve 4.2",
+        "5 ve 5",
+        "4 ve 4"
+      ],
+      correctAnswer: "4 ve 5",
+      explanation: "Slayt 47: floor() negatif sonsuza (aşağı: 4), ceil() pozitif sonsuza (yukarı: 5) yuvarlar."
+    },
+    {
+      id: "h6_t21",
+      question: "echo floor(-4.8); ve echo ceil(-4.8); çıktısı sırasıyla nedir?",
+      options: [
+        "-5 ve -4",
+        "-4 ve -5",
+        "-4 ve -4",
+        "-5 ve -5",
+        "4 ve 5"
+      ],
+      correctAnswer: "-5 ve -4",
+      explanation: "Slayt 47: Negatif sayılarda floor(-4.8) daha küçük olan -5'e; ceil(-4.8) daha büyük olan -4'e yuvarlar."
+    },
+    {
+      id: "h6_t22",
+      question: "37 öğrenciyi 8'er kişilik gruplara bölmek ve gereken grup sayısını bulmak için hangi matematiksel işlem ve fonksiyon kullanılmalıdır?",
+      options: [
+        "ceil(37 / 8)",
+        "floor(37 / 8)",
+        "round(37 / 8)",
+        "37 % 8",
+        "abs(37 / 8)"
+      ],
+      correctAnswer: "ceil(37 / 8)",
+      explanation: "Slayt 47: 37 / 8 = 4.625 eder. Artan öğrencileri de kapsamak için yukarı yuvarlayan ceil() kullanılır ve sonuç 5 grup olur."
+    },
+    {
+      id: "h6_t23",
+      question: "echo pow(2, 3); ve echo sqrt(81); çıktısı sırasıyla nedir?",
+      options: [
+        "8 ve 9",
+        "6 ve 9",
+        "8 ve 8.1",
+        "9 ve 8",
+        "16 ve 9"
+      ],
+      correctAnswer: "8 ve 9",
+      explanation: "Slayt 49: pow(2, 3) = 2^3 = 8; sqrt(81) = 81'in karekökü = 9."
+    },
+    {
+      id: "h6_t24",
+      question: "random_int(1, 6) fonksiyonu hakkında aşağıdakilerden hangisi doğrudur?",
+      options: [
+        "1 ile 6 arasında rastgele tamsayı üretir; 1 ve 6 sınırları sonuca dahildir.",
+        "Ürettiği sayı hiçbir zaman 6 olamaz.",
+        "Kayan noktalı (ondalıklı) rastgele sayı üretir.",
+        "Sadece çift sayıları üretir.",
+        "Her çalıştığında kesinlikle aynı sayıyı üretir."
+      ],
+      correctAnswer: "1 ile 6 arasında rastgele tamsayı üretir; 1 ve 6 sınırları sonuca dahildir.",
+      explanation: "Slayt 50: Alt ve üst sınırlar dahildir (1 ve 6 da gelebilir)."
+    },
+    {
+      id: "h6_t25",
+      question: "$tutar = 12345.678; için number_format($tutar, 2, \",\", \".\") ifadesinin ekran çıktısı nedir?",
+      options: [
+        "12.345,68",
+        "12,345.68",
+        "12345,68",
+        "12.345,678",
+        "12345.68"
+      ],
+      correctAnswer: "12.345,68",
+      explanation: "Slayt 51: 2 ondalık basamak, ondalık ayırıcı virgül (,), binlik ayırıcı nokta (.) olduğundan 12.345,68 üretilir."
+    },
+    {
+      id: "h6_t26",
+      question: "gettype(12.5) çağrıldığında tarihsel nedenlerle hangi tür adını string olarak döndürür?",
+      options: [
+        "double",
+        "float",
+        "decimal",
+        "number",
+        "real"
+      ],
+      correctAnswer: "double",
+      explanation: "Slayt 58: 'gettype(), ondalıklı sayı için tarihsel nedenlerle \"double\" metnini döndürür.'"
+    },
+    {
+      id: "h6_t27",
+      question: "Aşağıdaki ifadelerden hangisinin sonucu bool(false) çıkar?",
+      options: [
+        "is_int(\"25\")",
+        "is_int(25)",
+        "is_string(\"25\")",
+        "is_numeric(\"25\")",
+        "is_array([10, 20])"
+      ],
+      correctAnswer: "is_int(\"25\")",
+      explanation: "Slayt 59: is_int(\"25\") false'tur; çünkü \"25\" sayısal içerikli olsa da tipi string'dir!"
+    },
+    {
+      id: "h6_t28",
+      question: "is_numeric(\"75.5\") ve is_numeric(\"75,5\") fonksiyon çağrılarının sonuçları sırasıyla nedir?",
+      options: [
+        "bool(true) ve bool(false)",
+        "bool(true) ve bool(true)",
+        "bool(false) ve bool(false)",
+        "bool(false) ve bool(true)",
+        "Hata verir"
+      ],
+      correctAnswer: "bool(true) ve bool(false)",
+      explanation: "Slayt 60 Tablo: Ondalık ayracı olarak nokta kullanan \"75.5\" true'dur; ancak virgül kullanan \"75,5\" sayısal kabul edilmez (false)."
+    },
+    {
+      id: "h6_t29",
+      question: "$puan = 0; tanımlı değişken için isset($puan) ve empty($puan) sonuçları sırasıyla nedir?",
+      options: [
+        "bool(true) ve bool(true)",
+        "bool(true) ve bool(false)",
+        "bool(false) ve bool(true)",
+        "bool(false) ve bool(false)",
+        "1 ve 0"
+      ],
+      correctAnswer: "bool(true) ve bool(true)",
+      explanation: "Slayt 63 & 64: 0 tanımlı ve null olmadığı için isset($puan) true döner. Ancak 0 değeri boş kabul edildiği için empty($puan) da true döner!"
+    },
+    {
+      id: "h6_t30",
+      question: "Bir fonksiyonun ortamda tanımlı veya eklentisinin aktif olup olmadığını kontrol eden fonksiyon hangisidir?\nÖrn: if (____(\"mb_strlen\")) { ... }",
+      options: [
+        "function_exists()",
+        "is_function()",
+        "has_function()",
+        "check_function()",
+        "defined_function()"
+      ],
+      correctAnswer: "function_exists()",
+      explanation: "Slayt 68: function_exists(\"mb_strlen\") fonksiyonun kullanılabilir olup olmadığını kontrol eder."
+    }
+  ],
+  fillInBlanks: [
+    {
+      id: "h6_f1",
+      sentence: "Bir metnin başındaki ve sonundaki boşlukları temizleyen fonksiyon ____() fonksiyonudur.",
+      acceptedAnswers: ["trim", "trim()"],
+      hint: "trim",
+      explanation: "Slayt 12: trim() kenar boşluklarını kaldırır."
+    },
+    {
+      id: "h6_f2",
+      sentence: "Metnin sadece sağındaki boşlukları silmek için ____() fonksiyonu kullanılır.",
+      acceptedAnswers: ["rtrim", "rtrim()"],
+      hint: "rtrim",
+      explanation: "Slayt 13: rtrim() sağ tarafı temizler."
+    },
+    {
+      id: "h6_f3",
+      sentence: "Metnin sadece solundaki boşlukları silmek için ____() fonksiyonu kullanılır.",
+      acceptedAnswers: ["ltrim", "ltrim()"],
+      hint: "ltrim",
+      explanation: "Slayt 13: ltrim() sol tarafı temizler."
+    },
+    {
+      id: "h6_f4",
+      sentence: "strlen() fonksiyonu karakter sayısını değil, metnin ____ cinsinden uzunluğunu ölçer.",
+      acceptedAnswers: ["bayt", "byte"],
+      hint: "bayt / byte",
+      explanation: "Slayt 14: strlen() metnin bayt cinsinden uzunluğunu verir."
+    },
+    {
+      id: "h6_f5",
+      sentence: "Türkçe karakterlerin doğru sayılması için mbstring eklentisinin ____() fonksiyonu kullanılmalıdır.",
+      acceptedAnswers: ["mb_strlen", "mb_strlen()"],
+      hint: "mb_strlen",
+      explanation: "Slayt 15: mb_strlen() karakter sayısını ölçer."
+    },
+    {
+      id: "h6_f6",
+      sentence: "Bir metnin belirli bir kısmını kesip almak için kullanılan fonksiyon ____() fonksiyonudur.",
+      acceptedAnswers: ["substr", "substr()", "mb_substr"],
+      hint: "substr",
+      explanation: "Slayt 16: substr() belirtilen bölümü döndürür."
+    },
+    {
+      id: "h6_f7",
+      sentence: "Metin içindeki belirli kelimeleri başka kelimelerle değiştirmek için ____() fonksiyonu kullanılır.",
+      acceptedAnswers: ["str_replace", "str_replace()"],
+      hint: "str_replace",
+      explanation: "Slayt 23: str_replace() ile değiştirme."
+    },
+    {
+      id: "h6_f8",
+      sentence: "Aranan ifadenin metin içerisindeki ilk bayt konumunu bulan fonksiyon ____() fonksiyonudur.",
+      acceptedAnswers: ["strpos", "strpos()"],
+      hint: "strpos",
+      explanation: "Slayt 20: strpos() ilk bulunduğu bayt konumunu verir."
+    },
+    {
+      id: "h6_f9",
+      sentence: "strpos() aranan ifade en başta bulunduğunda ____ (sıfır) indeksini döndürür.",
+      acceptedAnswers: ["0", "sıfır", "sifir"],
+      hint: "0",
+      explanation: "Slayt 21: En başta bulunan ifade için konum 0'dır."
+    },
+    {
+      id: "h6_f10",
+      sentence: "PHP 8'de bir metnin içinde aranan parçanın var olup olmadığını bool(true/false) veren fonksiyon ____() fonksiyonudur.",
+      acceptedAnswers: ["str_contains", "str_contains()"],
+      hint: "str_contains",
+      explanation: "Slayt 22: str_contains() içeriyor mu kontrolüdür."
+    },
+    {
+      id: "h6_f11",
+      sentence: "Metni ayırıcı bir karaktere göre parçalayarak dizi haline getiren fonksiyon ____() fonksiyonudur.",
+      acceptedAnswers: ["explode", "explode()"],
+      hint: "explode",
+      explanation: "Slayt 24: explode() metni diziye dönüştürür."
+    },
+    {
+      id: "h6_f12",
+      sentence: "Dizi elemanlarını aralarına bir ayırıcı koyarak tek bir metne birleştiren fonksiyon ____() fonksiyonudur.",
+      acceptedAnswers: ["implode", "implode()"],
+      hint: "implode",
+      explanation: "Slayt 25: implode() parçaları birleştirir."
+    },
+    {
+      id: "h6_f13",
+      sentence: "HTML içinde < ve > özel karakterlerini güvenli varlıklara dönüştüren fonksiyon ____() fonksiyonudur.",
+      acceptedAnswers: ["htmlspecialchars", "htmlspecialchars()"],
+      hint: "htmlspecialchars",
+      explanation: "Slayt 27: htmlspecialchars() XSS koruması ve gösterim için kullanılır."
+    },
+    {
+      id: "h6_f14",
+      sentence: "PHP'de geçerli anın Unix zaman damgasını saniye cinsinden veren fonksiyon ____() fonksiyonudur.",
+      acceptedAnswers: ["time", "time()"],
+      hint: "time",
+      explanation: "Slayt 33: time() Unix zaman damgasını verir."
+    },
+    {
+      id: "h6_f15",
+      sentence: "date() fonksiyonunda iki basamaklı dakikayı gösteren biçim karakteri ____ harfidir.",
+      acceptedAnswers: ["i"],
+      hint: "i",
+      explanation: "Slayt 34: i dakika, m aydır."
+    },
+    {
+      id: "h6_f16",
+      sentence: "date() fonksiyonunda iki basamaklı ayı gösteren biçim karakteri ____ harfidir.",
+      acceptedAnswers: ["m"],
+      hint: "m",
+      explanation: "Slayt 34: m ay, i dakikadır."
+    },
+    {
+      id: "h6_f17",
+      sentence: "date() fonksiyonunda dört basamaklı yılı temsil eden karakter büyük ____ harfidir.",
+      acceptedAnswers: ["Y"],
+      hint: "Y",
+      explanation: "Slayt 34: Y dört basamaklı yıl."
+    },
+    {
+      id: "h6_f18",
+      sentence: "Bir tarih metnini zaman damgasına dönüştüren fonksiyon ____() fonksiyonudur.",
+      acceptedAnswers: ["strtotime", "strtotime()"],
+      hint: "strtotime",
+      explanation: "Slayt 36: strtotime() tarih metnini zaman damgasına çevirir."
+    },
+    {
+      id: "h6_f19",
+      sentence: "Takvimde girilen gün, ay ve yılın geçerli bir tarih olup olmadığını doğrulayan fonksiyon ____() fonksiyonudur.",
+      acceptedAnswers: ["checkdate", "checkdate()"],
+      hint: "checkdate",
+      explanation: "Slayt 39: checkdate() ile tarih doğrulama."
+    },
+    {
+      id: "h6_f20",
+      sentence: "Bir sayının mutlak değerini (sıfıra uzaklığını) hesaplayan fonksiyon ____() fonksiyonudur.",
+      acceptedAnswers: ["abs", "abs()"],
+      hint: "abs",
+      explanation: "Slayt 45: abs() mutlak değer."
+    },
+    {
+      id: "h6_f21",
+      sentence: "Sayıyı en yakın tam sayıya veya belirtilen ondalık basamağa yuvarlayan fonksiyon ____() fonksiyonudur.",
+      acceptedAnswers: ["round", "round()"],
+      hint: "round",
+      explanation: "Slayt 46: round() ile yuvarlama."
+    },
+    {
+      id: "h6_f22",
+      sentence: "Sayıyı negatif sonsuz yönünde aşağı tam sayıya yuvarlayan fonksiyon ____() fonksiyonudur.",
+      acceptedAnswers: ["floor", "floor()"],
+      hint: "floor",
+      explanation: "Slayt 47: floor() aşağı yuvarlar."
+    },
+    {
+      id: "h6_f23",
+      sentence: "Sayıyı pozitif sonsuz yönünde yukarı tam sayıya yuvarlayan fonksiyon ____() fonksiyonudur.",
+      acceptedAnswers: ["ceil", "ceil()"],
+      hint: "ceil",
+      explanation: "Slayt 47: ceil() yukarı yuvarlar."
+    },
+    {
+      id: "h6_f24",
+      sentence: "Bir sayının karekökünü hesaplayan matematiksel fonksiyon ____() fonksiyonudur.",
+      acceptedAnswers: ["sqrt", "sqrt()"],
+      hint: "sqrt",
+      explanation: "Slayt 49: sqrt(81) = 9."
+    },
+    {
+      id: "h6_f25",
+      sentence: "Belirli bir aralıkta kriptografik güvenli rastgele tam sayı üreten fonksiyon ____() fonksiyonudur.",
+      acceptedAnswers: ["random_int", "random_int()"],
+      hint: "random_int",
+      explanation: "Slayt 50: random_int() ile rastgele sayı."
+    },
+    {
+      id: "h6_f26",
+      sentence: "Sayıyı para tutarı gibi binlik ve ondalık ayırıcılarla biçimlendirilmiş metne dönüştüren fonksiyon ____() fonksiyonudur.",
+      acceptedAnswers: ["number_format", "number_format()"],
+      hint: "number_format",
+      explanation: "Slayt 51: number_format() sayı gösterimi için kullanılır."
+    },
+    {
+      id: "h6_f27",
+      sentence: "Bir değişkenin veya metnin sayısal bir değer olup olmadığını kontrol eden fonksiyon ____() fonksiyonudur.",
+      acceptedAnswers: ["is_numeric", "is_numeric()"],
+      hint: "is_numeric",
+      explanation: "Slayt 60: is_numeric() sayısal veri kontrolü."
+    },
+    {
+      id: "h6_f28",
+      sentence: "Bir değişkenin tanımlı olduğunu ve değerinin null olmadığını sınayan dil yapısı ____() yapısıdır.",
+      acceptedAnswers: ["isset", "isset()"],
+      hint: "isset",
+      explanation: "Slayt 63: isset ile tanımlı ve null olmayan değer kontrolü."
+    },
+    {
+      id: "h6_f29",
+      sentence: "PHP'de tanımlanmış bir değişkeni hafızadan tamamen silmek/kaldırmak için ____() kullanılır.",
+      acceptedAnswers: ["unset", "unset()"],
+      hint: "unset",
+      explanation: "Slayt 65: unset ile değişkeni kaldırma."
+    },
+    {
+      id: "h6_f30",
+      sentence: "Bir fonksiyonun sistemde tanımlı olup olmadığını test eden fonksiyon ____() fonksiyonudur.",
+      acceptedAnswers: ["function_exists", "function_exists()"],
+      hint: "function_exists",
+      explanation: "Slayt 68: function_exists() ile kullanılabilirlik kontrolü."
+    }
+  ],
+  codingQuestions: [
+    {
+      id: "h6_c1",
+      title: "Metin Temizleme ve Karakter Sayısı Ölçme",
+      task: "$ad = ' Çağrı '; değişkeninin kenar boşluklarını trim ile temizleyip mb_strlen() ile Türkçe karakter sayısını ekrana yazdırınız.",
+      initialCode: "<?php\n$ad = \" Çağrı \";\n// trim yapıp karakter sayısını yazdırınız\n?>",
+      expectedSolution: "<?php\n$ad = \" Çağrı \";\n$temizAd = trim($ad);\n$uzunluk = mb_strlen($temizAd, \"UTF-8\");\necho \"$temizAd: $uzunluk karakter\";\n?>",
+      validationKeyword: ["trim", "mb_strlen", "UTF-8"],
+      explanation: "Slayt 29 Etkinlik 1: trim ile kenar boşlukları silinir ve mb_strlen($ad, 'UTF-8') ile karakter sayısı bulunur."
+    },
+    {
+      id: "h6_c2",
+      title: "Explode ile Parçalayıp Foreach ile Yazdırma",
+      task: "$metin = 'PHP;HTML;CSS'; dizesini explode ile noktalı virgülden ayırıp herbir dersi foreach döngüsüyle satır satır yazdırınız.",
+      initialCode: "<?php\n$metin = \"PHP;HTML;CSS\";\n// explode ve foreach kullanınız\n?>",
+      expectedSolution: "<?php\n$metin = \"PHP;HTML;CSS\";\n$dersler = explode(\";\", $metin);\nforeach ($dersler as $ders) {\n  echo \"$ders\\n\";\n}\n?>",
+      validationKeyword: ["explode", "\";\"", "foreach", "as $ders"],
+      explanation: "Slayt 24: explode(';', $metin) metni diziye böler."
+    },
+    {
+      id: "h6_c3",
+      title: "Malzeme Paketi Planlama (ceil ile)",
+      task: "$ogrenci = 37 ve $paketKapasitesi = 8 için kaç paket gerektiğini ceil() fonksiyonu ile hesaplayıp ekrana yazdırınız.",
+      initialCode: "<?php\n$ogrenci = 37;\n$paketKapasitesi = 8;\n// ceil ile paket sayısını hesaplayıp yazdırınız\n?>",
+      expectedSolution: "<?php\n$ogrenci = 37;\n$paketKapasitesi = 8;\n$paketSayisi = (int) ceil($ogrenci / $paketKapasitesi);\necho \"Paket: $paketSayisi\";\n?>",
+      validationKeyword: ["ceil", "$ogrenci / $paketKapasitesi", "Paket:"],
+      explanation: "Slayt 54 Etkinlik 3: ceil(37 / 8) = 5 paket gereklidir."
+    },
+    {
+      id: "h6_c4",
+      title: "Son Teslim Zamanı Karşılaştırma",
+      task: "strtotime ile $sonTeslim ve $teslim zaman damgalarını oluşturunuz. $teslim <= $sonTeslim ise 'Zamanında teslim', aksi halde 'Geç teslim' yazdırınız.",
+      initialCode: "<?php\ndate_default_timezone_set(\"Europe/Istanbul\");\n$sonTeslim = strtotime(\"2026-10-21 17:00:00\");\n$teslim = strtotime(\"2026-10-21 16:30:00\");\n// Karşılaştırma yapınız\n?>",
+      expectedSolution: "<?php\ndate_default_timezone_set(\"Europe/Istanbul\");\n$sonTeslim = strtotime(\"2026-10-21 17:00:00\");\n$teslim = strtotime(\"2026-10-21 16:30:00\");\nif ($teslim <= $sonTeslim) {\n  echo \"Zamanında teslim\";\n} else {\n  echo \"Geç teslim\";\n}\n?>",
+      validationKeyword: ["strtotime", "$teslim <= $sonTeslim", "Zamanında teslim", "Geç teslim"],
+      explanation: "Slayt 40: Tarih karşılaştırması zaman damgası (timestamp) üzerinden yapılır."
+    },
+    {
+      id: "h6_c5",
+      title: "is_numeric ile Puan Doğrulama ve Tip Dönüşümü",
+      task: "$hamPuan = '75.5'; değişkenini is_numeric ile kontrol ediniz. Sayısal ise (float) türüne dönüştürüp 0-100 aralığında olduğunu doğrulayınız.",
+      initialCode: "<?php\n$hamPuan = \"75.5\";\n// is_numeric ve aralık kontrolünü yazınız\n?>",
+      expectedSolution: "<?php\n$hamPuan = \"75.5\";\nif (is_numeric($hamPuan)) {\n  $puan = (float) $hamPuan;\n  if ($puan >= 0 && $puan <= 100) {\n    echo \"Geçerli puan: $puan\";\n  }\n}\n?>",
+      validationKeyword: ["is_numeric", "(float)", "$puan >= 0", "$puan <= 100"],
+      explanation: "Slayt 67: Önce is_numeric ile sayısal kontrol, ardından (float) dönüşümü ve aralık denetimi yapılır."
+    }
+  ]
+};
+
+
+// TÜM HAFTALARI BİRLEŞTİREN ANA VERİ HAVUZU
+var ALL_WEEKS_DATA = {
+  2: typeof HAFTA_2_DATA !== 'undefined' ? HAFTA_2_DATA : null,
+  3: typeof HAFTA_3_DATA !== 'undefined' ? HAFTA_3_DATA : null,
+  4: typeof HAFTA_4_DATA !== 'undefined' ? HAFTA_4_DATA : null,
+  5: typeof HAFTA_5_DATA !== 'undefined' ? HAFTA_5_DATA : null,
+  6: typeof HAFTA_6_DATA !== 'undefined' ? HAFTA_6_DATA : null
+};
+
+// Genel Karma Deneme Paketi (Vize Prova Modu)
+function getAllCombinedData() {
+  const weeks = [2, 3, 4, 5, 6];
+  let allTests = [];
+  let allBlanks = [];
+  let allCoding = [];
+  let allSummaries = [];
+
+  weeks.forEach(w => {
+    const data = ALL_WEEKS_DATA[w];
+    if (data) {
+      if (data.tests) allTests = allTests.concat(data.tests.map(t => ({ ...t, week: w })));
+      if (data.fillInBlanks) allBlanks = allBlanks.concat(data.fillInBlanks.map(b => ({ ...b, week: w })));
+      if (data.codingQuestions) allCoding = allCoding.concat(data.codingQuestions.map(c => ({ ...c, week: w })));
+      if (data.summaryNotes) allSummaries = allSummaries.concat(data.summaryNotes.map(s => ({ ...s, week: w })));
+    }
+  });
+
+  return {
+    title: "Vize Genel Karma Deneme Sınavı (Hafta 2-6)",
+    description: "Tüm haftaları kapsayan, toplam 150 test sorusu, 150 boşluk doldurma ve 25 klasik kodlama sorusu içeren vize prova havuzu.",
+    summaryNotes: allSummaries,
+    tests: allTests,
+    fillInBlanks: allBlanks,
+    codingQuestions: allCoding
+  };
+}
+
+
+// PHP VİZE ÇALIŞMA PLATFORMU - UYGULAMA MOTORU
+
+class QuizEngine {
+  constructor() {
+    this.currentWeek = 2; // 2, 3, 4, 5, 6 veya 'all'
+    this.currentMode = 'test'; // 'test', 'fib', 'coding', 'summary'
+    this.currentIndex = 0;
+    
+    // Her hafta ve mod için kullanıcı durumları
+    this.userAnswers = {
+      test: {}, // { [questionId]: { selectedOption, isCorrect, options } }
+      fib: {},  // { [questionId]: { userInput, isCorrect } }
+      coding: {} // { [questionId]: { code, isSubmitted } }
+    };
+
+    this.shuffledOptionsCache = {}; // Soruların karıştırılmış 5 şıkkını önbellekleme
+    this.init();
+  }
+
+  init() {
+    this.bindEvents();
+    this.loadWeek(2);
+  }
+
+  bindEvents() {
+    // Hafta butonları
+    document.querySelectorAll('[data-week]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const week = btn.getAttribute('data-week');
+        this.selectWeek(week === 'all' ? 'all' : parseInt(week, 10));
+      });
+    });
+
+    // Mod butonları
+    document.querySelectorAll('[data-mode]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const mode = btn.getAttribute('data-mode');
+        this.selectMode(mode);
+      });
+    });
+
+    // Klavye kısayolları (A, B, C, D, E ve Enter)
+    window.addEventListener('keydown', (e) => {
+      if (this.currentMode === 'test') {
+        const key = e.key.toUpperCase();
+        if (['A', 'B', 'C', 'D', 'E'].includes(key)) {
+          const index = key.charCodeAt(0) - 65;
+          const options = document.querySelectorAll('.option-item');
+          if (options[index] && !options[index].classList.contains('disabled')) {
+            options[index].click();
+          }
+        }
+      }
+    });
+  }
+
+  getCurrentDataset() {
+    if (this.currentWeek === 'all') {
+      return getAllCombinedData();
+    }
+    return ALL_WEEKS_DATA[this.currentWeek];
+  }
+
+  selectWeek(week) {
+    this.currentWeek = week;
+    this.currentIndex = 0;
+    
+    // UI Güncelleme
+    document.querySelectorAll('[data-week]').forEach(btn => {
+      const w = btn.getAttribute('data-week');
+      const isMatch = (week === 'all' && w === 'all') || (parseInt(w, 10) === week);
+      btn.classList.toggle('active', isMatch);
+    });
+
+    this.render();
+  }
+
+  selectMode(mode) {
+    this.currentMode = mode;
+    this.currentIndex = 0;
+
+    document.querySelectorAll('[data-mode]').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-mode') === mode);
+    });
+
+    this.render();
+  }
+
+  render() {
+    this.updateHeaderStats();
+    this.renderWeekBanner();
+
+    const dataset = this.getCurrentDataset();
+    if (!dataset) return;
+
+    if (this.currentMode === 'summary') {
+      document.getElementById('palette-container').style.display = 'none';
+      document.getElementById('progress-container').style.display = 'none';
+      this.renderSummary(dataset.summaryNotes);
+    } else {
+      document.getElementById('palette-container').style.display = 'flex';
+      document.getElementById('progress-container').style.display = 'block';
+      this.renderPalette();
+      this.updateProgress();
+
+      if (this.currentMode === 'test') {
+        this.renderTestMode(dataset.tests);
+      } else if (this.currentMode === 'fib') {
+        this.renderFibMode(dataset.fillInBlanks);
+      } else if (this.currentMode === 'coding') {
+        this.renderCodingMode(dataset.codingQuestions);
+      }
+    }
+  }
+
+  renderWeekBanner() {
+    const dataset = this.getCurrentDataset();
+    const banner = document.getElementById('week-info-banner');
+    if (!banner || !dataset) return;
+
+    const testCount = dataset.tests ? dataset.tests.length : 0;
+    const fibCount = dataset.fillInBlanks ? dataset.fillInBlanks.length : 0;
+    const codeCount = dataset.codingQuestions ? dataset.codingQuestions.length : 0;
+
+    banner.innerHTML = `
+      <div class="week-info-content">
+        <h2>
+          <span>📘</span> ${dataset.title}
+        </h2>
+        <p>${dataset.description}</p>
+      </div>
+      <div class="quick-stats">
+        <div>Test: <strong>${testCount}</strong> Soru</div>
+        <div>Boşluk Doldurma: <strong>${fibCount}</strong> Soru</div>
+        <div>Kodlama: <strong>${codeCount}</strong> Uygulama</div>
+      </div>
+    `;
+  }
+
+  updateProgress() {
+    const dataset = this.getCurrentDataset();
+    let list = [];
+    if (this.currentMode === 'test') list = dataset.tests || [];
+    else if (this.currentMode === 'fib') list = dataset.fillInBlanks || [];
+    else if (this.currentMode === 'coding') list = dataset.codingQuestions || [];
+
+    const total = list.length;
+    const current = total > 0 ? this.currentIndex + 1 : 0;
+    const percent = total > 0 ? Math.round((current / total) * 100) : 0;
+
+    document.getElementById('progress-text').innerText = `Soru ${current} / ${total}`;
+    document.getElementById('progress-percent').innerText = `%${percent}`;
+    document.getElementById('progress-bar').style.width = `${percent}%`;
+  }
+
+  renderPalette() {
+    const dataset = this.getCurrentDataset();
+    let list = [];
+    if (this.currentMode === 'test') list = dataset.tests || [];
+    else if (this.currentMode === 'fib') list = dataset.fillInBlanks || [];
+    else if (this.currentMode === 'coding') list = dataset.codingQuestions || [];
+
+    const palette = document.getElementById('palette-grid');
+    palette.innerHTML = '';
+
+    list.forEach((item, idx) => {
+      const btn = document.createElement('button');
+      btn.className = 'palette-btn';
+      btn.innerText = idx + 1;
+
+      if (idx === this.currentIndex) {
+        btn.classList.add('current');
+      }
+
+      const answerData = this.userAnswers[this.currentMode][item.id];
+      if (answerData) {
+        if (answerData.isCorrect) {
+          btn.classList.add('correct');
+        } else {
+          btn.classList.add('incorrect');
+        }
+      }
+
+      btn.addEventListener('click', () => {
+        this.currentIndex = idx;
+        this.render();
+      });
+
+      palette.appendChild(btn);
+    });
+  }
+
+  // TEST MODU: 5 ŞIK KARIŞIK DAĞILIM
+  renderTestMode(tests) {
+    const container = document.getElementById('dynamic-content');
+    if (!tests || tests.length === 0) {
+      container.innerHTML = '<div class="quiz-card"><p>Bu modda soru bulunamadı.</p></div>';
+      return;
+    }
+
+    const q = tests[this.currentIndex];
+    const letters = ['A', 'B', 'C', 'D', 'E'];
+
+    // 5 Şıkkı karıştırma (Fisher-Yates) - soru ID'sine göre önbelleğe alıyoruz
+    if (!this.shuffledOptionsCache[q.id]) {
+      const opts = [...q.options];
+      for (let i = opts.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [opts[i], opts[j]] = [opts[j], opts[i]];
+      }
+      this.shuffledOptionsCache[q.id] = opts;
+    }
+
+    const currentOptions = this.shuffledOptionsCache[q.id];
+    const previousAnswer = this.userAnswers.test[q.id];
+
+    let optionsHtml = '';
+    currentOptions.forEach((opt, idx) => {
+      const letter = letters[idx];
+      let itemClass = 'option-item';
+
+      if (previousAnswer) {
+        itemClass += ' disabled';
+        if (opt === q.correctAnswer) {
+          itemClass += ' correct';
+        } else if (opt === previousAnswer.selectedOption && !previousAnswer.isCorrect) {
+          itemClass += ' incorrect';
+        }
+      }
+
+      optionsHtml += `
+        <div class="${itemClass}" data-option-index="${idx}" data-option-text="${this.escapeHtml(opt)}">
+          <div class="option-letter">${letter}</div>
+          <div class="option-text">${this.formatCodeSpans(opt)}</div>
+        </div>
+      `;
+    });
+
+    let explanationHtml = '';
+    if (previousAnswer) {
+      if (previousAnswer.isCorrect) {
+        explanationHtml = `
+          <div class="explanation-box correct-alert">
+            <div class="exp-header correct">
+              <span>✅</span> Tebrikler! Doğru Cevap!
+            </div>
+            <div class="exp-text">
+              <strong>PDF Referansı ve Açıklama:</strong><br>${q.explanation}
+            </div>
+          </div>
+        `;
+      } else {
+        explanationHtml = `
+          <div class="explanation-box wrong-alert">
+            <div class="exp-header wrong">
+              <span>❌</span> Yanlış Cevap Verdiniz!
+            </div>
+            <div style="margin-bottom: 6px; font-size: 13px; color: #cbd5e1;">
+              Doğru Seçenek:
+            </div>
+            <div class="exp-correct-value">${this.escapeHtml(q.correctAnswer)}</div>
+            <div class="exp-text">
+              <strong>PDF Kuralı ve Çözüm Detayı:</strong><br>${q.explanation}
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    container.innerHTML = `
+      <div class="quiz-card">
+        <div class="card-top">
+          <span class="question-badge">Çoktan Seçmeli Test (5 Şık)</span>
+          <span class="question-topic">${q.week ? `Hafta ${q.week}` : `Hafta ${this.currentWeek}`} • Soru ${this.currentIndex + 1} / ${tests.length}</span>
+        </div>
+        
+        <div class="question-text">${this.formatCodeSpans(q.question)}</div>
+        
+        <div class="options-list">
+          ${optionsHtml}
+        </div>
+
+        ${explanationHtml}
+
+        <div class="card-actions">
+          <div class="actions-left">
+            <button class="btn btn-secondary" id="btn-prev" ${this.currentIndex === 0 ? 'disabled' : ''}>← Önceki</button>
+            <button class="btn btn-secondary" id="btn-next" ${this.currentIndex === tests.length - 1 ? 'disabled' : ''}>Sonraki →</button>
+          </div>
+          <div class="actions-right">
+            <button class="btn btn-secondary" id="btn-reset-q">Cevabı Sıfırla</button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    // Seçenek tıklama dinleyicileri
+    if (!previousAnswer) {
+      container.querySelectorAll('.option-item').forEach(el => {
+        el.addEventListener('click', () => {
+          const selectedText = el.getAttribute('data-option-text');
+          this.handleTestAnswer(q, selectedText);
+        });
+      });
+    }
+
+    // Buton dinleyicileri
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+    const btnReset = document.getElementById('btn-reset-q');
+
+    if (btnPrev) btnPrev.addEventListener('click', () => this.goToPrev(tests));
+    if (btnNext) btnNext.addEventListener('click', () => this.goToNext(tests));
+    if (btnReset) btnReset.addEventListener('click', () => {
+      delete this.userAnswers.test[q.id];
+      this.render();
+    });
+  }
+
+  handleTestAnswer(question, selectedOption) {
+    const isCorrect = (selectedOption.trim() === question.correctAnswer.trim());
+    this.userAnswers.test[question.id] = {
+      selectedOption,
+      isCorrect
+    };
+
+    this.render();
+  }
+
+  // BOŞLUK DOLDURMA MODU
+  renderFibMode(blanks) {
+    const container = document.getElementById('dynamic-content');
+    if (!blanks || blanks.length === 0) {
+      container.innerHTML = '<div class="quiz-card"><p>Bu modda soru bulunamadı.</p></div>';
+      return;
+    }
+
+    const q = blanks[this.currentIndex];
+    const previousAnswer = this.userAnswers.fib[q.id];
+
+    // Boşluk yerini stilize et
+    const formattedSentence = q.sentence.replace('____', '<span class="fib-blank-highlight">____</span>');
+
+    let explanationHtml = '';
+    if (previousAnswer) {
+      if (previousAnswer.isCorrect) {
+        explanationHtml = `
+          <div class="explanation-box correct-alert">
+            <div class="exp-header correct">
+              <span>✅</span> Harika! Doğru Cevap!
+            </div>
+            <div class="exp-text">
+              <strong>PDF Açıklaması:</strong><br>${q.explanation}
+            </div>
+          </div>
+        `;
+      } else {
+        explanationHtml = `
+          <div class="explanation-box wrong-alert">
+            <div class="exp-header wrong">
+              <span>❌</span> Yanlış Cevap!
+            </div>
+            <div style="margin-bottom: 6px; font-size: 13px; color: #cbd5e1;">
+              Kabul Edilen Doğru Cevap:
+            </div>
+            <div class="exp-correct-value">${this.escapeHtml(q.acceptedAnswers[0])}</div>
+            <div class="exp-text">
+              <strong>PDF Kuralı ve Açıklama:</strong><br>${q.explanation}
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    container.innerHTML = `
+      <div class="quiz-card">
+        <div class="card-top">
+          <span class="question-badge" style="background: rgba(168, 85, 247, 0.15); color: #c084fc; border-color: rgba(168, 85, 247, 0.3);">Boşluk Doldurma</span>
+          <span class="question-topic">${q.week ? `Hafta ${q.week}` : `Hafta ${this.currentWeek}`} • Soru ${this.currentIndex + 1} / ${blanks.length}</span>
+        </div>
+
+        <div class="fib-sentence-card">
+          ${formattedSentence}
+        </div>
+
+        <div class="fib-input-group">
+          <input 
+            type="text" 
+            id="fib-input" 
+            class="fib-input" 
+            placeholder="Boşluğa gelecek cevabı buraya yazınız..." 
+            value="${previousAnswer ? this.escapeHtml(previousAnswer.userInput) : ''}"
+            ${previousAnswer ? 'disabled' : ''}
+            autocomplete="off"
+            autofocus
+          />
+          ${!previousAnswer ? `
+            <button class="btn btn-primary" id="btn-fib-submit">Cevabı Kontrol Et</button>
+          ` : `
+            <button class="btn btn-secondary" id="btn-fib-retry">Tekrar Dene</button>
+          `}
+        </div>
+
+        ${q.hint && !previousAnswer ? `
+          <div style="font-size: 13px; color: var(--text-muted); display: flex; align-items: center; gap: 6px;">
+            <span>💡 İpucu:</span> <em>${q.hint}</em>
+          </div>
+        ` : ''}
+
+        ${explanationHtml}
+
+        <div class="card-actions">
+          <div class="actions-left">
+            <button class="btn btn-secondary" id="btn-prev" ${this.currentIndex === 0 ? 'disabled' : ''}>← Önceki</button>
+            <button class="btn btn-secondary" id="btn-next" ${this.currentIndex === blanks.length - 1 ? 'disabled' : ''}>Sonraki →</button>
+          </div>
+          <div class="actions-right">
+            <button class="btn btn-secondary" id="btn-show-answer">Doğru Cevabı Göster</button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    const input = document.getElementById('fib-input');
+    const submitBtn = document.getElementById('btn-fib-submit');
+    const retryBtn = document.getElementById('btn-fib-retry');
+    const showAnsBtn = document.getElementById('btn-show-answer');
+
+    if (submitBtn && input) {
+      submitBtn.addEventListener('click', () => this.handleFibAnswer(q, input.value));
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          this.handleFibAnswer(q, input.value);
+        }
+      });
+    }
+
+    if (retryBtn) {
+      retryBtn.addEventListener('click', () => {
+        delete this.userAnswers.fib[q.id];
+        this.render();
+      });
+    }
+
+    if (showAnsBtn) {
+      showAnsBtn.addEventListener('click', () => {
+        this.handleFibAnswer(q, q.acceptedAnswers[0]);
+      });
+    }
+
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+    if (btnPrev) btnPrev.addEventListener('click', () => this.goToPrev(blanks));
+    if (btnNext) btnNext.addEventListener('click', () => this.goToNext(blanks));
+  }
+
+  handleFibAnswer(question, inputVal) {
+    const cleanInput = (inputVal || '').trim().toLowerCase()
+      .replace(/["']/g, '') // tırnak esnekliği
+      .replace(/;/g, '');   // noktalı virgül esnekliği
+
+    const isMatch = question.acceptedAnswers.some(ans => {
+      const cleanAns = ans.trim().toLowerCase().replace(/["']/g, '').replace(/;/g, '');
+      return cleanInput === cleanAns;
+    });
+
+    this.userAnswers.fib[question.id] = {
+      userInput: inputVal,
+      isCorrect: isMatch
+    };
+
+    this.render();
+  }
+
+  // KLASİK KOD YAZDIRMA MODU
+  renderCodingMode(codingList) {
+    const container = document.getElementById('dynamic-content');
+    if (!codingList || codingList.length === 0) {
+      container.innerHTML = '<div class="quiz-card"><p>Bu modda kodlama görevi bulunamadı.</p></div>';
+      return;
+    }
+
+    const q = codingList[this.currentIndex];
+    const previousAnswer = this.userAnswers.coding[q.id];
+
+    container.innerHTML = `
+      <div class="quiz-card">
+        <div class="card-top">
+          <span class="question-badge" style="background: rgba(16, 185, 129, 0.15); color: #34d399; border-color: rgba(16, 185, 129, 0.3);">Klasik Kod Yazma & Laboratuvar</span>
+          <span class="question-topic">${q.week ? `Hafta ${q.week}` : `Hafta ${this.currentWeek}`} • Uygulama ${this.currentIndex + 1} / ${codingList.length}</span>
+        </div>
+
+        <div>
+          <h3 style="font-size: 18px; margin-bottom: 8px; color: #fff;">${q.title}</h3>
+          <p style="font-size: 14px; color: var(--text-secondary);">${q.task}</p>
+        </div>
+
+        <div class="coding-container">
+          <div class="coding-editor-wrapper">
+            <div class="coding-editor-header">
+              <span>PHP Editor • script.php</span>
+              <span>UTF-8 • PHP 8.x</span>
+            </div>
+            <textarea id="coding-textarea" class="coding-editor" spellcheck="false">${previousAnswer ? previousAnswer.code : q.initialCode}</textarea>
+          </div>
+
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <button class="btn btn-primary" id="btn-check-code">Kodu Değerlendir ve Çalıştır</button>
+            <button class="btn btn-secondary" id="btn-toggle-solution">Model Çözümü Göster / Gizle</button>
+            <button class="btn btn-secondary" id="btn-reset-code">Şablonu Sıfırla</button>
+          </div>
+
+          <div id="coding-feedback" style="${previousAnswer ? '' : 'display: none;'}">
+            ${previousAnswer ? this.getCodingFeedbackHtml(q, previousAnswer.code) : ''}
+          </div>
+
+          <div id="solution-box" style="display: none;" class="explanation-box">
+            <div class="exp-header correct">
+              <span>💻</span> PDF Model Çözüm Kodu:
+            </div>
+            <pre class="question-code-snippet">${this.escapeHtml(q.expectedSolution)}</pre>
+            <div class="exp-text" style="margin-top: 10px;">
+              <strong>Mantık ve PDF Notu:</strong><br>${q.explanation}
+            </div>
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <div class="actions-left">
+            <button class="btn btn-secondary" id="btn-prev" ${this.currentIndex === 0 ? 'disabled' : ''}>← Önceki</button>
+            <button class="btn btn-secondary" id="btn-next" ${this.currentIndex === codingList.length - 1 ? 'disabled' : ''}>Sonraki →</button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    const textarea = document.getElementById('coding-textarea');
+    const checkBtn = document.getElementById('btn-check-code');
+    const toggleSolBtn = document.getElementById('btn-toggle-solution');
+    const resetCodeBtn = document.getElementById('btn-reset-code');
+    const solBox = document.getElementById('solution-box');
+    const feedbackBox = document.getElementById('coding-feedback');
+
+    checkBtn.addEventListener('click', () => {
+      const code = textarea.value;
+      const isCorrect = this.validateCode(q, code);
+      this.userAnswers.coding[q.id] = { code, isCorrect };
+      feedbackBox.style.display = 'block';
+      feedbackBox.innerHTML = this.getCodingFeedbackHtml(q, code);
+      this.renderPalette();
+      this.updateHeaderStats();
+    });
+
+    toggleSolBtn.addEventListener('click', () => {
+      solBox.style.display = solBox.style.display === 'none' ? 'block' : 'none';
+    });
+
+    resetCodeBtn.addEventListener('click', () => {
+      textarea.value = q.initialCode;
+      feedbackBox.style.display = 'none';
+      delete this.userAnswers.coding[q.id];
+      this.renderPalette();
+      this.updateHeaderStats();
+    });
+
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+    if (btnPrev) btnPrev.addEventListener('click', () => this.goToPrev(codingList));
+    if (btnNext) btnNext.addEventListener('click', () => this.goToNext(codingList));
+  }
+
+  validateCode(question, code) {
+    if (!question.validationKeyword) return true;
+    return question.validationKeyword.every(kw => code.includes(kw));
+  }
+
+  getCodingFeedbackHtml(question, code) {
+    const isCorrect = this.validateCode(question, code);
+    if (isCorrect) {
+      return `
+        <div class="explanation-box correct-alert">
+          <div class="exp-header correct">
+            <span>✅</span> Tebrikler! Kod Yapısı Başarılı ve Doğrulandı.
+          </div>
+          <div class="exp-text">
+            Kodunuz slaytta istenen tüm anahtar yapıları ve sözdizimini karşılıyor.<br>
+            <strong>Açıklama:</strong> ${question.explanation}
+          </div>
+        </div>
+      `;
+    } else {
+      return `
+        <div class="explanation-box wrong-alert">
+          <div class="exp-header wrong">
+            <span>⚠️</span> Eksik veya Hatalı Kod Yapısı Tespit Edildi!
+          </div>
+          <div class="exp-text">
+            İstenen kritik yapıları (örneğin: <code>${question.validationKeyword.join(', ')}</code>) kodunuzda eksiksiz kullandığınızdan emin olunuz. 'Model Çözümü Göster' butonuna basarak doğru kalıbı inceleyebilirsiniz.
+          </div>
+        </div>
+      `;
+    }
+  }
+
+  // ÖZET / CHEATSHEET MODU
+  renderSummary(notes) {
+    const container = document.getElementById('dynamic-content');
+    if (!notes || notes.length === 0) {
+      container.innerHTML = '<div class="quiz-card"><p>Özet not bulunamadı.</p></div>';
+      return;
+    }
+
+    let cardsHtml = '';
+    notes.forEach(note => {
+      cardsHtml += `
+        <div class="summary-card">
+          <h3><span>📌</span> ${note.title}</h3>
+          <p>${this.formatCodeSpans(note.text)}</p>
+        </div>
+      `;
+    });
+
+    container.innerHTML = `
+      <div class="summary-grid">
+        ${cardsHtml}
+      </div>
+    `;
+  }
+
+  goToPrev(list) {
+    if (this.currentIndex > 0) {
+      this.currentIndex--;
+      this.render();
+    }
+  }
+
+  goToNext(list) {
+    if (this.currentIndex < list.length - 1) {
+      this.currentIndex++;
+      this.render();
+    }
+  }
+
+  updateHeaderStats() {
+    let correctCount = 0;
+    let wrongCount = 0;
+    let totalAnswered = 0;
+
+    ['test', 'fib', 'coding'].forEach(mode => {
+      const modeAnswers = this.userAnswers[mode];
+      for (const qid in modeAnswers) {
+        totalAnswered++;
+        if (modeAnswers[qid].isCorrect) {
+          correctCount++;
+        } else {
+          wrongCount++;
+        }
+      }
+    });
+
+    const score = totalAnswered > 0 ? Math.round((correctCount / totalAnswered) * 100) : 0;
+
+    const elSuccess = document.getElementById('stat-success');
+    const elError = document.getElementById('stat-error');
+    const elScore = document.getElementById('stat-score');
+
+    if (elSuccess) elSuccess.innerText = `✓ ${correctCount} Doğru`;
+    if (elError) elError.innerText = `✗ ${wrongCount} Yanlış`;
+    if (elScore) elScore.innerText = `%${score} Başarı`;
+  }
+
+  escapeHtml(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  formatCodeSpans(str) {
+    if (!str) return '';
+    // Kod bloklarını veya özel sembolleri şık span'lara dönüştür
+    let escaped = this.escapeHtml(str);
+    escaped = escaped.replace(/`([^`]+)`/g, '<code style="background: rgba(255,255,255,0.08); padding: 2px 6px; border-radius: 4px; font-family: var(--font-mono); color: #38bdf8;">$1</code>');
+    return escaped;
+  }
+}
+
+// Sayfa yüklendiğinde başlat
+window.addEventListener('DOMContentLoaded', () => {
+  window.appEngine = new QuizEngine();
+});
+
+
+  </script>
+</body>
+</html>
